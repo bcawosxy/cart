@@ -1,6 +1,16 @@
 <?php
 // Heading
-$_['heading_title']  = '版本資訊111123';
+$_['heading_title']  = '版本資訊';
+
+//text-new
+$_['text_PrimarySchool'] = '國小';
+$_['text_JuniorHighSchool'] = '國中';
+$_['text_SeniorHighSchool'] = '高中';
+$_['text_subTitle'] = '選擇學級';
+$_['text_county'] = '縣市';
+$_['text_area'] = '行政區';
+$_['text_school'] = '學校';
+
 
 // Text 
 $_['text_location']  = '我們的地址';

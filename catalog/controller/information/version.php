@@ -21,18 +21,15 @@ class ControllerInformationVersion extends Controller {
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
-		$data['text_location'] = $this->language->get('text_location');
-		$data['text_store'] = $this->language->get('text_store');
-		$data['text_contact'] = $this->language->get('text_contact');
-		$data['text_address'] = $this->language->get('text_address');
-		$data['text_telephone'] = $this->language->get('text_telephone');
-		$data['text_fax'] = $this->language->get('text_fax');
-		$data['text_open'] = $this->language->get('text_open');
-		$data['text_comment'] = $this->language->get('text_comment');
+		//text-new
+		$data['text_subTitle'] = $this->language->get('text_subTitle');		
+		$data['text_county'] = $this->language->get('text_county');		
+		$data['text_area'] = $this->language->get('text_area');		
+		$data['text_school'] = $this->language->get('text_school');		
+		$data['text_PrimarySchool'] = $this->language->get('text_PrimarySchool');		
+		$data['text_JuniorHighSchool'] = $this->language->get('text_JuniorHighSchool');		
+		$data['text_SeniorHighSchool'] = $this->language->get('text_SeniorHighSchool');		
 
-		$data['entry_name'] = $this->language->get('entry_name');
-		$data['entry_email'] = $this->language->get('entry_email');
-		$data['entry_enquiry'] = $this->language->get('entry_enquiry');
 
 		$data['button_map'] = $this->language->get('button_map');
 
@@ -135,7 +132,7 @@ class ControllerInformationVersion extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
-		$this->response->setOutput($this->load->view('information/contact', $data));
+		$this->response->setOutput($this->load->view('information/version', $data));
 	}
 
 	protected function validate() {
