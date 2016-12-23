@@ -20,3 +20,4 @@ admin/view/template/extension/module/category_accordion.tpl
 admin/language/en-gb/extension/module/category_accordion.php
 catalog/controller/extension/module/category_accordion.php
 admin/view/stylesheet/admin-bigshop.css
+system/storage/
