@@ -29,7 +29,11 @@ class ControllerInformationVersion extends Controller {
 		$data['text_PrimarySchool'] = $this->language->get('text_PrimarySchool');		
 		$data['text_JuniorHighSchool'] = $this->language->get('text_JuniorHighSchool');		
 		$data['text_SeniorHighSchool'] = $this->language->get('text_SeniorHighSchool');		
+		$data['text_no_results_text'] = $this->language->get('text_no_results_text');		
 
+		//fetch location list
+		$this->load->model('localisation/zone');
+		$data['zones'] = $this->model_localisation_zone->getZonesByCountryId(206);		
 
 		$data['button_map'] = $this->language->get('button_map');
 

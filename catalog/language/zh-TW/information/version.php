@@ -7,9 +7,10 @@ $_['text_PrimarySchool'] = '國小';
 $_['text_JuniorHighSchool'] = '國中';
 $_['text_SeniorHighSchool'] = '高中';
 $_['text_subTitle'] = '選擇學級';
-$_['text_county'] = '縣市';
-$_['text_area'] = '行政區';
-$_['text_school'] = '學校';
+$_['text_county'] = '請選擇縣市';
+$_['text_area'] = '請選擇行政區';
+$_['text_school'] = '請選擇學校';
+$_['text_no_results_text'] = '找不到資料!';
 
 
 // Text 
