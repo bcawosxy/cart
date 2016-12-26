@@ -34,7 +34,8 @@
           <div class="row">
             <div class="col-sm-8">
               <!-- 縣市 -->
-              <div class="btn-group col-sm-3">
+              <div class="btn-group col-sm-3 col-xs-12" style="margin: 5px 0px;">
+                <span class="visible-xs-block visible-md-block"><?php echo $text_county; ?> : </span>
                 <select id="countyList">
                   <option value="default"></option>
                   <?php 
@@ -46,7 +47,8 @@
               </div>
               
               <!-- 行政區 -->
-              <div class="btn-group col-sm-3">
+              <div class="btn-group col-sm-3 col-xs-12" style="margin: 5px 0px;">
+                <span class="visible-xs-block visible-md-block"><?php echo $text_area; ?> : </span>
                 <select id="areaList">
                   <option value="default"></option>
                   <option value="1">東區</option>
@@ -57,7 +59,8 @@
               </div>
 
               <!-- 學校 -->
-              <div class="btn-group col-sm-3">
+              <div class="btn-group col-sm-3 col-xs-12" style="margin: 5px 0px;">
+                <span class="visible-xs-block visible-md-block"><?php echo $text_school; ?> : </span>
                 <select id="schoolList">
                   <option value="default"></option>
                   <option value="1">A國小</option>
@@ -74,6 +77,15 @@
     <?php echo $column_right; ?></div>
 </div>
 <script type="text/javascript">
+function setArea(data) {
+  var item='';
+  for (var i = data.length - 1; i >= 0; i--) {
+    item += '<option value="'+data[i].area_id+'">'+data[i].name+'</option>';
+  }
+  itemList.init();
+  $('#areaList').append(item).trigger('chosen:updated');
+}
+
 $(document).ready(function(){
   $('#countyList').chosen({
     placeholder_text_single : '<?php echo $text_county; ?>',
@@ -81,7 +93,12 @@ $(document).ready(function(){
     search_contains :true,
     width:'100%',
   }).on('change', function(evt, params) {
-    $('#areaList').trigger('chosen:updated');
+    $.post("<?php echo $fetchAreaUrl ?>", {
+      data : params.selected,
+    }, function(r) {
+      r = $.parseJSON(r);
+      setArea(r);
+    });
   });
 
   $('#areaList').chosen({
@@ -97,7 +114,6 @@ $(document).ready(function(){
     search_contains :true,
     width:'100%',
   });
-
 
   var itemList = {
     init : function(){  $('#areaList, #schoolList').empty(); },
