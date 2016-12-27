@@ -24,7 +24,7 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-sm-8">
-              <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_PrimarySchool; ?>" id="PrimarySchool" name="schoolbtn" data-school="primary">
+              <input type="button" class="btn btn-primary btn-lg active" value="<?php echo $text_PrimarySchool; ?>" id="PrimarySchool" name="schoolbtn" data-school="primary">
               <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_JuniorHighSchool; ?>" id="JuniorHighSchool" name="schoolbtn" data-school="junior">
               <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_SeniorHighSchool; ?>" id="SeniorHighSchool" name="schoolbtn" data-school="senior">
             </div>
@@ -96,12 +96,14 @@ $(document).ready(function(){
     search_contains :true,
     width:'100%',
   }).on('change', function(evt, params) {
+    var v = $('#countyList :selected').val();
     $.post("<?php echo $fetchAreaUrl ?>", {
-      data : params.selected,
+      data : v,
     }, function(r) {
       r = $.parseJSON(r);
       setArea(r);
     });
+
   });
 
   $('#areaList').chosen({
@@ -110,10 +112,11 @@ $(document).ready(function(){
     search_contains :true,
     width:'100%',
   }).on('change', function(evt, params) {
-    var grade = $(this).data('school');
+    var grade = $(this).data('school'),
+        v = $('#areaList :selected').val();
     if(typeof grade == 'undefined') grade = 'primary';
     $.post("<?php echo $fetchJsonUrl ?>get"+grade+"byarea", {
-      data : params.selected,
+      data : v,
     }, function(r) {
       r = $.parseJSON(r);
       setSchool(r);
