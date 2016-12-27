@@ -36,6 +36,10 @@ class ControllerInformationVersion extends Controller {
 		$data['zones'] = $this->model_localisation_zone->getZonesByCountryId(206);		
 
 		$data['fetchAreaUrl'] = $this->url->link('information/version/getareabyzone');
+		$data['fetchPrimaryUrl'] = $this->url->link('information/version/getprimarybyarea');
+		$data['fetchJuniorUrl'] = $this->url->link('information/version/getjuniorbyarea');
+		$data['fetchSeniorUrl'] = $this->url->link('information/version/getseniorbyarea');
+		$data['fetchJsonUrl'] = $this->url->link('information/version/');
 
 		//------------//
 		$data['button_map'] = $this->language->get('button_map');
@@ -173,6 +177,33 @@ class ControllerInformationVersion extends Controller {
 		$this->load->model('localisation/area');
 		$areas = $this->model_localisation_area->getAreasByZoneId($zone_id);	
 		print_r(json_encode($areas));
+		die();
+	}
+
+	public function getprimarybyarea() {
+		$area_id = $_POST['data'];
+		//fetch area list
+		$this->load->model('localisation/primary');
+		$schools = $this->model_localisation_primary->getSchoolsByAreaId($area_id);	
+		print_r(json_encode($schools));
+		die();
+	}
+
+	public function getjuniorbyarea() {
+		$area_id = $_POST['data'];
+		//fetch area list
+		$this->load->model('localisation/junior');
+		$schools = $this->model_localisation_junior->getSchoolsByAreaId($area_id);	
+		print_r(json_encode($schools));
+		die();
+	}
+
+	public function getseniorbyarea() {
+		$area_id = $_POST['data'];
+		//fetch area list
+		$this->load->model('localisation/senior');
+		$schools = $this->model_localisation_senior->getSchoolsByAreaId($area_id);	
+		print_r(json_encode($schools));
 		die();
 	}
 }

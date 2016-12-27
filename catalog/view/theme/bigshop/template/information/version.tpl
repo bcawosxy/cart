@@ -24,9 +24,9 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-sm-8">
-              <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_PrimarySchool; ?>" id="PrimarySchool">
-              <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_JuniorHighSchool; ?>" id="JuniorHighSchool">
-              <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_SeniorHighSchool; ?>" id="SeniorHighSchool">
+              <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_PrimarySchool; ?>" id="PrimarySchool" name="schoolbtn" data-school="primary">
+              <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_JuniorHighSchool; ?>" id="JuniorHighSchool" name="schoolbtn" data-school="junior">
+              <input type="button" class="btn btn-primary btn-lg" value="<?php echo $text_SeniorHighSchool; ?>" id="SeniorHighSchool" name="schoolbtn" data-school="senior">
             </div>
           </div>
         </div>
@@ -51,21 +51,14 @@
                 <span class="visible-xs-block visible-md-block"><?php echo $text_area; ?> : </span>
                 <select id="areaList">
                   <option value="default"></option>
-                  <option value="1">東區</option>
-                  <option value="2">西區</option>
-                  <option value="3">南區</option>
-                  <option value="4">中央區</option>
                 </select>
               </div>
 
               <!-- 學校 -->
-              <div class="btn-group col-sm-3 col-xs-12" style="margin: 5px 0px;">
+              <div class="btn-group col-sm-4 col-xs-12" style="margin: 5px 0px;">
                 <span class="visible-xs-block visible-md-block"><?php echo $text_school; ?> : </span>
                 <select id="schoolList">
                   <option value="default"></option>
-                  <option value="1">A國小</option>
-                  <option value="2">B國小</option>
-                  <option value="3">C國小</option>
                 </select>
               </div>      
             </div>
@@ -78,13 +71,23 @@
 </div>
 <script type="text/javascript">
 function setArea(data) {
-  var item='';
+  var item='<option value="default"></option>';
   for (var i = data.length - 1; i >= 0; i--) {
     item += '<option value="'+data[i].area_id+'">'+data[i].name+'</option>';
   }
   itemList.init();
   $('#areaList').append(item).trigger('chosen:updated');
 }
+
+function setSchool(data) {
+  var item='<option value="default"></option>';
+  for (var i = data.length - 1; i >= 0; i--) {
+    item += '<option value="'+data[i].primary_id+'">'+data[i].name+'</option>';
+  }
+  itemList.initPrimaryList();
+  $('#schoolList').append(item).trigger('chosen:updated');
+}
+
 
 $(document).ready(function(){
   $('#countyList').chosen({
@@ -106,6 +109,16 @@ $(document).ready(function(){
     no_results_text: '<?php echo $text_no_results_text; ?>',
     search_contains :true,
     width:'100%',
+  }).on('change', function(evt, params) {
+    var grade = $(this).data('school');
+    if(typeof grade == 'undefined') grade = 'primary';
+    $.post("<?php echo $fetchJsonUrl ?>get"+grade+"byarea", {
+      data : params.selected,
+    }, function(r) {
+      r = $.parseJSON(r);
+      setSchool(r);
+    });
+
   });
 
   $('#schoolList').chosen({
@@ -115,8 +128,12 @@ $(document).ready(function(){
     width:'100%',
   });
 
+  //init itemSelector
   var itemList = {
     init : function(){  $('#areaList, #schoolList').empty(); },
+    initPrimaryList : function() {
+      $('#schoolList').empty().trigger('chosen:updated');
+    },
     initCountyList : function() {
       this.init();
       $('#countyList').val('default');
@@ -129,6 +146,8 @@ $(document).ready(function(){
 
 $(document).on('click', '#PrimarySchool, #JuniorHighSchool, #SeniorHighSchool', function(){
   itemList.initCountyList();
+  $(this).addClass('active').siblings('input[type="button"]').removeClass('active');
+  $('#areaList').data('school', $(this).data('school'));
 });
 
 </script>

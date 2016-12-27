@@ -11,7 +11,7 @@ class ModelLocalisationArea extends Model {
 
 		if (!$area_data) {
 			
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area WHERE zone_id = '" . (int)$zone_id . "' AND status = '1' ORDER BY area_id");
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "area WHERE zone_id = '" . (int)$zone_id . "' AND status = '1' ORDER BY area_id DESC");
 				
 
 			$area_data = $query->rows;
