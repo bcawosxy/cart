@@ -56,6 +56,10 @@ class ControllerSettingSetting extends Controller {
 		$data['text_security'] = $this->language->get('text_security');
 		$data['text_upload'] = $this->language->get('text_upload');
 		$data['text_error'] = $this->language->get('text_error');
+		$data['text_version_upload'] = $this->language->get('text_version_upload');
+		$data['text_primary'] = $this->language->get('text_primary');
+		$data['text_junior'] = $this->language->get('text_junior');
+		$data['text_senior'] = $this->language->get('text_senior');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_owner'] = $this->language->get('entry_owner');
@@ -151,6 +155,9 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_error_log'] = $this->language->get('entry_error_log');
 		$data['entry_error_filename'] = $this->language->get('entry_error_filename');
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_version_year'] = $this->language->get('entry_version_year');
+		$data['entry_school_type'] = $this->language->get('entry_school_type');
+
 
 		$data['help_geocode'] = $this->language->get('help_geocode');
 		$data['help_open'] = $this->language->get('help_open');
@@ -212,6 +219,7 @@ class ControllerSettingSetting extends Controller {
 		$data['help_password'] = $this->language->get('help_password');
 		$data['help_encryption'] = $this->language->get('help_encryption');
 		$data['help_compression'] = $this->language->get('help_compression');
+		$data['help_version_year'] = $this->language->get('help_version_year');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -224,6 +232,9 @@ class ControllerSettingSetting extends Controller {
 		$data['tab_ftp'] = $this->language->get('tab_ftp');
 		$data['tab_mail'] = $this->language->get('tab_mail');
 		$data['tab_server'] = $this->language->get('tab_server');
+		$data['tab_version'] = '參考書版本';
+
+		$data['version_year'] = date('Y') ;
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];

@@ -39,6 +39,7 @@
             <li><a href="#tab-ftp" data-toggle="tab"><?php echo $tab_ftp; ?></a></li>
             <li><a href="#tab-mail" data-toggle="tab"><?php echo $tab_mail; ?></a></li>
             <li><a href="#tab-server" data-toggle="tab"><?php echo $tab_server; ?></a></li>
+            <li><a href="#tab-version" data-toggle="tab"><?php echo $tab_version; ?></a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -1391,6 +1392,33 @@
                 </div>
               </fieldset>
             </div>
+            
+            <!-- Version Tab -->
+            <div class="tab-pane" id="tab-version">
+              <fieldset>
+                <legend><?php echo $text_version_upload; ?></legend>
+                <div class="form-group">
+                  <!-- 輸入西元年份 -->
+                  <label class="col-sm-2 control-label" for="input-version_year"><span data-toggle="tooltip" title="<?php echo $help_version_year; ?>"><?php echo $entry_version_year; ?></span></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="version_year" value="<?php echo $version_year; ?>" placeholder="<?php echo $entry_version_year; ?>" id="input-version_year" class="form-control" />
+                  </div>
+                </div>
+                <!-- 輸入學校類別-->
+                <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-layout"><?php echo $entry_school_type; ?></label>
+                <div class="col-sm-10">
+                  <select name="config_layout_id" id="input-layout" class="form-control">
+                    <option value="paimary"><?php echo $text_primary ?></option>
+                    <option value="junior"><?php echo $text_junior ?></option>
+                    <option value="senior"><?php echo $text_senior ?></option>
+                  </select>
+                </div>
+              </div>
+              </fieldset>
+            </div>         
+            <!--End Version Tab -->
+
           </div>
         </form>
       </div>

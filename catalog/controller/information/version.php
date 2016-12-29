@@ -206,4 +206,13 @@ class ControllerInformationVersion extends Controller {
 		print_r(json_encode($schools));
 		die();
 	}
+
+	public function test(){
+		$this->load->model('version/book2school');
+		$areas = $this->model_version_book2school->getdata();
+		print_r($areas);
+
+		die();
+
+	}
 }

@@ -65,11 +65,19 @@
           </div>
         </div>
       </div>
-
+      <input type="button" name="ajax" onclick="test()">
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
 <script type="text/javascript">
+function test(){
+    $.post("http://dev.ntcart.com/index.php?route=information/version/test", {
+      data : 12,
+    }, function(r) {
+    });
+
+}
+
 function setArea(data) {
   var item='<option value="default"></option>';
   for (var i = data.length - 1; i >= 0; i--) {
