@@ -2,6 +2,30 @@
 class ControllerSettingSetting extends Controller {
 	private $error = array();
 
+	public function fetchfilelist (){
+		$schoolType = (!empty($_POST['data'])) ? $_POST['data'] : null;
+
+		$dir_path = DIR_UPLOAD.'version/'.$schoolType.'/';
+		if(is_dir($dir_path)) {
+			if ($dh = opendir($dir_path)) {
+				$fileData = [];
+				while (($file = readdir($dh)) !== false) {
+					//只過讀取出xls, xlsx 的檔案
+					if (strpos( $file, '.xls')){ 
+						$tmp = [
+							'name' => $file,
+							'path' => $dir_path.$file,
+						];
+						$fileData[] = $tmp;
+					}
+				}
+				closedir($dh);
+			}
+		}
+		print_r(json_encode($fileData));
+		die();
+	}
+
 	public function index() {
 		$this->load->language('setting/setting');
 
@@ -60,6 +84,8 @@ class ControllerSettingSetting extends Controller {
 		$data['text_primary'] = $this->language->get('text_primary');
 		$data['text_junior'] = $this->language->get('text_junior');
 		$data['text_senior'] = $this->language->get('text_senior');
+		$data['text_optionDefault'] = $this->language->get('text_optionDefault');
+		$data['text_insert'] = $this->language->get('text_insert');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_owner'] = $this->language->get('entry_owner');
@@ -157,6 +183,8 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_version_year'] = $this->language->get('entry_version_year');
 		$data['entry_school_type'] = $this->language->get('entry_school_type');
+		$data['entry_fileList'] = $this->language->get('entry_fileList');
+		$data['entry_insert'] = $this->language->get('entry_insert');
 
 
 		$data['help_geocode'] = $this->language->get('help_geocode');
@@ -234,7 +262,12 @@ class ControllerSettingSetting extends Controller {
 		$data['tab_server'] = $this->language->get('tab_server');
 		$data['tab_version'] = '參考書版本';
 
-		$data['version_year'] = date('Y') ;
+		$years = [(date('Y')+1)];
+		for ($i=0; $i < 10; $i++) { 
+			$years[] = (date('Y')-$i);
+		}
+
+		$data['version_year'] = $years ;
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -396,6 +429,9 @@ class ControllerSettingSetting extends Controller {
 		$data['action'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], true);
 
 		$data['cancel'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], true);
+		
+		$data['fetchFileList'] = str_replace('amp;', '', $this->url->link('setting/setting/fetchfilelist', 'token=' . $this->session->data['token'], true) );
+		$data['insert'] = str_replace('amp;', '', $this->url->link('setting/setting/insert', 'token=' . $this->session->data['token'], true) );
 
 		$data['token'] = $this->session->data['token'];
 
@@ -1154,6 +1190,22 @@ class ControllerSettingSetting extends Controller {
 		$this->response->setOutput($this->load->view('setting/setting', $data));
 	}
 
+	public function insert() {
+		$path = (!empty($_POST['path'])) ? $_POST['path'] : null;
+		$years = (!empty($_POST['years'])) ? $_POST['years'] : null;
+		$schoolType = (!empty($_POST['schoolType'])) ? $_POST['schoolType'] : null;
+
+		if($path != null && $years != null && $schoolType != null) {
+			$this->load->model('version/book2school');
+			$data = $this->model_version_book2school->setdata($schoolType, $years, $path);
+
+			print_r(json_encode($data));
+		}
+
+
+		die();
+	}
+
 	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'setting/setting')) {
 			$this->error['warning'] = $this->language->get('error_permission');
@@ -1268,4 +1320,6 @@ class ControllerSettingSetting extends Controller {
 			$this->response->setOutput($server . 'image/no_image.png');
 		}
 	}	
+
+
 }

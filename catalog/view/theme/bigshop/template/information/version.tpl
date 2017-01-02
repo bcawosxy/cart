@@ -49,7 +49,7 @@
               <!-- 行政區 -->
               <div class="btn-group col-sm-3 col-xs-12" style="margin: 5px 0px;">
                 <span class="visible-xs-block visible-md-block"><?php echo $text_area; ?> : </span>
-                <select id="areaList">
+                <select id="areaList" data-school="primary">
                   <option value="default"></option>
                 </select>
               </div>
@@ -65,18 +65,10 @@
           </div>
         </div>
       </div>
-      <input type="button" name="ajax" onclick="test()">
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
 <script type="text/javascript">
-function test(){
-    $.post("http://dev.ntcart.com/index.php?route=information/version/test", {
-      data : 12,
-    }, function(r) {
-    });
-
-}
 
 function setArea(data) {
   var item='<option value="default"></option>';
@@ -111,7 +103,6 @@ $(document).ready(function(){
       r = $.parseJSON(r);
       setArea(r);
     });
-
   });
 
   $('#areaList').chosen({
@@ -129,7 +120,6 @@ $(document).ready(function(){
       r = $.parseJSON(r);
       setSchool(r);
     });
-
   });
 
   $('#schoolList').chosen({
@@ -137,6 +127,22 @@ $(document).ready(function(){
     no_results_text: '<?php echo $text_no_results_text; ?>',
     search_contains :true,
     width:'100%',
+  }).on('change', function(evt, params) {
+    var type = $('#areaList').data('school'),
+        school = $('#schoolList :selected').val(),
+        schoolName = $('#schoolList :selected').html(),
+        county = $('#countyList :selected').val(),
+        countyName = $('#countyList :selected').html();
+    $.post("<?php echo $fetchJsonUrl ?>getversionbyschool", {
+      type : type,
+      county : county,
+      countyName : countyName,
+      school : school,
+      schoolName : schoolName,
+    }, function(r) {
+      r = $.parseJSON(r);
+      console.log(r);
+    });
   });
 
   //init itemSelector

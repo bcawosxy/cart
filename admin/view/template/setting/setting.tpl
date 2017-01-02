@@ -1401,20 +1401,47 @@
                   <!-- 輸入西元年份 -->
                   <label class="col-sm-2 control-label" for="input-version_year"><span data-toggle="tooltip" title="<?php echo $help_version_year; ?>"><?php echo $entry_version_year; ?></span></label>
                   <div class="col-sm-10">
-                    <input type="text" name="version_year" value="<?php echo $version_year; ?>" placeholder="<?php echo $entry_version_year; ?>" id="input-version_year" class="form-control" />
+                    <select id="years" class="form-control">
+                      <option value=""><?php echo $text_optionDefault ?></option>
+                      <?php 
+                        foreach($version_year as $k0 => $v0) {
+                          if($k0 == 1) {
+                            echo '<option value="'.$v0.'" selected="">'.$v0.'</option>';
+                          } else {
+                            echo '<option value="'.$v0.'">'.$v0.'</option>';
+                          }
+                        }
+                      ?>
+                    </select>                    
                   </div>
                 </div>
                 <!-- 輸入學校類別-->
                 <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-layout"><?php echo $entry_school_type; ?></label>
-                <div class="col-sm-10">
-                  <select name="config_layout_id" id="input-layout" class="form-control">
-                    <option value="paimary"><?php echo $text_primary ?></option>
-                    <option value="junior"><?php echo $text_junior ?></option>
-                    <option value="senior"><?php echo $text_senior ?></option>
-                  </select>
+                  <label class="col-sm-2 control-label" for="schoolType"><?php echo $entry_school_type; ?></label>
+                   <div class="col-sm-10">
+                     <select name="" id="schoolType" class="form-control">
+                      <option value=""><?php echo $text_optionDefault ?></option>
+                      <option value="primary"><?php echo $text_primary ?></option>
+                      <option value="junior"><?php echo $text_junior ?></option>
+                      <option value="senior"><?php echo $text_senior ?></option>
+                     </select>
+                    </div>
                 </div>
-              </div>
+                <!-- 檔案列表 -->
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="fileList"><?php echo $entry_fileList; ?></label>
+                    <div class="col-sm-10">
+                      <select id="fileList" class="form-control"></select>
+                    </div>
+                </div> 
+                <!-- 匯入按鈕 -->
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-layout"><?php echo $entry_insert; ?></label>
+                    <div class="col-sm-10">
+                      <!-- 指出成功或積極的操作 -->
+                      <button type="button" onclick="insert()" class="btn btn-success"><?php echo $text_insert; ?></button>
+                    </div>
+                </div>
               </fieldset>
             </div>         
             <!--End Version Tab -->
@@ -1424,7 +1451,56 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
+<script type="text/javascript">
+  function insert(){
+    var val = $('#fileList :selected').val(),
+        years = $('#years').val(),
+        schoolType = $('#schoolType :selected').val();
+    
+    if(years == '') {
+      alert('請選擇對應年份');
+      $('#years').focus();
+      return;
+    }  
+
+    if(years == '') {
+      alert('請選擇學校類型');
+      $('#schoolType').focus();
+      return;
+    }
+
+    if(val != '' && typeof val !='undefined') {
+      $.post("<?php echo $insert;?>", {
+        path : val,
+        years : years,
+        schoolType : schoolType,
+      }, function(r) {
+        r = $.parseJSON(r);
+        console.log(r);
+      });
+    }
+  }
+
+  $('#schoolType').on('change', function(evt, params) {
+    var val = $('#schoolType :selected').val();
+    if(val != '') {
+      $.post("<?php echo $fetchFileList;?>", {
+        data : val,
+      }, function(r) {
+        r = $.parseJSON(r);
+        $('#fileList').empty();
+        var item = '<option value="">請選擇檔案</option>';
+        for (var i = r.length - 1; i >= 0; i--) {
+          item += `<option value="${r[i]['path']}">${r[i]['name']}</option>`;
+        }
+        $('#fileList').append(item);
+      });
+    }
+  });
+</script>
+
+
+<script type="text/javascript"><!--
 $('select[name=\'config_theme\']').on('change', function() {
 	$.ajax({
 		url: 'index.php?route=setting/setting/theme&token=<?php echo $token; ?>&theme=' + this.value,

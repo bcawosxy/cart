@@ -32,10 +32,12 @@ $_['text_general']						= '一般';
 $_['text_security']						= '安全性';
 $_['text_upload']					  	= '上傳';
 $_['text_error']					   	= '錯誤';
-$_['text_version_upload']				= '上傳檔案';
+$_['text_version_upload']				= '匯入版本表';
 $_['text_primary']						= '國小';
 $_['text_junior']						= '國中';
 $_['text_senior']						= '高中';
+$_['text_optionDefault']				= '請選擇';
+$_['text_insert']						= '匯入';
 
 
 // Entry
@@ -133,7 +135,9 @@ $_['entry_error_log']				  	= '日誌錯誤';
 $_['entry_error_filename']			 	= '錯誤日誌檔案名稱：';
 $_['entry_status']					 	= '狀態';
 $_['entry_version_year']				= '西元年';
-$_['entry_school_type']					= '學校類型';
+$_['entry_school_type']					= '學校(國小 / 國中 / 高中)';
+$_['entry_fileList']					= '檔案清單';
+$_['entry_insert']						= '匯入檔案';
 
 
 // Help
