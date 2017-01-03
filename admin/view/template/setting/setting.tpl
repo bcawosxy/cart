@@ -1469,6 +1469,7 @@
     }
 
     if(val != '' && typeof val !='undefined') {
+      
       block_box = new jBox('Modal', {
         offset: {y: -50},
         position: {y: 'center'},

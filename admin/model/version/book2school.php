@@ -35,7 +35,7 @@ class ModelVersionBook2school extends Model {
 		foreach ($data as $k0 => $v0) {
 			//取得對應縣市id (zone)
 			$zone = str_replace('台', '臺', $v0['zone']);
-			$fetchZoneQuery = $this->db->query('SELECT `zone_id`,`name` AS `zone_name` FROM `bs_zone` WHERE `name` = "'.$zone.'";');
+			$fetchZoneQuery = $this->db->query('SELECT `zone_id`,`name` AS `zone_name` FROM `'.DB_PREFIX.'zone` WHERE `name` = "'.$zone.'";');
 			if( ($fetchZoneQuery->num_rows) === 1 ) {
 				$str = '';
 				$str = 'INSERT INTO `book2school`.`'.$dbname.'` (`id`, `name`, `sub_name`, `zone_id`, `zone`, `grades`) VALUES (NULL, "'.$v0['name'].'", "", "'.$fetchZoneQuery->row['zone_id'].'", "'.$fetchZoneQuery->row['zone_name'].'", \''.str_replace('\\', '\\\\', json_encode($v0['class'])).'\');';
@@ -75,32 +75,24 @@ class ModelVersionBook2school extends Model {
 			            if(count($school) > 0) $data[] = $school;
 			            //開始一輪新的學校
 			            $a_tmpName[] = $v0[$fileSchoolNameCel];
-			            $books[$v0['C']] = [
-			                $sheetData[1]['D'] => $v0['D'],
-			                $sheetData[1]['E'] => $v0['E'],
-			                $sheetData[1]['F'] => $v0['F'],
-			                $sheetData[1]['G'] => $v0['G'],
-			                $sheetData[1]['H'] => $v0['H'],
-			                $sheetData[1]['I'] => $v0['I'],
-			                $sheetData[1]['J'] => $v0['J'],
-			            ];
-			            
+
+			            foreach ($sheetData[1] as $k1 => $v1) {
+			            	if( in_array($k1, ['A','B','C']) ) continue;
+			            	$a_grade[$sheetData[1][$k1]] = $v0[$k1];
+			            }
+
+			            $books[1] = $a_grade;
 			            $school = [
 			                'name' => $v0[$fileSchoolNameCel],
 			                'zone' => $v0[$fileCountyNameCel],
 			                'class' => $books,
 			            ]; 
-			        } else {            
-			            $books = [
-			                $sheetData[1]['D'] => $v0['D'],
-			                $sheetData[1]['E'] => $v0['E'],
-			                $sheetData[1]['F'] => $v0['F'],
-			                $sheetData[1]['G'] => $v0['G'],
-			                $sheetData[1]['H'] => $v0['H'],
-			                $sheetData[1]['I'] => $v0['I'],
-			                $sheetData[1]['J'] => $v0['J'],
-			            ];
-			            $school['class'][$v0['C']] = $books;
+			        } else {
+			            foreach ($sheetData[1] as $k1 => $v1) {
+			            	if( in_array($k1, ['A','B','C']) ) continue;
+			            	$a_grade[$sheetData[1][$k1]] = $v0[$k1];
+			            }
+			            $school['class'][$v0['C']] = $a_grade;
 			        }
 			    } 
 			}
