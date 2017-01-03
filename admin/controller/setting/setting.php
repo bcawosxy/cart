@@ -2,6 +2,9 @@
 class ControllerSettingSetting extends Controller {
 	private $error = array();
 
+	/**
+	 * 取得下拉檔案清單
+	 */
 	public function fetchfilelist (){
 		$schoolType = (!empty($_POST['data'])) ? $_POST['data'] : null;
 
@@ -1190,6 +1193,9 @@ class ControllerSettingSetting extends Controller {
 		$this->response->setOutput($this->load->view('setting/setting', $data));
 	}
 
+	/**
+	 * 向資料庫倒入文件資料
+	 */
 	public function insert() {
 		$path = (!empty($_POST['path'])) ? $_POST['path'] : null;
 		$years = (!empty($_POST['years'])) ? $_POST['years'] : null;
@@ -1199,9 +1205,9 @@ class ControllerSettingSetting extends Controller {
 			$this->load->model('version/book2school');
 			$data = $this->model_version_book2school->setdata($schoolType, $years, $path);
 
+			// $data = ['result' => 1];
 			print_r(json_encode($data));
 		}
-
 
 		die();
 	}

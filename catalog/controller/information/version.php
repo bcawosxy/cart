@@ -214,68 +214,14 @@ class ControllerInformationVersion extends Controller {
 		$county = $_POST['county'];
 		$countyName = str_replace('台', '臺', $_POST['countyName']);
 
-		require_once(DIR_UPLOAD.'/Classes/PHPExcel.php');
-		require_once(DIR_UPLOAD.'/Classes/phpexcel/IOFactory.php'); 
-		$objPHPExcel = new PHPExcel();
-
-		//從excel中取出資料列
-		$file = DIR_UPLOAD.'version/primary/105-primary.xls';
-		try {
-		    $objPHPExcel = PHPExcel_IOFactory::load($file);
-		} catch(Exception $e) {
-		    die('Error loading file "'.pathinfo($file,PATHINFO_BASENAME).'": '.$e->getMessage());
+		$fetchVersion = $this->db->query('SELECT * FROM `book2school`.`'.date('Y').'_'.$type.'` WHERE `zone` = "'.$countyName.'" AND `name` LIKE "%'.$schoolName.'";');
+		
+		if($fetchVersion->num_rows == 1) {
+			print_r($fetchVersion->row);			
+		} else {
+			print_r(0);
 		}
 		
-		$sheetData = $objPHPExcel->getActiveSheet()->toArray('',true,true,true);
-
-		foreach ($sheetData[1] as $k0 => $v0) {
-			if($v0 =='縣市') $fileCountyNameCel = $k0;
-			if($v0 =='學校') $fileSchoolNameCel = $k0;
-		}
-
-		
-		$data = []; $a_tmpName =[]; $school =[];$return =[];
-		foreach ($sheetData as $k0 => $v0) {
-		    if($v0[$fileCountyNameCel] == '宜蘭縣') {
-		        $books=[];
-		        if(!in_array($v0['A'], $a_tmpName)) {
-		            if(count($school) > 0) $data[] = $school;
-		            //開始一輪新的學校
-		            $a_tmpName[] = $v0['A'];
-		            $books[$v0['C']] = [
-		                $sheetData[1]['D'] => $v0['D'],
-		                $sheetData[1]['E'] => $v0['E'],
-		                $sheetData[1]['F'] => $v0['F'],
-		                $sheetData[1]['G'] => $v0['G'],
-		                $sheetData[1]['H'] => $v0['H'],
-		                $sheetData[1]['I'] => $v0['I'],
-		                $sheetData[1]['J'] => $v0['J'],
-		            ];
-		            
-		            $school = [
-		                'name' => $v0['A'],
-		                'zone' => $v0['B'],
-		                'class' => $books,
-		            ]; 
-		        } else {            
-		            $books = [
-		                $sheetData[1]['D'] => $v0['D'],
-		                $sheetData[1]['E'] => $v0['E'],
-		                $sheetData[1]['F'] => $v0['F'],
-		                $sheetData[1]['G'] => $v0['G'],
-		                $sheetData[1]['H'] => $v0['H'],
-		                $sheetData[1]['I'] => $v0['I'],
-		                $sheetData[1]['J'] => $v0['J'],
-		            ];
-		            $school['class'][$v0['C']] = $books;
-		        }
-		    } 
-		}
-		$data[] = $school;
-
-
-		// print_r(1);
-		print_r($data);
 		die();
 	}
 

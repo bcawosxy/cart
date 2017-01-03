@@ -79,7 +79,7 @@ function setArea(data) {
   $('#areaList').append(item).trigger('chosen:updated');
 }
 
-function setSchool(data) {
+function setSchool(data=[]) {
   var item='<option value="default"></option>';
   for (var i = data.length - 1; i >= 0; i--) {
     item += '<option value="'+data[i].primary_id+'">'+data[i].name+'</option>';
@@ -102,6 +102,7 @@ $(document).ready(function(){
     }, function(r) {
       r = $.parseJSON(r);
       setArea(r);
+      setSchool();
     });
   });
 

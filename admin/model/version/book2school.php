@@ -2,7 +2,6 @@
 class ModelVersionBook2school extends Model {
 	
 	public function createTable($years ,$schoolType) {
-		
 		$new_db = $years.'_'.$schoolType;
 		
 		//create table
@@ -31,16 +30,19 @@ class ModelVersionBook2school extends Model {
 		return $new_db;
 	}
 
-	public function getdata() {
-		$year = date('Y');
-		$this->createTable($year);
-		$query = $this->db->query("SELECT * FROM `book2school`.`$year`");
-
-		return $query->row;
-	}
-
 	public function insertdata($dbname, $data) {
-		print_r($data);
+		$return = 1;
+		foreach ($data as $k0 => $v0) {
+			//取得對應縣市id (zone)
+			$zone = str_replace('台', '臺', $v0['zone']);
+			$fetchZoneQuery = $this->db->query('SELECT `zone_id`,`name` AS `zone_name` FROM `bs_zone` WHERE `name` = "'.$zone.'";');
+			if( ($fetchZoneQuery->num_rows) === 1 ) {
+				$str = '';
+				$str = 'INSERT INTO `book2school`.`'.$dbname.'` (`id`, `name`, `sub_name`, `zone_id`, `zone`, `grades`) VALUES (NULL, "'.$v0['name'].'", "", "'.$fetchZoneQuery->row['zone_id'].'", "'.$fetchZoneQuery->row['zone_name'].'", \''.str_replace('\\', '\\\\', json_encode($v0['class'])).'\');';
+				$insertBook2SchoolQuery = $this->db->query($str);
+			}			
+		}
+		return $return;
 	}
 
 	public function setdata($schoolType=null, $years=null, $path=null) {
@@ -60,14 +62,19 @@ class ModelVersionBook2school extends Model {
 			}
 			    
 			$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+			foreach ($sheetData[1] as $k0 => $v0) {
+				if($v0 =='縣市') $fileCountyNameCel = $k0;
+				if($v0 =='學校') $fileSchoolNameCel = $k0;
+			}
+			
 			$data = []; $a_tmpName =[]; $school =[];
 			foreach ($sheetData as $k0 => $v0) {
 			    if($k0 > 1) {
 			        $books=[];
-			        if(!in_array($v0['A'], $a_tmpName)) {
+			        if(!in_array($v0[$fileSchoolNameCel], $a_tmpName)) {
 			            if(count($school) > 0) $data[] = $school;
 			            //開始一輪新的學校
-			            $a_tmpName[] = $v0['A'];
+			            $a_tmpName[] = $v0[$fileSchoolNameCel];
 			            $books[$v0['C']] = [
 			                $sheetData[1]['D'] => $v0['D'],
 			                $sheetData[1]['E'] => $v0['E'],
@@ -79,8 +86,8 @@ class ModelVersionBook2school extends Model {
 			            ];
 			            
 			            $school = [
-			                'name' => $v0['A'],
-			                'zone' => $v0['B'],
+			                'name' => $v0[$fileSchoolNameCel],
+			                'zone' => $v0[$fileCountyNameCel],
 			                'class' => $books,
 			            ]; 
 			        } else {            
@@ -98,11 +105,11 @@ class ModelVersionBook2school extends Model {
 			    } 
 			}
 			$data[] = $school;
-			$this->insertdata($DBName, $data);
-			
-			$return = 1;
+			$return = $this->insertdata($DBName, $data);
+			$objPHPExcel->disconnectWorksheets();
+			unset($objPHPExcel);
 		}
-		return [$return];
+		return ['result' => $return];
 	}
 
 }

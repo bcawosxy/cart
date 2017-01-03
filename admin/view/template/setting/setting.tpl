@@ -1438,7 +1438,6 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-layout"><?php echo $entry_insert; ?></label>
                     <div class="col-sm-10">
-                      <!-- 指出成功或積極的操作 -->
                       <button type="button" onclick="insert()" class="btn btn-success"><?php echo $text_insert; ?></button>
                     </div>
                 </div>
@@ -1470,14 +1469,44 @@
     }
 
     if(val != '' && typeof val !='undefined') {
+      block_box = new jBox('Modal', {
+        offset: {y: -50},
+        position: {y: 'center'},
+        closeButton: 'title',
+        closeOnClick: false,
+        closeOnEsc: false,
+        delayOpen: 400,
+        zIndex: 1500,
+      }).setContent('正在匯入資料...請勿關閉或離開網頁&nbsp;&nbsp;<img src="./view/image/loading.gif">').open();
+
       $.post("<?php echo $insert;?>", {
         path : val,
         years : years,
         schoolType : schoolType,
       }, function(r) {
         r = $.parseJSON(r);
-        console.log(r);
+        block_box.close();
+        if(r.result == 1) {
+          var modal = new jBox('Modal', {
+            offset: {y: -50},
+            position: {y: 'center'},
+            closeButton: 'title',
+            delayOpen: 300,
+            zIndex: 1500,
+            title : '<img src="./view/image/check.png" style="width:15px;">',
+          }).setContent('資料匯入完成。').open();
+        } else {
+          var modal = new jBox('Modal', {
+            offset: {y: -50},
+            position: {y: 'center'},
+            closeButton: 'title',
+            delayOpen: 300,
+            zIndex: 1500,
+            title : '<img src="./view/image/error.png" style="width:15px;">',
+          }).setContent('資料匯入失敗, 請重新操作。').open();
+        }
       });
+
     }
   }
 
