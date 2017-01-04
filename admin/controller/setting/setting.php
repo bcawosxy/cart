@@ -265,9 +265,9 @@ class ControllerSettingSetting extends Controller {
 		$data['tab_server'] = $this->language->get('tab_server');
 		$data['tab_version'] = '參考書版本';
 
-		$years = [(date('Y')+1)];
-		for ($i=0; $i < 10; $i++) { 
-			$years[] = (date('Y')-$i);
+		$years = [((date('Y')+1)-1911)];
+		for ($i=0; $i < 5; $i++) { 
+			$years[] = ((date('Y')-$i)-1911);
 		}
 
 		$data['version_year'] = $years ;
@@ -1205,7 +1205,6 @@ class ControllerSettingSetting extends Controller {
 			$this->load->model('version/book2school');
 			$data = $this->model_version_book2school->setdata($schoolType, $years, $path);
 
-			// $data = ['result' => 1];
 			print_r(json_encode($data));
 		}
 

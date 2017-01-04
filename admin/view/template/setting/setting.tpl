@@ -1451,25 +1451,41 @@
     </div>
   </div>
 <script type="text/javascript">
+  function  jbox(r) {
+    var img = (r.result === 1) ? '<img src="./view/image/check.png" style="width:15px;">' : '<img src="./view/image/error.png" style="width:15px;">',
+        modal = new jBox('Modal', {
+          offset: {y: -50},
+          position: {y: 'center'},
+          closeButton: 'title',
+          delayOpen: 300,
+          zIndex: 1500,
+          title : img,
+        }).setContent(r.message).open();      
+  }
+
   function insert(){
     var val = $('#fileList :selected').val(),
         years = $('#years').val(),
         schoolType = $('#schoolType :selected').val();
     
     if(years == '') {
-      alert('請選擇對應年份');
+      jbox({'result':0, 'message':'請選擇對應學年度'});
       $('#years').focus();
       return;
     }  
 
-    if(years == '') {
-      alert('請選擇學校類型');
+    if(schoolType == '') {
+      jbox({'result':0, 'message':'請選擇學校類型'});
       $('#schoolType').focus();
       return;
     }
 
+    if(val == '') {
+      jbox({'result':0, 'message':'未選擇版本表文件'});
+      return;
+    }
+
     if(val != '' && typeof val !='undefined') {
-      
       block_box = new jBox('Modal', {
         offset: {y: -50},
         position: {y: 'center'},
@@ -1488,23 +1504,9 @@
         r = $.parseJSON(r);
         block_box.close();
         if(r.result == 1) {
-          var modal = new jBox('Modal', {
-            offset: {y: -50},
-            position: {y: 'center'},
-            closeButton: 'title',
-            delayOpen: 300,
-            zIndex: 1500,
-            title : '<img src="./view/image/check.png" style="width:15px;">',
-          }).setContent('資料匯入完成。').open();
+          jbox({'result':r.result, 'message':'資料匯入完成。'});
         } else {
-          var modal = new jBox('Modal', {
-            offset: {y: -50},
-            position: {y: 'center'},
-            closeButton: 'title',
-            delayOpen: 300,
-            zIndex: 1500,
-            title : '<img src="./view/image/error.png" style="width:15px;">',
-          }).setContent('資料匯入失敗, 請重新操作。').open();
+          jbox({'result':r.result, 'message':'資料匯入失敗,請重新操作。'});
         }
       });
 

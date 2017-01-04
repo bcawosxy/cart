@@ -73,7 +73,7 @@ class ModelVersionBook2school extends Model {
 			        $books=[];
 			        if(!in_array($v0[$fileSchoolNameCel], $a_tmpName)) {
 			            if(count($school) > 0) $data[] = $school;
-			            //開始一輪新的學校
+			            //紀錄下一個學校
 			            $a_tmpName[] = $v0[$fileSchoolNameCel];
 
 			            foreach ($sheetData[1] as $k1 => $v1) {

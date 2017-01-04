@@ -214,12 +214,29 @@ class ControllerInformationVersion extends Controller {
 		$county = $_POST['county'];
 		$countyName = str_replace('台', '臺', $_POST['countyName']);
 
-		$fetchVersion = $this->db->query('SELECT * FROM `book2school`.`'.date('Y').'_'.$type.'` WHERE `zone` = "'.$countyName.'" AND `name` LIKE "%'.$schoolName.'";');
+		//取得目前查詢日期對應的學年度資料表
+		$gradeYears = (in_array(date('m'), ['01', '02', '03', '04', '05', '06', '07'])) ? date('Y')-1912 : date('Y')-1911 ;
+		$fetchVersion = $this->db->query('SELECT * FROM `book2school`.`'.$gradeYears.'_'.$type.'` WHERE `zone` = "'.$countyName.'" AND `name` LIKE "%'.$schoolName.'";');
 		
 		if($fetchVersion->num_rows == 1) {
-			print_r($fetchVersion->row);			
+			foreach ($fetchVersion->row as $k0 => $v0) { $data[$k0] = ($k0 == 'grades') ? json_decode($v0 , true) : $v0; }
+			
+			$arr = ['南一', '康軒','翰林'];
+			foreach ($data['grades'] as $k0 => $v0) {
+				foreach ($v0 as $k1 => $v1) {
+					if (is_null($v1)) $data['grades'][$k0][$k1] = '';
+					if( in_array($v1, $arr) ) {
+						$data['grades'][$k0][$k1] = '<a href="#'.array_search($v1, $arr).'">'.$v1.'</a>';
+					}
+				}
+			}
+
+			$result = ['result' => 1, 'data'=>$data];
+			print_r(json_encode($result));
+
 		} else {
-			print_r(0);
+			$result = ['result' => 0];
+			print_r(json_encode($result));
 		}
 		
 		die();

@@ -65,6 +65,19 @@
           </div>
         </div>
       </div>
+
+      <!--下半部區塊 (搜尋結果)-->
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-10 search">
+              <div class="table-responsive">
+                <table id="display" class="table"> </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
@@ -87,7 +100,6 @@ function setSchool(data=[]) {
   itemList.initPrimaryList();
   $('#schoolList').append(item).trigger('chosen:updated');
 }
-
 
 $(document).ready(function(){
   $('#countyList').chosen({
@@ -142,7 +154,35 @@ $(document).ready(function(){
       schoolName : schoolName,
     }, function(r) {
       r = $.parseJSON(r);
-      console.log(r);
+      $('#display').empty();
+      
+      if(r.result){
+        colsNum = (Object.keys(r.data.grades[1]).length); 
+        rowsNum = (Object.keys(r.data.grades).length+1); 
+        var html = ''
+            colsAdd ='';
+            content ='';
+        html += `<tr class="waring" id="firstRow">
+                  <td style="vertical-align: middle;" rowspan="${rowsNum}">${r.data.zone}</td>
+                  <td style="vertical-align: middle;" rowspan="${rowsNum}">${r.data.name}</td>
+                  <td>年級</td>
+                </tr>`;
+        $('#display').append(html);
+
+        for (var i in(r.data.grades[1])) { colsAdd += `<td>${i}</td>`; }
+        $('#firstRow').append(colsAdd);
+
+        for (var i in r.data.grades) {
+          content += `<tr><td>${i}</td>`;
+          for (var j in r.data.grades[i]) {
+           content += `<td>${r.data.grades[i][j]}</td>`;
+          }        
+          content += `</tr>`;      
+        }
+        $('#display').append(content);
+      } else {
+        console.log('Not Found!');
+      }
     });
   });
 
@@ -167,6 +207,8 @@ $(document).on('click', '#PrimarySchool, #JuniorHighSchool, #SeniorHighSchool', 
   $(this).addClass('active').siblings('input[type="button"]').removeClass('active');
   $('#areaList').data('school', $(this).data('school'));
 });
+
+
 
 </script>
 <?php echo $footer; ?>
