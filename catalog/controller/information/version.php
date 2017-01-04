@@ -221,9 +221,10 @@ class ControllerInformationVersion extends Controller {
 		if($fetchVersion->num_rows == 1) {
 			foreach ($fetchVersion->row as $k0 => $v0) { $data[$k0] = ($k0 == 'grades') ? json_decode($v0 , true) : $v0; }
 			
-			$arr = ['南一', '康軒','翰林'];
+			$arr = ['南一','康軒','翰林', '康熹', '三民', '龍騰', '全華', '泰宇'];
 			foreach ($data['grades'] as $k0 => $v0) {
 				foreach ($v0 as $k1 => $v1) {
+					if( strpos($v1 ,'(' ) ) $data['grades'][$k0][$k1] = $v1 = substr($v1, 0, strpos($v1 ,'(' ));
 					if (is_null($v1)) $data['grades'][$k0][$k1] = '';
 					if( in_array($v1, $arr) ) {
 						$data['grades'][$k0][$k1] = '<a href="#'.array_search($v1, $arr).'">'.$v1.'</a>';

@@ -1469,19 +1469,19 @@
         schoolType = $('#schoolType :selected').val();
     
     if(years == '') {
-      jbox({'result':0, 'message':'請選擇對應學年度'});
+      jbox({'result':0, 'message':'<?php echo $error_yearsGrade ?>'});
       $('#years').focus();
       return;
     }  
 
     if(schoolType == '') {
-      jbox({'result':0, 'message':'請選擇學校類型'});
+      jbox({'result':0, 'message':'<?php echo $error_schoolType ?>'});
       $('#schoolType').focus();
       return;
     }
 
     if(val == '') {
-      jbox({'result':0, 'message':'未選擇版本表文件'});
+      jbox({'result':0, 'message':'<?php echo $error_versionFile ?>' });
       return;
     }
 

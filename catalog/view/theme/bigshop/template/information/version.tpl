@@ -70,9 +70,10 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="row">
-            <div class="col-sm-10 search">
+            <div class="col-sm-12 search">
               <div class="table-responsive">
-                <table id="display" class="table"> </table>
+                <table id="display" class="table table-striped"> </table>
+                <div style="display :none;" class="alert alert-danger" role="alert"><?php echo $text_no_results_text; ?></div>
               </div>
             </div>
           </div>
@@ -108,6 +109,7 @@ $(document).ready(function(){
     search_contains :true,
     width:'100%',
   }).on('change', function(evt, params) {
+    $('div.alert').hide();
     var v = $('#countyList :selected').val();
     $.post("<?php echo $fetchAreaUrl ?>", {
       data : v,
@@ -124,6 +126,7 @@ $(document).ready(function(){
     search_contains :true,
     width:'100%',
   }).on('change', function(evt, params) {
+    $('div.alert').hide();
     var grade = $(this).data('school'),
         v = $('#areaList :selected').val();
     if(typeof grade == 'undefined') grade = 'primary';
@@ -141,6 +144,7 @@ $(document).ready(function(){
     search_contains :true,
     width:'100%',
   }).on('change', function(evt, params) {
+    $('div.alert').hide();
     var type = $('#areaList').data('school'),
         school = $('#schoolList :selected').val(),
         schoolName = $('#schoolList :selected').html(),
@@ -163,13 +167,13 @@ $(document).ready(function(){
             colsAdd ='';
             content ='';
         html += `<tr class="waring" id="firstRow">
-                  <td style="vertical-align: middle;" rowspan="${rowsNum}">${r.data.zone}</td>
-                  <td style="vertical-align: middle;" rowspan="${rowsNum}">${r.data.name}</td>
+                  <td style="vertical-align: middle;color: #117dda; font-weight: bold;" rowspan="${rowsNum}">${r.data.zone}</td>
+                  <td style="vertical-align: middle;color: #117dda; font-weight: bold;" rowspan="${rowsNum}">${r.data.name}</td>
                   <td>年級</td>
                 </tr>`;
         $('#display').append(html);
 
-        for (var i in(r.data.grades[1])) { colsAdd += `<td>${i}</td>`; }
+        for (var i in(r.data.grades[1])) { colsAdd += `<td style="font-weight:bold;">${i}</td>`; }
         $('#firstRow').append(colsAdd);
 
         for (var i in r.data.grades) {
@@ -181,7 +185,7 @@ $(document).ready(function(){
         }
         $('#display').append(content);
       } else {
-        console.log('Not Found!');
+        $('div.alert').show();
       }
     });
   });
@@ -206,6 +210,8 @@ $(document).on('click', '#PrimarySchool, #JuniorHighSchool, #SeniorHighSchool', 
   itemList.initCountyList();
   $(this).addClass('active').siblings('input[type="button"]').removeClass('active');
   $('#areaList').data('school', $(this).data('school'));
+  $('#display').empty();
+  $('div.alert').hide();
 });
 
 

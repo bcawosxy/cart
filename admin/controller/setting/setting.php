@@ -265,6 +265,10 @@ class ControllerSettingSetting extends Controller {
 		$data['tab_server'] = $this->language->get('tab_server');
 		$data['tab_version'] = '參考書版本';
 
+		$data['error_yearsGrade'] = $this->language->get('error_yearsGrade');
+		$data['error_schoolType'] = $this->language->get('error_schoolType');
+		$data['error_versionFile'] = $this->language->get('error_versionFile');
+
 		$years = [((date('Y')+1)-1911)];
 		for ($i=0; $i < 5; $i++) { 
 			$years[] = ((date('Y')-$i)-1911);

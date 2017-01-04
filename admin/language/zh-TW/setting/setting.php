@@ -40,6 +40,7 @@ $_['text_optionDefault']				= '請選擇';
 $_['text_insert']						= '匯入';
 
 
+
 // Entry
 $_['entry_meta_title']				 	= 'Meta標題';
 $_['entry_meta_description']		   	= 'Meta網頁描述';
@@ -225,3 +226,6 @@ $_['error_ftp_password']			   	= 'FTP 密碼必須填寫！';
 $_['error_error_filename']			 	= '請輸入錯誤日誌檔案名稱！';
 $_['error_malformed_filename']		   	= '錯誤日誌檔案名稱有誤!';
 $_['error_encryption']				 	= '密鑰必須是 3 至 32 個字！';
+$_['error_yearsGrade']					= '請選擇對應學年度';
+$_['error_schoolType']					= '請選擇學校類型';
+$_['error_versionFile']					= '未選擇版本表文件';
