@@ -103,6 +103,7 @@ function setSchool(data=[]) {
 }
 
 $(document).ready(function(){
+
   $('#countyList').chosen({
     placeholder_text_single : '<?php echo $text_county; ?>',
     no_results_text: '<?php echo $text_no_results_text; ?>',
@@ -162,22 +163,23 @@ $(document).ready(function(){
       
       if(r.result){
         colsNum = (Object.keys(r.data.grades[1]).length); 
-        rowsNum = (Object.keys(r.data.grades).length+1); 
+        rowsNum = (Object.keys(r.data.grades).length+1);
         var html = ''
             colsAdd ='';
             content ='';
-        html += `<tr class="waring" id="firstRow">
-                  <td style="vertical-align: middle;color: #117dda; font-weight: bold;" rowspan="${rowsNum}">${r.data.zone}</td>
-                  <td style="vertical-align: middle;color: #117dda; font-weight: bold;" rowspan="${rowsNum}">${r.data.name}</td>
-                  <td>年級</td>
+        html += `<tr class="waring" id="firstRow">                  
+                  <td style="vertical-align: middle;color: #117dda; font-weight: bold;font-size:1.3em;" colspan="${colsNum+1}">${r.data.zone} - ${r.data.name}</td>
+                </tr>
+                <tr id="titleRow">
+                  <td style="text-align:center;">年級</td>
                 </tr>`;
         $('#display').append(html);
 
         for (var i in(r.data.grades[1])) { colsAdd += `<td style="font-weight:bold;">${i}</td>`; }
-        $('#firstRow').append(colsAdd);
+        $('#titleRow').append(colsAdd);
 
         for (var i in r.data.grades) {
-          content += `<tr><td>${i}</td>`;
+          content += `<tr><td style="text-align:center;">${i}</td>`;
           for (var j in r.data.grades[i]) {
            content += `<td>${r.data.grades[i][j]}</td>`;
           }        
