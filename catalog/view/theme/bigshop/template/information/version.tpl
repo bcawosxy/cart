@@ -1,6 +1,7 @@
 <?php echo $header; ?>
 <script type="text/javascript" src="../catalog/view/javascript/chosen/chosen.jquery.min.js"></script>
 <link rel=stylesheet type="text/css" href="../catalog/view/javascript/chosen/chosen.min.css">
+<link rel=stylesheet type="text/css" href="../catalog/view/stylesheet/stylesheet.css">
 <div class="container">
   <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -168,7 +169,7 @@ $(document).ready(function(){
             colsAdd ='';
             content ='';
         html += `<tr class="waring" id="firstRow">                  
-                  <td style="vertical-align: middle;color: #117dda; font-weight: bold;font-size:1.3em;" colspan="${colsNum+1}">${r.data.zone} - ${r.data.name}</td>
+                  <td style="vertical-align: middle;color: #117dda; font-weight: bold;font-size:1.3em;" colspan="${colsNum+1}">${r.data.zone} - ${r.data.name} <span class="tips">(*版本表僅供查詢)</span></td>
                 </tr>
                 <tr id="titleRow">
                   <td style="text-align:center;">年級</td>
