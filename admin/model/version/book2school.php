@@ -50,7 +50,7 @@ class ModelVersionBook2school extends Model {
 		if($schoolType != null && $years != null && $path != null) {
 			$DBName = $this->createTable($years, $schoolType);
 			require_once(DIR_UPLOAD.'Classes/PHPExcel.php');
-			require_once(DIR_UPLOAD.'Classes/phpexcel/IOFactory.php'); 
+			require_once(DIR_UPLOAD.'Classes/PHPExcel/IOFactory.php'); 
 			$objPHPExcel = new PHPExcel();
 
 			//從excel中取出資料列
