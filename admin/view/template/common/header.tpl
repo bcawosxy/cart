@@ -18,6 +18,16 @@
 <script src="view/javascript/jquery/datetimepicker/moment.js" type="text/javascript"></script>
 <script src="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 <script src="view/javascript/jbox/jbox.min.js" type="text/javascript"></script>
+
+<script src="view/javascript/jqueryfileupload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="view/javascript/jqueryfileupload/js/jquery.fileupload.js" type="text/javascript"></script>
+<script src="view/javascript/jqueryfileupload/js/jquery.iframe-transport.js" type="text/javascript"></script>
+<script src="view/javascript/jqueryfileupload/js/jquery.fileupload-process.js" type="text/javascript"></script>
+<script src="view/javascript/jqueryfileupload/js/jquery.fileupload-validate.js" type="text/javascript"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="view/javascript/jqueryfileupload/css/jquery.fileupload.css" type="text/css" rel="stylesheet" />
+
+
 <link href="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" media="screen" />
 <link type="text/css" href="view/stylesheet/stylesheet.css" rel="stylesheet" media="screen" />
 <link type="text/css" href="view/javascript/jbox/jbox.css" rel="stylesheet" media="screen" />

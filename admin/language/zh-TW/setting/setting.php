@@ -139,6 +139,7 @@ $_['entry_version_year']				= '學年度';
 $_['entry_school_type']					= '學校(國小 / 國中 / 高中)';
 $_['entry_fileList']					= '檔案清單';
 $_['entry_insert']						= '匯入檔案';
+$_['entry_file_upload']					= '上傳檔案';
 
 
 // Help
@@ -202,6 +203,7 @@ $_['help_password']						= '忘記密碼管理。如果系統被破壞，將不�
 $_['help_encryption']				  	= '請提供一個密鑰, 讓處理訂單時可加密個人的資料。';
 $_['help_compression']				 	= 'GZIP 可更有效地轉移到要求的客戶端。壓縮級別必須在0 - 9';
 $_['help_version_year']				 	= '選擇對應文件的學年度';
+$_['help_file_type']					= '目前僅支援excel(xls,xlsx)格式文件';
 
 // Error
 $_['error_warning']						= '警告： 請檢查您輸入的資料！';

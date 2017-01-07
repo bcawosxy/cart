@@ -2,6 +2,32 @@
 class ControllerSettingSetting extends Controller {
 	private $error = array();
 
+	public function afterfileupload() {
+		$filename = $_POST['filename'];
+		$grades = $_POST['grades'];
+		$data = [];
+		$fileinfo = pathinfo(DIR_UPLOAD.'files/'.$filename);
+		
+		if(!in_array($fileinfo['extension'], ['xls', 'xlsx'])) {
+			$result = 0;
+			$message = '檔案類型錯誤, 請上傳xls / xlsx 格式檔案';
+		} else {
+			$source = DIR_UPLOAD.'files/'.$filename;
+			$dir = DIR_UPLOAD.'version/'.$grades.'/'.$filename;
+			if(rename($source, $dir)) {
+				$result = 1;
+				$message ='上傳完成';
+				$data = ['path' => $dir, 'name'=> $filename];
+			} else {
+				$result = 0 ;
+				$message = '發生異常, 請重新操作.';
+			}
+		}
+
+		print_r(json_encode(['result'=>$result , 'message' => $message, 'data' => $data]));
+		die();
+	} 
+
 	/**
 	 * 取得下拉檔案清單
 	 */
@@ -27,6 +53,11 @@ class ControllerSettingSetting extends Controller {
 		}
 		print_r(json_encode($fileData));
 		die();
+	}
+
+	public function fileupload() {
+		require(DIR_UPLOAD.'jquery-file-upload/UploadHandler.php');
+		$upload_handler = new UploadHandler();
 	}
 
 	public function index() {
@@ -188,6 +219,7 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_school_type'] = $this->language->get('entry_school_type');
 		$data['entry_fileList'] = $this->language->get('entry_fileList');
 		$data['entry_insert'] = $this->language->get('entry_insert');
+		$data['entry_file_upload'] = $this->language->get('entry_file_upload');
 
 
 		$data['help_geocode'] = $this->language->get('help_geocode');
@@ -251,6 +283,7 @@ class ControllerSettingSetting extends Controller {
 		$data['help_encryption'] = $this->language->get('help_encryption');
 		$data['help_compression'] = $this->language->get('help_compression');
 		$data['help_version_year'] = $this->language->get('help_version_year');
+		$data['help_file_type'] = $this->language->get('help_file_type');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -437,8 +470,11 @@ class ControllerSettingSetting extends Controller {
 
 		$data['cancel'] = $this->url->link('setting/store', 'token=' . $this->session->data['token'], true);
 		
+		/*custom URL*/
 		$data['fetchFileList'] = str_replace('amp;', '', $this->url->link('setting/setting/fetchfilelist', 'token=' . $this->session->data['token'], true) );
 		$data['insert'] = str_replace('amp;', '', $this->url->link('setting/setting/insert', 'token=' . $this->session->data['token'], true) );
+		$data['fileuploadURL'] = str_replace('amp;', '', $this->url->link('setting/setting/fileupload', 'token=' . $this->session->data['token'], true) );
+		$data['afterFileuploadURL'] = str_replace('amp;', '', $this->url->link('setting/setting/afterfileupload', 'token=' . $this->session->data['token'], true) );
 
 		$data['token'] = $this->session->data['token'];
 
