@@ -39,7 +39,7 @@
             <li><a href="#tab-ftp" data-toggle="tab"><?php echo $tab_ftp; ?></a></li>
             <li><a href="#tab-mail" data-toggle="tab"><?php echo $tab_mail; ?></a></li>
             <li><a href="#tab-server" data-toggle="tab"><?php echo $tab_server; ?></a></li>
-            <li><a href="#tab-version" data-toggle="tab"><?php echo $tab_version; ?></a></li>
+            <li ><a href="#tab-version" data-toggle="tab"><?php echo $tab_version; ?></a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -1394,11 +1394,11 @@
             </div>
             
             <!-- Version Tab -->
-            <div class="tab-pane" id="tab-version">
+            <div class="tab-pane " id="tab-version">
               <fieldset>
                 <legend><?php echo $text_version_upload; ?></legend>
                 <div class="form-group">
-                  <!-- 輸入西元年份 -->
+                  <!-- 選擇學年度 -->
                   <label class="col-sm-2 control-label" for="input-version_year"><span data-toggle="tooltip" title="<?php echo $help_version_year; ?>"><?php echo $entry_version_year; ?></span></label>
                   <div class="col-sm-10">
                     <select id="years" class="form-control">
@@ -1427,6 +1427,20 @@
                      </select>
                     </div>
                 </div>
+                <!-- 上傳檔案 -->
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="exampleInputFile"><?php echo $entry_file_upload; ?>
+                   <span data-toggle="tooltip" title="<?php echo $help_file_type; ?>"></span>
+                  </label>
+                  <div class="col-sm-10">
+                    <input type="button" id="fileUploadBtn" class="btn btn-primary" value="選擇檔案"></input>
+                    <input id="fileupload" style="display:none;" type="file" name="files[]" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" multiple>
+                  </div>
+                  <div id="progress" class="progress">
+                      <div class="progress-bar progress-bar-success"></div>
+                  </div>
+                  <div id="files" class="files"></div>
+                </div> 
                 <!-- 檔案列表 -->
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="fileList"><?php echo $entry_fileList; ?></label>
@@ -1447,6 +1461,8 @@
 
           </div>
         </form>
+   
+
       </div>
     </div>
   </div>
@@ -1509,7 +1525,6 @@
           jbox({'result':r.result, 'message':'資料匯入失敗,請重新操作。'});
         }
       });
-
     }
   }
 
@@ -1528,6 +1543,40 @@
         $('#fileList').append(item);
       });
     }
+  });
+
+  $('#fileUploadBtn').on('click', function(e) {
+    var schoolType = $('#schoolType :selected').val();
+    if(schoolType == '') {
+      jbox({'result':0, 'message':'<?php echo $error_schoolType ?>' });
+    } else {
+      $('#fileupload').trigger('click');
+    }
+  })
+
+  $(function () {
+    'use strict';
+    var url = '<?php echo $fileuploadURL ?>';
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+              name =  file.name ;
+            });
+            $.post('<?php echo $afterFileuploadURL ?>', {
+              filename : name,
+              grades : $('#schoolType :selected').val(),
+            }, function(r) {
+              r = $.parseJSON(r);
+              jbox({'result': r.result, 'message': r.message });
+              if(r.result == 1) {
+                $('#fileList').append('<option value="'+r.data.path+'">'+r.data.name+'</option>');
+              }
+            });
+        },
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
   });
 </script>
 
