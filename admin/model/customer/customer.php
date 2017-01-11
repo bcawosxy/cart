@@ -38,7 +38,12 @@ class ModelCustomerCustomer extends Model {
 				if (!isset($address['custom_field'])) {
 					$address['custom_field'] = array();
 				}
-
+				/*0111 由於中文化移除了這幾個欄位 故再存入SQL前須填寫避免造成異常*/
+				$address['lastname'] = '';
+				$address['company'] = '';
+				$address['address_2'] = '';
+				$address['city'] = '';
+				$address['country_id'] = '206';
 				$this->db->query("INSERT INTO " . DB_PREFIX . "address SET address_id = '" . (int)$address['address_id'] . "', customer_id = '" . (int)$customer_id . "', firstname = '" . $this->db->escape($address['firstname']) . "', lastname = '" . $this->db->escape($address['lastname']) . "', company = '" . $this->db->escape($address['company']) . "', address_1 = '" . $this->db->escape($address['address_1']) . "', address_2 = '" . $this->db->escape($address['address_2']) . "', city = '" . $this->db->escape($address['city']) . "', postcode = '" . $this->db->escape($address['postcode']) . "', country_id = '" . (int)$address['country_id'] . "', zone_id = '" . (int)$address['zone_id'] . "', custom_field = '" . $this->db->escape(isset($address['custom_field']) ? json_encode($address['custom_field']) : '') . "'");
 
 				if (isset($address['default'])) {
