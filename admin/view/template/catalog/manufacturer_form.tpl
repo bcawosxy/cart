@@ -34,6 +34,8 @@
               <?php } ?>
             </div>
           </div>
+          <!--暫不開放調整子商店 -->
+          <!--
           <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_store; ?></label>
             <div class="col-sm-10">
@@ -65,6 +67,7 @@
               </div>
             </div>
           </div>
+          -->
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-keyword"><span data-toggle="tooltip" title="<?php echo $help_keyword; ?>"><?php echo $entry_keyword; ?></span></label>
             <div class="col-sm-10">

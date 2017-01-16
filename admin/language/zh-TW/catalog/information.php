@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']			= '頁面管理';
+$_['heading_title']			= '資訊頁面管理';
 
 // Text
 $_['text_success']			= '成功：您已更新商店資訊頁面！';
