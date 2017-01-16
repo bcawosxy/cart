@@ -323,6 +323,7 @@ class ControllerCatalogCategory extends Controller {
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_top'] = $this->language->get('help_top');
 		$data['help_column'] = $this->language->get('help_column');
+		$data['help_category_description'] = $this->language->get('help_category_description');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');

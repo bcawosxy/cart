@@ -28,7 +28,8 @@
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
             <li><a href="#tab-data" data-toggle="tab"><?php echo $tab_data; ?></a></li>
-            <li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>
+            <!--暫不使用此功能[版面設計]-->
+            <!--<li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>-->
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -56,7 +57,7 @@
                     </div>
                   </div>
                   <div class="form-group required">
-                    <label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>"><?php echo $entry_meta_title; ?></label>
+                    <label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>"><span data-toggle="tooltip" title="<?php echo $help_category_description; ?>"><?php echo $entry_meta_title; ?></span></label>
                     <div class="col-sm-10">
                       <input type="text" name="category_description[<?php echo $language['language_id']; ?>][meta_title]" value="<?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['meta_title'] : ''; ?>" placeholder="<?php echo $entry_meta_title; ?>" id="input-meta-title<?php echo $language['language_id']; ?>" class="form-control" />
                       <?php if (isset($error_meta_title[$language['language_id']])) { ?>
@@ -91,6 +92,7 @@
                   <?php } ?>
                 </div>
               </div>
+              <!-- 暫不使用此功能[過濾器][子商店選擇]
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-filter"><span data-toggle="tooltip" title="<?php echo $help_filter; ?>"><?php echo $entry_filter; ?></span></label>
                 <div class="col-sm-10">
@@ -135,6 +137,7 @@
                   </div>
                 </div>
               </div>
+              -->
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-keyword"><span data-toggle="tooltip" title="<?php echo $help_keyword; ?>"><?php echo $entry_keyword; ?></span></label>
                 <div class="col-sm-10">

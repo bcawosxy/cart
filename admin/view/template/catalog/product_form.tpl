@@ -31,12 +31,14 @@
             <li><a href="#tab-links" data-toggle="tab"><?php echo $tab_links; ?></a></li>
             <li><a href="#tab-attribute" data-toggle="tab"><?php echo $tab_attribute; ?></a></li>
             <li><a href="#tab-option" data-toggle="tab"><?php echo $tab_option; ?></a></li>
-            <li><a href="#tab-recurring" data-toggle="tab"><?php echo $tab_recurring; ?></a></li>
+            <!--暫不使用此功能[定期付款]-->
+            <!-- <li><a href="#tab-recurring" data-toggle="tab"><?php echo $tab_recurring; ?></a></li> -->
             <li><a href="#tab-discount" data-toggle="tab"><?php echo $tab_discount; ?></a></li>
             <li><a href="#tab-special" data-toggle="tab"><?php echo $tab_special; ?></a></li>
             <li><a href="#tab-image" data-toggle="tab"><?php echo $tab_image; ?></a></li>
             <li><a href="#tab-reward" data-toggle="tab"><?php echo $tab_reward; ?></a></li>
-            <li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>
+            <!--暫不使用此功能[版面設計]-->
+            <!--<li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>-->
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -110,12 +112,15 @@
                   <input type="text" name="sku" value="<?php echo $sku; ?>" placeholder="<?php echo $entry_sku; ?>" id="input-sku" class="form-control" />
                 </div>
               </div>
+              <!--暫不使用此欄位[UPC][EAN][JAN] -->
+              <!--
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-upc"><span data-toggle="tooltip" title="<?php echo $help_upc; ?>"><?php echo $entry_upc; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="upc" value="<?php echo $upc; ?>" placeholder="<?php echo $entry_upc; ?>" id="input-upc" class="form-control" />
                 </div>
               </div>
+
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-ean"><span data-toggle="tooltip" title="<?php echo $help_ean; ?>"><?php echo $entry_ean; ?></span></label>
                 <div class="col-sm-10">
@@ -128,18 +133,22 @@
                   <input type="text" name="jan" value="<?php echo $jan; ?>" placeholder="<?php echo $entry_jan; ?>" id="input-jan" class="form-control" />
                 </div>
               </div>
+              -->
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-isbn"><span data-toggle="tooltip" title="<?php echo $help_isbn; ?>"><?php echo $entry_isbn; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="isbn" value="<?php echo $isbn; ?>" placeholder="<?php echo $entry_isbn; ?>" id="input-isbn" class="form-control" />
                 </div>
               </div>
+              <!--暫不使用此欄位[MPN] -->
+              <!--
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-mpn"><span data-toggle="tooltip" title="<?php echo $help_mpn; ?>"><?php echo $entry_mpn; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="mpn" value="<?php echo $mpn; ?>" placeholder="<?php echo $entry_mpn; ?>" id="input-mpn" class="form-control" />
                 </div>
               </div>
+              -->
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-location"><?php echo $entry_location; ?></label>
                 <div class="col-sm-10">
@@ -341,6 +350,8 @@
                   </div>
                 </div>
               </div>
+              <!-- 暫不使用此欄位[過濾器][子商店][下載商品]-->
+              <!--
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-filter"><span data-toggle="tooltip" title="<?php echo $help_filter; ?>"><?php echo $entry_filter; ?></span></label>
                 <div class="col-sm-10">
@@ -354,6 +365,7 @@
                   </div>
                 </div>
               </div>
+              
               <div class="form-group">
                 <label class="col-sm-2 control-label"><?php echo $entry_store; ?></label>
                 <div class="col-sm-10">
@@ -398,6 +410,7 @@
                   </div>
                 </div>
               </div>
+               -->
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-related"><span data-toggle="tooltip" title="<?php echo $help_related; ?>"><?php echo $entry_related; ?></span></label>
                 <div class="col-sm-10">
