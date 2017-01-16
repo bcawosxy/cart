@@ -1236,8 +1236,7 @@ class ControllerSettingSetting extends Controller {
 	/**
 	 * 向資料庫倒入文件資料
 	 */
-	public function insert() {
-        ini_set('memory_limit', '128M');
+	public function insert() {       
 		$path = (!empty($_POST['path'])) ? $_POST['path'] : null;
 		$years = (!empty($_POST['years'])) ? $_POST['years'] : null;
 		$schoolType = (!empty($_POST['schoolType'])) ? $_POST['schoolType'] : null;

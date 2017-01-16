@@ -378,8 +378,8 @@ class ControllerCatalogProduct extends Controller {
 				'image'      => $image,
 				'name'       => $result['name'],
 				'model'      => $result['model'],
-				'price'      => $result['price'],
-				'special'    => $special,
+				'price'      => number_format($result['price']),
+				'special'    => number_format($special),
 				'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'edit'       => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $result['product_id'] . $url, true)
@@ -1167,7 +1167,7 @@ class ControllerCatalogProduct extends Controller {
 				'customer_group_id' => $product_discount['customer_group_id'],
 				'quantity'          => $product_discount['quantity'],
 				'priority'          => $product_discount['priority'],
-				'price'             => $product_discount['price'],
+				'price'             => number_format($product_discount['price']),
 				'date_start'        => ($product_discount['date_start'] != '0000-00-00') ? $product_discount['date_start'] : '',
 				'date_end'          => ($product_discount['date_end'] != '0000-00-00') ? $product_discount['date_end'] : ''
 			);
@@ -1187,7 +1187,7 @@ class ControllerCatalogProduct extends Controller {
 			$data['product_specials'][] = array(
 				'customer_group_id' => $product_special['customer_group_id'],
 				'priority'          => $product_special['priority'],
-				'price'             => $product_special['price'],
+				'price'             => number_format($product_special['price']),
 				'date_start'        => ($product_special['date_start'] != '0000-00-00') ? $product_special['date_start'] : '',
 				'date_end'          => ($product_special['date_end'] != '0000-00-00') ? $product_special['date_end'] :  ''
 			);
@@ -1317,6 +1317,13 @@ class ControllerCatalogProduct extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
+
+		//number_format
+		$data['price'] = number_format($data['price']);
+		$data['length'] = number_format($data['length']);
+		$data['width'] = number_format($data['width']);
+		$data['height'] = number_format($data['height']);
+		$data['weight'] = number_format($data['weight']);
 
 		$this->response->setOutput($this->load->view('catalog/product_form', $data));
 	}

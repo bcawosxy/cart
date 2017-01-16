@@ -16,4 +16,7 @@ if (!defined('DIR_APPLICATION')) {
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 
+//set memory_limit
+ini_set('memory_limit', '128M');
+
 start('admin');
