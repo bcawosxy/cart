@@ -9,10 +9,10 @@ catalog/view/theme/bigshop/stylesheet/
 catalog/view/theme/bigshop/template/error/
 catalog/view/theme/bigshop/template/account/
 catalog/view/theme/bigshop/template/affiliate/
-catalog/view/theme/bigshop/template/common/
+
 catalog/view/theme/bigshop/template/extension/
 catalog/view/theme/bigshop/template/mail/
-catalog/view/theme/bigshop/template/product/
+
 catalog/view/theme/bigshop/template/information/contact.tpl
 catalog/view/theme/bigshop/template/information/information.tpl
 catalog/view/theme/bigshop/template/information/sitemap.tpl
