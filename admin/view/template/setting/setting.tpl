@@ -66,8 +66,8 @@
                 </div>
               </div>
               <!--不顯示此欄位[版型][布局] -->
-              <!--
-              <div class="form-group">
+              
+              <div class="form-group" style="display: none;" >
                 <label class="col-sm-2 control-label" for="input-theme"><?php echo $entry_theme; ?></label>
                 <div class="col-sm-10">
                   <select name="config_theme" id="input-theme" class="form-control">
@@ -82,7 +82,7 @@
                   <br />
                   <img src="" alt="" id="theme" class="img-thumbnail" /></div>
               </div>
-              <div class="form-group">
+              <div class="form-group" style="display:none;">
                 <label class="col-sm-2 control-label" for="input-layout"><?php echo $entry_layout; ?></label>
                 <div class="col-sm-10">
                   <select name="config_layout_id" id="input-layout" class="form-control">
@@ -96,7 +96,7 @@
                   </select>
                 </div>
               </div>
-              -->
+              
             </div>
             <div class="tab-pane" id="tab-store">
               <div class="form-group required">
@@ -127,14 +127,14 @@
                 </div>
               </div>
               <!--不顯示此欄位[經緯度座標]-->
-              <!--
-              <div class="form-group">
+              
+              <div class="form-group" style="display:none">
                 <label class="col-sm-2 control-label" for="input-geocode"><span data-toggle="tooltip" data-container="#tab-general" title="<?php echo $help_geocode; ?>"><?php echo $entry_geocode; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="config_geocode" value="<?php echo $config_geocode; ?>" placeholder="<?php echo $entry_geocode; ?>" id="input-geocode" class="form-control" />
                 </div>
               </div>
-              -->
+              
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
                 <div class="col-sm-10">
@@ -263,8 +263,8 @@
                 </div>
               </div>
               <!--不顯示此欄位[匯率自動更新] -->
-              <!--
-              <div class="form-group">
+              
+              <div class="form-group" style="display:none;">
                 <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="<?php echo $help_currency_auto; ?>"><?php echo $entry_currency_auto; ?></span></label>
                 <div class="col-sm-10">
                   <label class="radio-inline">
@@ -287,7 +287,7 @@
                   </label>
                 </div>
               </div>
-              -->
+              
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-length-class"><?php echo $entry_length_class; ?></label>
                 <div class="col-sm-10">
@@ -403,8 +403,7 @@
                 </div>
               </fieldset>
               <!-- 不顯示此欄位[禮券] -->
-              <!--
-              <fieldset>
+              <fieldset style="display:none;">
                 <legend><?php echo $text_voucher; ?></legend>
                 <div class="form-group required">
                   <label class="col-sm-2 control-label" for="input-voucher-min"><span data-toggle="tooltip" title="<?php echo $help_voucher_min; ?>"><?php echo $entry_voucher_min; ?></span></label>
@@ -425,7 +424,6 @@
                   </div>
                 </div>
               </fieldset>
-              -->
               <fieldset>
                 <legend><?php echo $text_tax; ?></legend>
                 <div class="form-group">
@@ -772,8 +770,8 @@
                   </div>
                 </div>
                 <!-- 不顯示此欄位[防詐欺] -->
-                <!--
-                <div class="form-group">
+                
+                <div class="form-group" style="display:none;">
                   <label class="col-sm-2 control-label" for="input-fraud-status"><span data-toggle="tooltip" title="<?php echo $help_fraud_status; ?>"><?php echo $entry_fraud_status; ?></span></label>
                   <div class="col-sm-10">
                     <select name="config_fraud_status_id" id="input-fraud-status" class="form-control">
@@ -787,7 +785,7 @@
                     </select>
                   </div>
                 </div>
-                -->
+                
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-api"><span data-toggle="tooltip" title="<?php echo $help_api; ?>"><?php echo $entry_api; ?></span></label>
                   <div class="col-sm-10">
@@ -877,8 +875,8 @@
                 </div>
               </fieldset>
               <!-- 不顯示此欄位[推薦會員] -->
-              <!--
-              <fieldset>
+              
+              <fieldset style="display:none;">
                 <legend><?php echo $text_affiliate; ?></legend>
                 <div class="form-group">
                   <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="<?php echo $help_affiliate_approval; ?>"><?php echo $entry_affiliate_approval; ?></span></label>
@@ -948,7 +946,7 @@
                   </div>
                 </div>
               </fieldset>
-              -->
+              
               <fieldset>
                 <legend><?php echo $text_return; ?></legend>
                 <div class="form-group">

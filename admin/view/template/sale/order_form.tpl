@@ -832,8 +832,7 @@
                 </div>
 
                 <!-- 不使用禮券功能-->
-                <!-- 
-                <div class="form-group">
+                <div class="form-group" style="display:none;">
                   <label class="col-sm-2 control-label" for="input-voucher"><?php echo $entry_voucher; ?></label>
                   <div class="col-sm-10">
                     <div class="input-group">
@@ -843,7 +842,7 @@
                       </span></div>
                   </div>
                 </div>
-                -->
+                
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-reward"><?php echo $entry_reward; ?></label>
                   <div class="col-sm-10">
