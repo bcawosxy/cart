@@ -171,7 +171,10 @@ class ControllerUserUser extends Controller {
 
 		$results = $this->model_user_user->getUsers($filter_data);
 
+		$user_info = $this->model_user_user->getUser($this->user->getId());
+		/*如果不是最高管理員登入則不顯示該欄位*/
 		foreach ($results as $result) {
+			if($user_info['user_group_id'] != 1 && $result['user_group_id'] == 1) continue;
 			$data['users'][] = array(
 				'user_id'    => $result['user_id'],
 				'username'   => $result['username'],
@@ -381,6 +384,14 @@ class ControllerUserUser extends Controller {
 		$this->load->model('user/user_group');
 
 		$data['user_groups'] = $this->model_user_user_group->getUserGroups();
+		
+		/*如果不是最高管理員登入則不顯示該欄位*/
+		$user_info = $this->model_user_user->getUser($this->user->getId());
+		if($user_info['user_group_id'] != 1) {
+			foreach ($data['user_groups'] as $k0 => $v0) {
+				if($v0['user_group_id'] == 1) unset($data['user_groups'][$k0]);
+			}
+		}
 
 		if (isset($this->request->post['password'])) {
 			$data['password'] = $this->request->post['password'];

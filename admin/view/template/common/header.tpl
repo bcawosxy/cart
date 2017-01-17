@@ -78,7 +78,9 @@
         <?php } ?>
       </ul>
     </li>
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-life-ring fa-lg"></i></a>
+    <!--不顯示此區塊 -->
+    
+    <li style="display: none;" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-life-ring fa-lg"></i></a>
       <ul class="dropdown-menu dropdown-menu-right">
         <li class="dropdown-header"><?php echo $text_help; ?></li>
         <li><a href="http://www.opencart.com" target="_blank"><?php echo $text_homepage; ?></a></li>
@@ -86,6 +88,7 @@
         <li><a href="http://forum.opencart.com" target="_blank"><?php echo $text_support; ?></a></li>
       </ul>
     </li>
+    
     <li><a href="<?php echo $logout; ?>"><span class="hidden-xs hidden-sm hidden-md"><?php echo $text_logout; ?></span> <i class="fa fa-sign-out fa-lg"></i></a></li>
   </ul>
   <?php } ?>

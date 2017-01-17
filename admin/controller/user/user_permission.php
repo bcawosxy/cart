@@ -170,8 +170,12 @@ class ControllerUserUserPermission extends Controller {
 		$user_group_total = $this->model_user_user_group->getTotalUserGroups();
 
 		$results = $this->model_user_user_group->getUserGroups($filter_data);
-
+		
+		$this->load->model('user/user');
+		$user_info = $this->model_user_user->getUser($this->user->getId());
+		/*如果不是最高管理員登入則不顯示該欄位*/
 		foreach ($results as $result) {
+			if($user_info['user_group_id'] != 1 && $result['user_group_id'] == 1) continue;
 			$data['user_groups'][] = array(
 				'user_group_id' => $result['user_group_id'],
 				'name'          => $result['name'],
@@ -367,7 +371,8 @@ class ControllerUserUserPermission extends Controller {
 
 		// Sort the file array
 		sort($files);
-					
+		
+		/* 系統內所有可選擇權限的清單*/
 		foreach ($files as $file) {
 			$controller = substr($file, strlen(DIR_APPLICATION . 'controller/'));
 
@@ -377,6 +382,65 @@ class ControllerUserUserPermission extends Controller {
 				$data['permissions'][] = $permission;
 			}
 		}
+		/* 此版本內所有可開放給admin權限的清單 */
+		$admin_access = [
+			'catalog/attribute',
+		    'catalog/attribute_group',
+		    'catalog/category',
+		    'catalog/information',
+		    'catalog/manufacturer',
+		    'catalog/option',
+		    'catalog/product',
+		    'catalog/review',
+		    'common/column_left',
+		    'common/filemanager',
+		    'customer/custom_field',
+		    'customer/customer',
+		    'customer/customer_group',
+		    'design/banner',
+		    'extension/dashboard/activity',
+		    'extension/dashboard/chart',
+		    'extension/dashboard/customer',
+		    'extension/dashboard/map',
+		    'extension/dashboard/online',
+		    'extension/dashboard/order',
+		    'extension/dashboard/recent',
+		    'extension/dashboard/sale',
+		    'extension/openbay',
+		    'localisation/country',
+		    'localisation/order_status',
+		    'localisation/return_action',
+		    'localisation/return_reason',
+		    'localisation/return_status',
+		    'localisation/stock_status',
+		    'marketing/coupon',
+		    'marketing/marketing',
+		    'report/customer_credit',
+		    'report/customer_online',
+		    'report/customer_order',
+		    'report/customer_reward',
+		    'report/customer_search',
+		    'report/marketing',
+		    'report/product_purchased',
+		    'report/product_viewed',
+		    'report/sale_coupon',
+		    'report/sale_order',
+		    'report/sale_return',
+		    'report/sale_shipping',
+		    'sale/order',
+		    'sale/return',
+		    'setting/setting',
+		    'setting/store',
+		    'user/api',
+		    'user/user',
+		    'user/user_permission',
+		];
+
+
+		/* 如果不是root登入則重置清單讓admin選擇 */
+		$this->load->model('user/user');
+		$user_info = $this->model_user_user->getUser($this->user->getId());
+		if($user_info['user_group_id'] != 1) $data['permissions'] = $admin_access;
 
 		if (isset($this->request->post['permission']['access'])) {
 			$data['access'] = $this->request->post['permission']['access'];
