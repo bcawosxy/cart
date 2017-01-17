@@ -238,12 +238,15 @@
                     </select>
                   </div>
                 </div>
+                <!-- 不使用此功能[覆蓋?] -->
+                <!--
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-override"><span data-toggle="tooltip" title="<?php echo $help_override; ?>"><?php echo $entry_override; ?></span></label>
                   <div class="col-sm-10">
                     <input type="checkbox" name="override" value="1" id="input-override" />
                   </div>
                 </div>
+                -->
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-notify"><?php echo $entry_notify; ?></label>
                   <div class="col-sm-10">

@@ -204,6 +204,7 @@ $_['help_encryption']				  	= '請提供一個密鑰, 讓處理訂單時可加�
 $_['help_compression']				 	= 'GZIP 可更有效地轉移到要求的客戶端。壓縮級別必須在0 - 9';
 $_['help_version_year']				 	= '選擇對應文件的學年度';
 $_['help_file_type']					= '目前僅支援excel(xls,xlsx)格式文件';
+$_['help_customer_activity']			= '透過客戶報告紀錄活動。';
 
 // Error
 $_['error_warning']						= '警告： 請檢查您輸入的資料！';

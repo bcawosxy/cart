@@ -455,6 +455,7 @@ class ControllerCommonColumnLeft extends Controller {
 			// Localisation
 			$localisation = array();
 			
+			/*
 			if ($this->user->hasPermission('access', 'localisation/location')) {
 				$localisation[] = array(
 					'name'	   => $this->language->get('text_location'),
@@ -478,7 +479,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+			*/
 			if ($this->user->hasPermission('access', 'localisation/stock_status')) {
 				$localisation[] = array(
 					'name'	   => $this->language->get('text_stock_status'),
@@ -529,7 +530,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => $return		
 				);
 			}
-			
+			/*
 			if ($this->user->hasPermission('access', 'localisation/country')) {
 				$localisation[] = array(
 					'name'	   => $this->language->get('text_country'),
@@ -537,7 +538,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+			*/
 			if ($this->user->hasPermission('access', 'localisation/zone')) {
 				$localisation[] = array(
 					'name'	   => $this->language->get('text_zone'),
@@ -773,7 +774,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()
 				);
 			}
-			
+			/*
 			if ($this->user->hasPermission('access', 'report/customer_credit')) {
 				$report_customer[] = array(
 					'name'	   => $this->language->get('text_report_customer_credit'),
@@ -781,7 +782,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()
 				);
 			}
-			
+			*/
 			if ($report_customer) {	
 				$report[] = array(
 					'name'	   => $this->language->get('text_report_customer'),
@@ -801,6 +802,7 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
+			/*
 			if ($this->user->hasPermission('access', 'report/affiliate')) {
 				$report_marketing[] = array(
 					'name'	   => $this->language->get('text_report_affiliate'),
@@ -816,7 +818,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()
 				);		
 			}
-			
+			*/
 			if ($report_marketing) {	
 				$report[] = array(
 					'name'	   => $this->language->get('text_report_marketing'),

@@ -172,11 +172,12 @@ class ControllerMarketingCoupon extends Controller {
 		$results = $this->model_marketing_coupon->getCoupons($filter_data);
 
 		foreach ($results as $result) {
+			$discount = ($result['type'] == 'P') ? number_format($result['discount'], 1).' %' : number_format($result['discount']).' 元';
 			$data['coupons'][] = array(
 				'coupon_id'  => $result['coupon_id'],
 				'name'       => $result['name'],
 				'code'       => $result['code'],
-				'discount'   => $result['discount'],
+				'discount'   => $discount,
 				'date_start' => date($this->language->get('date_format_short'), strtotime($result['date_start'])),
 				'date_end'   => date($this->language->get('date_format_short'), strtotime($result['date_end'])),
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
@@ -530,6 +531,9 @@ class ControllerMarketingCoupon extends Controller {
 		} else {
 			$data['status'] = true;
 		}
+
+		$data['discount'] = number_format($data['discount']);
+		$data['total'] = number_format($data['total']);
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
