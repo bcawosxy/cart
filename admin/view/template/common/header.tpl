@@ -18,6 +18,9 @@
 <script src="view/javascript/jquery/datetimepicker/moment.js" type="text/javascript"></script>
 <script src="view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 
+<script type="text/javascript" src="../catalog/view/javascript/chosen/chosen.jquery.min.js"></script>
+<link rel=stylesheet type="text/css" href="../catalog/view/javascript/chosen/chosen.min.css">
+
 <script src="view/javascript/jbox/jbox.min.js" type="text/javascript"></script>
 <script src="view/javascript/jqueryfileupload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
 <script src="view/javascript/jqueryfileupload/js/jquery.fileupload.js" type="text/javascript"></script>

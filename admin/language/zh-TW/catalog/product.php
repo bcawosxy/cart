@@ -14,6 +14,7 @@ $_['text_option']				= '選項';
 $_['text_option_value']			= '選項值';
 $_['text_percent']				= '百分比';
 $_['text_amount']				= '固定數額';
+$_['text_eaaser']				= '清除條件';
 
 // Column
 $_['column_name']				= '商品名稱';
@@ -80,6 +81,8 @@ $_['entry_tag']					= '商品標籤：';
 $_['entry_reward']				= '紅利點數：';
 $_['entry_layout']				= '佈局覆蓋：';
 $_['entry_recurring']			= '定期付款：';
+$_['entry_price_start']			= '由';
+$_['entry_price_end']			= '至';
 
 // Help
 $_['help_keyword']				= '請確保關鍵字的唯一性，並請使用 "-" 來替代空格。';
@@ -106,3 +109,4 @@ $_['error_name']				= '商品名稱長度必須在3至255個字之間！';
 $_['error_meta_title']			= 'Meta標題必須在3至255個字之間！';
 $_['error_model']				= '商品型號必須在3至24個字之間！';
 $_['error_keyword']				= 'SEO 關鍵字已在使用中!';
+
