@@ -74,8 +74,6 @@
                   <?php } ?>
                 </select>
               </div>              
-              
-
             </div>
             <div class="col-sm-4">
               <div class="form-group col-sm-6">
@@ -111,7 +109,6 @@
                   ?>
                 </select>                
               </div>
-
               <div class="form-group col-sm-12">
                 <label class="control-label" for="input-manufacturer"><?php echo $entry_manufacturer; ?></label>
                 <select id="filter_manufacturer" class="form-control" />
