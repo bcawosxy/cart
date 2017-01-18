@@ -38,44 +38,11 @@
                 <label class="control-label" for="input-name"><?php echo $entry_name; ?></label>
                 <input type="text" name="filter_name" value="<?php echo $filter_name; ?>" placeholder="<?php echo $entry_name; ?>" id="input-name" class="form-control" />
               </div>
-             
              <div class="form-group col-sm-6">
                 <label class="control-label" for="input-model"><?php echo $entry_model; ?></label>
                 <input type="text" name="filter_model" value="<?php echo $filter_model; ?>" placeholder="<?php echo $entry_model; ?>" id="input-model" class="form-control" />
               </div>
-   
-              <div class="form-group col-sm-12">
-                <label class="control-label" for="input-category"><?php echo $entry_category; ?></label>
-                <select id="filter_category" class="form-control" />
-                  <option value=""></option>
-                  <?php 
-                    foreach($categoryList as $k0 => $v0) {
-                      if($filter_category == $v0['category_id']) {
-                        echo '<option value="'.$v0['category_id'].'" selected="selected">'.$v0['name'].'</option>';
-                      } else {
-                        echo '<option value="'.$v0['category_id'].'">'.$v0['name'].'</option>';
-                      }
-                    }
-                  ?>
-                </select>                
-              </div>
-            </div>
-            <div class="col-sm-4">
               <div class="form-group col-sm-6">
-                <label class="control-label" for="input-price"><?php echo $entry_price.$entry_price_start; ?></label>
-                <input type="text" name="filter_price" value="<?php echo $filter_price; ?>" placeholder="<?php echo $entry_price.$entry_price_start; ?>" id="input-price" class="form-control" />
-              </div>
-              <div class="form-group col-sm-6">
-                <label class="control-label" for="input-price-end"><?php echo $entry_price_end; ?></label>
-                <input type="text" name="filter_price_end" value="<?php echo $filter_price_end; ?>" placeholder="<?php echo $entry_price_end; ?>" id="input-price-end" class="form-control" />
-              </div>
-              <div class="form-group col-sm-6">
-                <label class="control-label" for="input-quantity"><?php echo $entry_quantity; ?></label>
-                <input type="text" name="filter_quantity" value="<?php echo $filter_quantity; ?>" placeholder="<?php echo $entry_quantity; ?>" id="input-quantity" class="form-control" />
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group col-sm-12">
                 <label class="control-label" for="input-status"><?php echo $entry_status; ?></label>
                 <select name="filter_status" id="input-status" class="form-control">
                   <option value="*"></option>
@@ -91,7 +58,7 @@
                   <?php } ?>
                 </select>
               </div>
-              <div class="form-group col-sm-12">
+              <div class="form-group col-sm-6">
                 <label class="control-label" for="input-image"><?php echo $entry_image; ?></label>
                 <select name="filter_image" id="input-image" class="form-control">
                   <option value="*"></option>
@@ -107,9 +74,62 @@
                   <?php } ?>
                 </select>
               </div>              
+              
+
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group col-sm-6">
+                <label class="control-label" for="input-price"><?php echo $entry_price.$entry_price_start; ?>~</label>
+                <input type="text" name="filter_price" value="<?php echo $filter_price; ?>" placeholder="<?php echo $entry_price.$entry_price_start; ?>" id="input-price" class="form-control" />
+              </div>
+              <div class="form-group col-sm-6">
+                <label class="control-label" for="input-price-end"><?php echo $entry_price_end; ?></label>
+                <input type="text" name="filter_price_end" value="<?php echo $filter_price_end; ?>" placeholder="<?php echo $entry_price_end; ?>" id="input-price-end" class="form-control" />
+              </div>
+              <div class="form-group col-sm-6">
+                <label class="control-label" for="input-quantity"><?php echo $entry_quantity.$entry_price_start; ?>~</label>
+                <input type="text" name="filter_quantity" value="<?php echo $filter_quantity; ?>" placeholder="<?php echo $entry_quantity; ?>" id="input-quantity" class="form-control" />
+              </div>
+              <div class="form-group col-sm-6">
+                <label class="control-label" for="input-quantity"><?php echo $entry_price_end; ?></label>
+                <input type="text" name="filter_quantity_end" value="<?php echo $filter_quantity_end; ?>" placeholder="<?php echo $entry_price_end; ?>" id="input-quantity-end" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-4">
               <div class="form-group col-sm-12">
+                <label class="control-label" for="input-category"><?php echo $entry_category; ?></label>
+                <select id="filter_category" class="form-control" />
+                  <option value=""></option>
+                  <?php 
+                    foreach($categoryList as $k0 => $v0) {
+                      if($filter_category == $v0['category_id']) {
+                        echo '<option value="'.$v0['category_id'].'" selected="selected">'.$v0['name'].'</option>';
+                      } else {
+                        echo '<option value="'.$v0['category_id'].'">'.$v0['name'].'</option>';
+                      }
+                    }
+                  ?>
+                </select>                
+              </div>
+
+              <div class="form-group col-sm-12">
+                <label class="control-label" for="input-manufacturer"><?php echo $entry_manufacturer; ?></label>
+                <select id="filter_manufacturer" class="form-control" />
+                  <option value=""></option>
+                  <?php 
+                    foreach($manufacturer as $k0 => $v0) {
+                      if($filter_manufacturer == $v0['manufacturer_id']) {
+                        echo '<option value="'.$v0['manufacturer_id'].'" selected="selected">'.$v0['name'].'</option>';
+                      } else {
+                        echo '<option value="'.$v0['manufacturer_id'].'">'.$v0['name'].'</option>';
+                      }
+                    }
+                  ?>
+                </select>                
+              </div>
+              <div class="form-group col-sm-12"><br>
                 <button type="button" id="button-clear" class="btn btn-warning pull-right"><i class="fa fa-eraser"></i> <?php echo $text_eaaser; ?></button>
-                <button style="margin:0px 10px;" type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button> 
+                <button style="width:8em;margin:0px 10px;" type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button> 
               </div>
             </div>
           </div>
@@ -120,6 +140,7 @@
               <thead>
                 <tr>
                   <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td class="text-center"><?php echo 'id'; ?></td>
                   <td class="text-center"><?php echo $column_image; ?></td>
                   <td class="text-left"><?php if ($sort == 'pd.name') { ?>
                     <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
@@ -158,6 +179,7 @@
                     <?php } else { ?>
                     <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" />
                     <?php } ?></td>
+                  <td class="text-center"><?php echo $product['product_id']; ?></td>
                   <td class="text-center"><?php if ($product['image']) { ?>
                     <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" class="img-thumbnail" />
                     <?php } else { ?>
@@ -220,6 +242,12 @@ $('#button-filter').on('click', function() {
     url += '&filter_category=' + encodeURIComponent(filter_category);
   }
 
+  var filter_manufacturer = $('#filter_manufacturer').val();
+
+  if (filter_manufacturer) {
+    url += '&filter_manufacturer=' + encodeURIComponent(filter_manufacturer);
+  }
+
   var filter_price = $('input[name=\'filter_price\']').val();
 
   if (filter_price) {
@@ -236,6 +264,11 @@ $('#button-filter').on('click', function() {
 
   if (filter_quantity) {
     url += '&filter_quantity=' + encodeURIComponent(filter_quantity);
+  }
+  var filter_quantity_end = $('input[name=\'filter_quantity_end\']').val();
+
+  if (filter_quantity_end) {
+    url += '&filter_quantity_end=' + encodeURIComponent(filter_quantity_end);
   }
 
   var filter_status = $('select[name=\'filter_status\']').val();
@@ -305,9 +338,15 @@ $(document).ready(function(){
     no_results_text: '無相關結果',
     search_contains :true,
     width:'100%',
-  }).on('change', function(evt, params) {
-   
-  });
+  }).on('change', function(evt, params) {});
+  
+  $('#filter_manufacturer').chosen({
+    placeholder_text_single : '<?php echo $entry_manufacturer ;?>',
+    no_results_text: '無相關結果',
+    search_contains :true,
+    width:'100%',
+  }).on('change', function(evt, params) {});
+
 })
 
 //--></script></div>

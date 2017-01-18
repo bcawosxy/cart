@@ -355,6 +355,10 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND pc.category_id = '" . $this->db->escape($data['filter_category']) . "'";
 		}
 
+		if (!empty($data['filter_manufacturer'])) {
+			$sql .= " AND p.manufacturer_id = '" . $this->db->escape($data['filter_manufacturer']) . "'";
+		}
+
 		if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
 			$sql .= " AND p.price >= '" . $this->db->escape($data['filter_price']) . "'";
 		}
@@ -364,7 +368,11 @@ class ModelCatalogProduct extends Model {
 		}
 
 		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
-			$sql .= " AND p.quantity = '" . (int)$data['filter_quantity'] . "'";
+			$sql .= " AND p.quantity >= '" . (int)$data['filter_quantity'] . "'";
+		}
+
+		if (isset($data['filter_quantity_end']) && !is_null($data['filter_quantity_end'])) {
+			$sql .= " AND p.quantity <= '" . (int)$data['filter_quantity_end'] . "'";
 		}
 
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
@@ -636,6 +644,10 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND pc.category_id = '" . $this->db->escape($data['filter_category']) . "'";
 		}
 
+		if (!empty($data['filter_manufacturer'])) {
+			$sql .= " AND p.manufacturer_id = '" . $this->db->escape($data['filter_manufacturer']) . "'";
+		}
+
 		if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
 			$sql .= " AND p.price >= '" . $this->db->escape($data['filter_price']) . "'";
 		}
@@ -645,7 +657,11 @@ class ModelCatalogProduct extends Model {
 		}
 
 		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
-			$sql .= " AND p.quantity = '" . (int)$data['filter_quantity'] . "'";
+			$sql .= " AND p.quantity >= '" . (int)$data['filter_quantity'] . "'";
+		}
+
+		if (isset($data['filter_quantity_end']) && !is_null($data['filter_quantity_end'])) {
+			$sql .= " AND p.quantity <= '" . (int)$data['filter_quantity_end'] . "'";
 		}
 
 		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {

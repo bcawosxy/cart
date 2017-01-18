@@ -243,6 +243,12 @@ class ControllerCatalogProduct extends Controller {
 			$filter_category = null;
 		}
 
+		if (isset($this->request->get['filter_manufacturer'])) {
+			$filter_manufacturer = $this->request->get['filter_manufacturer'];
+		} else {
+			$filter_manufacturer = null;
+		}
+
 		if (isset($this->request->get['filter_price'])) {
 			$filter_price = $this->request->get['filter_price'];
 		} else {
@@ -258,7 +264,12 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['filter_quantity'])) {
 			$filter_quantity = $this->request->get['filter_quantity'];
 		} else {
-			$filter_quantity = null;
+			$filter_quantity = 0;
+		}
+		if (isset($this->request->get['filter_quantity_end'])) {
+			$filter_quantity_end = $this->request->get['filter_quantity_end'];
+		} else {
+			$filter_quantity_end = null;
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -305,6 +316,10 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&filter_category=' . urlencode(html_entity_decode($this->request->get['filter_category'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_manufacturer'])) {
+			$url .= '&filter_manufacturer=' . urlencode(html_entity_decode($this->request->get['filter_manufacturer'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_price'])) {
 			$url .= '&filter_price=' . $this->request->get['filter_price'];
 		}
@@ -315,6 +330,10 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->get['filter_quantity'])) {
 			$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+		}
+
+		if (isset($this->request->get['filter_quantity_end'])) {
+			$url .= '&filter_quantity_end=' . $this->request->get['filter_quantity_end'];
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -359,9 +378,11 @@ class ControllerCatalogProduct extends Controller {
 			'filter_name'	  => $filter_name,
 			'filter_model'	  => $filter_model,
 			'filter_category' => $filter_category,
+			'filter_manufacturer' => $filter_manufacturer,
 			'filter_price'	  => $filter_price,
 			'filter_price_end'=> $filter_price_end,
 			'filter_quantity' => $filter_quantity,
+			'filter_quantity_end' => $filter_quantity_end,
 			'filter_status'   => $filter_status,
 			'filter_image'    => $filter_image,
 			'sort'            => $sort,
@@ -434,6 +455,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_image'] = $this->language->get('entry_image');
 		$data['entry_price_start'] = $this->language->get('entry_price_start');
 		$data['entry_price_end'] = $this->language->get('entry_price_end');
+		$data['entry_manufacturer'] = $this->language->get('entry_manufacturer');
 
 		$data['button_copy'] = $this->language->get('button_copy');
 		$data['button_add'] = $this->language->get('button_add');
@@ -477,6 +499,10 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&filter_category=' . urlencode(html_entity_decode($this->request->get['filter_category'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_manufacturer'])) {
+			$url .= '&filter_manufacturer=' . urlencode(html_entity_decode($this->request->get['filter_manufacturer'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_price'])) {
 			$url .= '&filter_price=' . $this->request->get['filter_price'];
 		}
@@ -487,6 +513,10 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->get['filter_quantity'])) {
 			$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+		}
+
+		if (isset($this->request->get['filter_quantity_end'])) {
+			$url .= '&filter_quantity_end=' . $this->request->get['filter_quantity_end'];
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -528,6 +558,10 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&filter_category=' . urlencode(html_entity_decode($this->request->get['filter_category'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_manufacturer'])) {
+			$url .= '&filter_manufacturer=' . urlencode(html_entity_decode($this->request->get['filter_manufacturer'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_price'])) {
 			$url .= '&filter_price=' . $this->request->get['filter_price'];
 		}
@@ -538,6 +572,10 @@ class ControllerCatalogProduct extends Controller {
 
 		if (isset($this->request->get['filter_quantity'])) {
 			$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+		}
+
+		if (isset($this->request->get['filter_quantity_end'])) {
+			$url .= '&filter_quantity_end=' . $this->request->get['filter_quantity_end'];
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -569,9 +607,11 @@ class ControllerCatalogProduct extends Controller {
 		$data['filter_name'] = $filter_name;
 		$data['filter_model'] = $filter_model;
 		$data['filter_category'] = $filter_category;
+		$data['filter_manufacturer'] = $filter_manufacturer;
 		$data['filter_price'] = $filter_price;
 		$data['filter_price_end'] = $filter_price_end;
 		$data['filter_quantity'] = $filter_quantity;
+		$data['filter_quantity_end'] = $filter_quantity_end;
 		$data['filter_status'] = $filter_status;
 		$data['filter_image'] = $filter_image;
 
@@ -599,6 +639,14 @@ class ControllerCatalogProduct extends Controller {
 		foreach ($categoryList as $key => $value) { $sort_order[$key] = $value['name']; }
 		array_multisort($sort_order, SORT_ASC, $categoryList);
 		$data['categoryList'] = $categoryList;
+
+		/**
+		 * 取得品牌列表
+		 */
+		$manufacturerList = array();
+		$this->load->model('catalog/manufacturer');
+		$query = $this->db->query('SELECT * FROM `'.DB_PREFIX.'manufacturer` ORDER BY `name` ASC;');
+		$data['manufacturer'] = $query->rows;
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
