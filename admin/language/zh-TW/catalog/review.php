@@ -25,7 +25,7 @@ $_['entry_text']        = '評論內容：';
 $_['entry_date_added']  = '評論日期：';
 
 // Help
-$_['help_product']      = '(自動完成)';
+$_['help_product']      = '商品名稱';
 
 // Error
 $_['error_permission']  = '警告：您沒有權限更改商品評論！';
