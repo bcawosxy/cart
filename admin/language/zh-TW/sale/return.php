@@ -12,6 +12,7 @@ $_['text_unopened']       = '未拆封';
 $_['text_order']          = '訂單訊息';
 $_['text_product']        = '商品訊息 &amp; 退換原因';
 $_['text_history']        = '新增退換記錄';
+$_['text_eraser']         = '清除條件';
 
 // Column
 $_['column_return_id']     = '退換 ID';
@@ -44,7 +45,8 @@ $_['entry_return_action'] = '退換管理';
 $_['entry_return_status'] = '退換狀態';
 $_['entry_notify']        = '客戶通知';
 $_['entry_return_id']     = '退換 ID';
-$_['entry_date_added']    = '新增日期';
+$_['entry_date_added']    = '新增日期：由~';
+$_['entry_date_added_end']= '至';
 $_['entry_date_modified'] = '修改日期';
 
 // Help

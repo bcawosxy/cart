@@ -197,7 +197,11 @@ class ModelSaleOrder extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$sql .= " AND DATE(o.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$sql .= " AND DATE(o.date_added) >= DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+		}
+
+		if (!empty($data['filter_date_added_end'])) {
+			$sql .= " AND DATE(o.date_added) <= DATE('" . $this->db->escape($data['filter_date_added_end']) . "')";
 		}
 
 		if (!empty($data['filter_date_modified'])) {
@@ -205,7 +209,11 @@ class ModelSaleOrder extends Model {
 		}
 
 		if (!empty($data['filter_total'])) {
-			$sql .= " AND o.total = '" . (float)$data['filter_total'] . "'";
+			$sql .= " AND o.total >= '" . (float)$data['filter_total'] . "'";
+		}
+
+		if (!empty($data['filter_total_end'])) {
+			$sql .= " AND o.total <= '" . (float)$data['filter_total_end'] . "'";
 		}
 
 		$sort_data = array(
@@ -304,7 +312,11 @@ class ModelSaleOrder extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$sql .= " AND DATE(date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$sql .= " AND DATE(date_added) >= DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+		}
+
+		if (!empty($data['filter_date_added_end'])) {
+			$sql .= " AND DATE(date_added) <= DATE('" . $this->db->escape($data['filter_date_added_end']) . "')";
 		}
 
 		if (!empty($data['filter_date_modified'])) {
@@ -312,7 +324,11 @@ class ModelSaleOrder extends Model {
 		}
 
 		if (!empty($data['filter_total'])) {
-			$sql .= " AND total = '" . (float)$data['filter_total'] . "'";
+			$sql .= " AND total >= '" . (float)$data['filter_total'] . "'";
+		}
+
+		if (!empty($data['filter_total_end'])) {
+			$sql .= " AND total <= '" . (float)$data['filter_total_end'] . "'";
 		}
 
 		$query = $this->db->query($sql);

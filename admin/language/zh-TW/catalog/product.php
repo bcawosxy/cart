@@ -14,9 +14,10 @@ $_['text_option']				= '選項';
 $_['text_option_value']			= '選項值';
 $_['text_percent']				= '百分比';
 $_['text_amount']				= '固定數額';
-$_['text_eaaser']				= '清除條件';
+$_['text_eraser']				= '清除條件';
 
 // Column
+$_['column_product_id']			= '商品id';
 $_['column_name']				= '商品名稱';
 $_['column_model']				= '商品型號';
 $_['column_image']				= '圖片';

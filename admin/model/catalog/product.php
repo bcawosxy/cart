@@ -390,6 +390,7 @@ class ModelCatalogProduct extends Model {
 		$sql .= " GROUP BY p.product_id";
 
 		$sort_data = array(
+			'p.product_id',
 			'pd.name',
 			'p.model',
 			'p.price',
@@ -401,7 +402,7 @@ class ModelCatalogProduct extends Model {
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
 		} else {
-			$sql .= " ORDER BY pd.name";
+			$sql .= " ORDER BY p.product_id";
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {

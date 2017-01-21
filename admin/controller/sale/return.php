@@ -249,6 +249,12 @@ class ControllerSaleReturn extends Controller {
 			$filter_date_added = null;
 		}
 
+		if (isset($this->request->get['filter_date_added_end'])) {
+			$filter_date_added_end = $this->request->get['filter_date_added_end'];
+		} else {
+			$filter_date_added_end = null;
+		}
+
 		if (isset($this->request->get['filter_date_modified'])) {
 			$filter_date_modified = $this->request->get['filter_date_modified'];
 		} else {
@@ -303,6 +309,10 @@ class ControllerSaleReturn extends Controller {
 			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 		}
 
+		if (isset($this->request->get['filter_date_added_end'])) {
+			$url .= '&filter_date_added_end=' . $this->request->get['filter_date_added_end'];
+		}
+
 		if (isset($this->request->get['filter_date_modified'])) {
 			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 		}
@@ -344,6 +354,7 @@ class ControllerSaleReturn extends Controller {
 			'filter_model'            => $filter_model,
 			'filter_return_status_id' => $filter_return_status_id,
 			'filter_date_added'       => $filter_date_added,
+			'filter_date_added_end'   => $filter_date_added_end,
 			'filter_date_modified'    => $filter_date_modified,
 			'sort'                    => $sort,
 			'order'                   => $order,
@@ -374,6 +385,7 @@ class ControllerSaleReturn extends Controller {
 		$data['text_list'] = $this->language->get('text_list');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
+		$data['text_eraser'] = $this->language->get('text_eraser');
 
 		$data['column_return_id'] = $this->language->get('column_return_id');
 		$data['column_order_id'] = $this->language->get('column_order_id');
@@ -393,6 +405,7 @@ class ControllerSaleReturn extends Controller {
 		$data['entry_model'] = $this->language->get('entry_model');
 		$data['entry_return_status'] = $this->language->get('entry_return_status');
 		$data['entry_date_added'] = $this->language->get('entry_date_added');
+		$data['entry_date_added_end'] = $this->language->get('entry_date_added_end');
 		$data['entry_date_modified'] = $this->language->get('entry_date_modified');
 
 		$data['button_add'] = $this->language->get('button_add');
@@ -456,6 +469,10 @@ class ControllerSaleReturn extends Controller {
 			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 		}
 
+		if (isset($this->request->get['filter_date_added_end'])) {
+			$url .= '&filter_date_added_end=' . $this->request->get['filter_date_added_end'];
+		}
+
 		if (isset($this->request->get['filter_date_modified'])) {
 			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 		}
@@ -509,6 +526,10 @@ class ControllerSaleReturn extends Controller {
 			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 		}
 
+		if (isset($this->request->get['filter_date_added_end'])) {
+			$url .= '&filter_date_added_end=' . $this->request->get['filter_date_added_end'];
+		}
+
 		if (isset($this->request->get['filter_date_modified'])) {
 			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 		}
@@ -538,6 +559,7 @@ class ControllerSaleReturn extends Controller {
 		$data['filter_model'] = $filter_model;
 		$data['filter_return_status_id'] = $filter_return_status_id;
 		$data['filter_date_added'] = $filter_date_added;
+		$data['filter_date_added_end'] = $filter_date_added_end;
 		$data['filter_date_modified'] = $filter_date_modified;
 
 		$this->load->model('localisation/return_status');

@@ -51,7 +51,11 @@ class ModelSaleReturn extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(r.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(r.date_added) >= DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+		}
+
+		if (!empty($data['filter_date_added_end'])) {
+			$implode[] = "DATE(r.date_added) <= DATE('" . $this->db->escape($data['filter_date_added_end']) . "')";
 		}
 
 		if (!empty($data['filter_date_modified'])) {
@@ -132,7 +136,11 @@ class ModelSaleReturn extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(r.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(r.date_added) >= DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+		}
+
+		if (!empty($data['filter_date_added_end'])) {
+			$implode[] = "DATE(r.date_added) <= DATE('" . $this->db->escape($data['filter_date_added_end']) . "')";
 		}
 
 		if (!empty($data['filter_date_modified'])) {

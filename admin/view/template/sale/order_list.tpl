@@ -45,7 +45,15 @@
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="form-group">
+              <div class="form-group col-sm-6">
+                <label class="control-label" for="input-total"><?php echo $entry_total; ?></label>
+                <input type="text" name="filter_total" value="<?php echo $filter_total; ?>" placeholder="<?php echo $entry_total; ?>" id="input-total" class="form-control" />
+              </div>
+              <div class="form-group col-sm-6">
+                <label class="control-label" for="input-total-end"><?php echo $entry_date_added_end; ?></label>
+                <input type="text" name="filter_total_end" value="<?php echo $filter_total_end; ?>" placeholder="<?php echo $entry_date_added_end; ?>" id="input-total-end" class="form-control" />
+              </div>
+              <div class="form-group col-sm-12">
                 <label class="control-label" for="input-order-status"><?php echo $entry_order_status; ?></label>
                 <select name="filter_order_status" id="input-order-status" class="form-control">
                   <option value="*"></option>
@@ -63,13 +71,9 @@
                   <?php } ?>
                 </select>
               </div>
-              <div class="form-group">
-                <label class="control-label" for="input-total"><?php echo $entry_total; ?></label>
-                <input type="text" name="filter_total" value="<?php echo $filter_total; ?>" placeholder="<?php echo $entry_total; ?>" id="input-total" class="form-control" />
-              </div>
             </div>
             <div class="col-sm-4">
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label class="control-label" for="input-date-added"><?php echo $entry_date_added; ?></label>
                 <div class="input-group date">
                   <input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" placeholder="<?php echo $entry_date_added; ?>" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
@@ -77,7 +81,15 @@
                   <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                   </span></div>
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
+                <label class="control-label" for="input-date-added_end"><?php echo $entry_date_added_end; ?></label>
+                <div class="input-group date">
+                  <input type="text" name="filter_date_added_end" value="<?php echo $filter_date_added_end; ?>" placeholder="<?php echo $entry_date_added_end; ?>" data-date-format="YYYY-MM-DD" id="input-date-added_end" class="form-control" />
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                  </span></div>
+              </div>
+              <div class="form-group col-sm-12">
                 <label class="control-label" for="input-date-modified"><?php echo $entry_date_modified; ?></label>
                 <div class="input-group date">
                   <input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" placeholder="<?php echo $entry_date_modified; ?>" data-date-format="YYYY-MM-DD" id="input-date-modified" class="form-control" />
@@ -85,7 +97,8 @@
                   <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                   </span></div>
               </div>
-              <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
+              <button type="button" id="button-clear" class="btn btn-warning pull-right"><i class="fa fa-eraser"></i> <?php echo $text_eraser; ?></button>
+              <button style="width:8em;margin:0px 10px;" type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
             </div>
           </div>
         </div>
@@ -165,43 +178,61 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
+  url = 'index.php?route=sale/order&token=<?php echo $token; ?>';
+
+  var filter_order_id = $('input[name=\'filter_order_id\']').val();
+
+  if (filter_order_id) {
+    url += '&filter_order_id=' + encodeURIComponent(filter_order_id);
+  }
+
+  var filter_customer = $('input[name=\'filter_customer\']').val();
+
+  if (filter_customer) {
+    url += '&filter_customer=' + encodeURIComponent(filter_customer);
+  }
+
+  var filter_order_status = $('select[name=\'filter_order_status\']').val();
+
+  if (filter_order_status != '*') {
+    url += '&filter_order_status=' + encodeURIComponent(filter_order_status);
+  }
+
+  var filter_total = $('input[name=\'filter_total\']').val();
+
+  if (filter_total) {
+    url += '&filter_total=' + encodeURIComponent(filter_total);
+  }
+
+  var filter_total_end = $('input[name=\'filter_total_end\']').val();
+
+  if (filter_total_end) {
+    url += '&filter_total_end=' + encodeURIComponent(filter_total_end);
+  }
+
+  var filter_date_added = $('input[name=\'filter_date_added\']').val();
+
+  if (filter_date_added) {
+    url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+  }
+
+  var filter_date_added_end = $('input[name=\'filter_date_added_end\']').val();
+
+  if (filter_date_added_end) {
+    url += '&filter_date_added_end=' + encodeURIComponent(filter_date_added_end);
+  }
+
+  var filter_date_modified = $('input[name=\'filter_date_modified\']').val();
+
+  if (filter_date_modified) {
+    url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
+  }
+
+  location = url;
+});
+
+$('#button-clear').on('click', function() {
 	url = 'index.php?route=sale/order&token=<?php echo $token; ?>';
-
-	var filter_order_id = $('input[name=\'filter_order_id\']').val();
-
-	if (filter_order_id) {
-		url += '&filter_order_id=' + encodeURIComponent(filter_order_id);
-	}
-
-	var filter_customer = $('input[name=\'filter_customer\']').val();
-
-	if (filter_customer) {
-		url += '&filter_customer=' + encodeURIComponent(filter_customer);
-	}
-
-	var filter_order_status = $('select[name=\'filter_order_status\']').val();
-
-	if (filter_order_status != '*') {
-		url += '&filter_order_status=' + encodeURIComponent(filter_order_status);
-	}
-
-	var filter_total = $('input[name=\'filter_total\']').val();
-
-	if (filter_total) {
-		url += '&filter_total=' + encodeURIComponent(filter_total);
-	}
-
-	var filter_date_added = $('input[name=\'filter_date_added\']').val();
-
-	if (filter_date_added) {
-		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
-	}
-
-	var filter_date_modified = $('input[name=\'filter_date_modified\']').val();
-
-	if (filter_date_modified) {
-		url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
-	}
 
 	location = url;
 });

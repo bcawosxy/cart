@@ -125,7 +125,7 @@
                 </select>                
               </div>
               <div class="form-group col-sm-12"><br>
-                <button type="button" id="button-clear" class="btn btn-warning pull-right"><i class="fa fa-eraser"></i> <?php echo $text_eaaser; ?></button>
+                <button type="button" id="button-clear" class="btn btn-warning pull-right"><i class="fa fa-eraser"></i> <?php echo $text_eraser; ?></button>
                 <button style="width:8em;margin:0px 10px;" type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button> 
               </div>
             </div>
@@ -137,7 +137,13 @@
               <thead>
                 <tr>
                   <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                  <td class="text-center"><?php echo 'id'; ?></td>
+                  
+                  <td class="text-right"><?php if ($sort == 'p.product_id') { ?>
+                    <a href="<?php echo $sort_product_id; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_product_id; ?></a>
+                    <?php } else { ?>
+                    <a href="<?php echo $sort_product_id; ?>"><?php echo $column_product_id; ?></a>
+                    <?php } ?></td>
+
                   <td class="text-center"><?php echo $column_image; ?></td>
                   <td class="text-left"><?php if ($sort == 'pd.name') { ?>
                     <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
@@ -176,7 +182,7 @@
                     <?php } else { ?>
                     <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" />
                     <?php } ?></td>
-                  <td class="text-center"><?php echo $product['product_id']; ?></td>
+                  <td class="text-right"><?php echo $product['product_id']; ?></td>
                   <td class="text-center"><?php if ($product['image']) { ?>
                     <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" class="img-thumbnail" />
                     <?php } else { ?>

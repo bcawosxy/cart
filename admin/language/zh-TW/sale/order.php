@@ -59,6 +59,7 @@ $_['text_commission_removed']  = '成功：獎金已刪除！';
 $_['text_restock']             = '成功：商品已補貨！';
 $_['text_upload']              = '您的檔案已上傳！';
 $_['text_picklist']            = '發貨單備註';
+$_['text_eraser']         	   = '清除條件';
 
 // Column
 $_['column_order_id']          = '訂單編號';
@@ -118,9 +119,10 @@ $_['entry_coupon']             = '優惠券';
 $_['entry_voucher']            = '禮券';
 $_['entry_reward']             = '紅利點數';
 $_['entry_order_id']           = '訂單 ID';
-$_['entry_total']              = '總計';
-$_['entry_date_added']         = '新增日期';
+$_['entry_total']              = '總計：由~';
+$_['entry_date_added']         = '新增日期：由~';
 $_['entry_date_modified']      = '修改日期';
+$_['entry_date_added_end']      = '至';
 
 // Help
 $_['help_override']				= 'If the customers order is being blocked from changing the order status due to a anti-fraud extension enable override.';

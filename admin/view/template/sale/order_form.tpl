@@ -874,7 +874,8 @@
                     <textarea name="comment" rows="5" id="input-comment" class="form-control"><?php echo $comment; ?></textarea>
                   </div>
                 </div>
-                <div class="form-group">
+                <!--不顯示推薦會員 -->
+                <div class="form-group" style="display: none;>
                   <label class="col-sm-2 control-label" for="input-affiliate"><?php echo $entry_affiliate; ?></label>
                   <div class="col-sm-10">
                     <input type="text" name="affiliate" value="<?php echo $affiliate; ?>" id="input-affiliate" class="form-control" />
