@@ -114,7 +114,11 @@ class ModelCustomerCustomer extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(c.date_added) >= DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+		}
+
+		if (!empty($data['filter_date_added_end'])) {
+			$implode[] = "DATE(c.date_added) <= DATE('" . $this->db->escape($data['filter_date_added_end']) . "')";
 		}
 
 		if ($implode) {
@@ -318,7 +322,11 @@ class ModelCustomerCustomer extends Model {
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+			$implode[] = "DATE(date_added) >= DATE('" . $this->db->escape($data['filter_date_added']) . "')";
+		}
+
+		if (!empty($data['filter_date_added_end'])) {
+			$implode[] = "DATE(date_added) <= DATE('" . $this->db->escape($data['filter_date_added_end']) . "')";
 		}
 
 		if ($implode) {

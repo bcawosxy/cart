@@ -9,6 +9,7 @@ $_['text_add']              = '新增客戶';
 $_['text_edit']             = '編輯客戶';
 $_['text_default']          = '預設';
 $_['text_balance']          = '餘額';
+$_['text_eraser']           = '清除條件';
 
 // Column
 $_['column_name']           = '客戶名稱';
@@ -51,7 +52,8 @@ $_['entry_amount']          = '總額';
 $_['entry_points']          = '點數';
 $_['entry_name']            = '客戶名稱';
 $_['entry_ip']              = 'IP';
-$_['entry_date_added']      = '加入日期';
+$_['entry_date_added']      = '加入日期：由~';
+$_['entry_date_added_end']  = '至';
 
 // Help
 $_['help_safe']             = '請設定是(true)以避免客戶被反詐欺系統攔截。';

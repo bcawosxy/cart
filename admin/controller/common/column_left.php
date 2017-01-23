@@ -195,17 +195,24 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-					
-			if ($extension) {					
-				$data['menus'][] = array(
-					'id'       => 'menu-extension',
-					'icon'	   => 'fa-puzzle-piece', 
-					'name'	   => $this->language->get('text_extension'),
-					'href'     => '',
-					'children' => $extension
-				);		
+		
+			/**
+			 * 若登入者不為root 則不開啟模組選單
+			 */
+			$this->load->model('user/user');
+			$user_info = $this->model_user_user->getUser($this->user->getId());
+			if($user_info['user_group_id'] == 1) {
+				if ($extension) {
+					$data['menus'][] = array(
+						'id'       => 'menu-extension',
+						'icon'	   => 'fa-puzzle-piece', 
+						'name'	   => $this->language->get('text_extension'),
+						'href'     => '',
+						'children' => $extension
+					);		
+				}
 			}
-			
+
 			// Design
 			$design = array();
 			

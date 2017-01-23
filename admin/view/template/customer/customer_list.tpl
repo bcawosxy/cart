@@ -95,7 +95,7 @@
               </div>
             </div>
             <div class="col-sm-3">
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label class="control-label" for="input-date-added"><?php echo $entry_date_added; ?></label>
                 <div class="input-group date">
                   <input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" placeholder="<?php echo $entry_date_added; ?>" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
@@ -103,7 +103,16 @@
                   <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                   </span></div>
               </div>
-              <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
+              <div class="form-group col-sm-6">
+                <label class="control-label" for="input-date-added-end"><?php echo $entry_date_added_end; ?></label>
+                <div class="input-group date">
+                  <input type="text" name="filter_date_added_end" value="<?php echo $filter_date_added_end; ?>" placeholder="<?php echo $entry_date_added_end; ?>" data-date-format="YYYY-MM-DD" id="input-date-added-end" class="form-control" />
+                  <span class="input-group-btn">
+                  <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                  </span></div>
+              </div>
+              <button type="button" id="button-clear" class="btn btn-warning pull-right"><i class="fa fa-eraser"></i> <?php echo $text_eraser; ?></button>
+              <button style="width:8em;margin:0px 10px;" type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
             </div>
           </div>
         </div>
@@ -166,6 +175,11 @@
                     <?php } else { ?>
                     <button type="button" class="btn btn-success" disabled><i class="fa fa-thumbs-o-up"></i></button>
                     <?php } ?>
+                    <?php if ($customer['unlock']) { ?>
+                    <a href="<?php echo $customer['unlock']; ?>" data-toggle="tooltip" title="<?php echo $button_unlock; ?>" class="btn btn-warning"><i class="fa fa-unlock"></i></a>
+                    <?php } else { ?>
+                    <button type="button" class="btn btn-warning" disabled><i class="fa fa-unlock"></i></button>
+                    <?php } ?>
                     <div class="btn-group" data-toggle="tooltip" title="<?php echo $button_login; ?>">
                       <button type="button" data-toggle="dropdown" class="btn btn-info dropdown-toggle"><i class="fa fa-lock"></i></button>
                       <ul class="dropdown-menu pull-right">
@@ -175,11 +189,6 @@
                         <?php } ?>
                       </ul>
                     </div>
-                    <?php if ($customer['unlock']) { ?>
-                    <a href="<?php echo $customer['unlock']; ?>" data-toggle="tooltip" title="<?php echo $button_unlock; ?>" class="btn btn-warning"><i class="fa fa-unlock"></i></a>
-                    <?php } else { ?>
-                    <button type="button" class="btn btn-warning" disabled><i class="fa fa-unlock"></i></button>
-                    <?php } ?>
                     <a href="<?php echo $customer['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 <?php } ?>
@@ -239,13 +248,24 @@ $('#button-filter').on('click', function() {
 		url += '&filter_ip=' + encodeURIComponent(filter_ip);
 	}
 		
-	var filter_date_added = $('input[name=\'filter_date_added\']').val();
+  var filter_date_added = $('input[name=\'filter_date_added\']').val();
+  
+  if (filter_date_added) {
+    url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+  }
+
+  	var filter_date_added_end = $('input[name=\'filter_date_added_end\']').val();
 	
-	if (filter_date_added) {
-		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+	if (filter_date_added_end) {
+		url += '&filter_date_added_end=' + encodeURIComponent(filter_date_added_end);
 	}
 	
 	location = url;
+});
+
+$('#button-clear').on('click', function() {
+  url = 'index.php?route=customer/customer&token=<?php echo $token; ?>';
+  location = url;
 });
 //--></script> 
   <script type="text/javascript"><!--

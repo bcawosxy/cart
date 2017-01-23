@@ -365,6 +365,12 @@ class ControllerCustomerCustomer extends Controller {
 			$filter_date_added = null;
 		}
 
+		if (isset($this->request->get['filter_date_added_end'])) {
+			$filter_date_added_end = $this->request->get['filter_date_added_end'];
+		} else {
+			$filter_date_added_end = null;
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -412,6 +418,9 @@ class ControllerCustomerCustomer extends Controller {
 		if (isset($this->request->get['filter_date_added'])) {
 			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 		}
+		if (isset($this->request->get['filter_date_added_end'])) {
+			$url .= '&filter_date_added_end=' . $this->request->get['filter_date_added_end'];
+		}
 
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
@@ -449,6 +458,7 @@ class ControllerCustomerCustomer extends Controller {
 			'filter_status'            => $filter_status,
 			'filter_approved'          => $filter_approved,
 			'filter_date_added'        => $filter_date_added,
+			'filter_date_added_end'	   => $filter_date_added_end,
 			'filter_ip'                => $filter_ip,
 			'sort'                     => $sort,
 			'order'                    => $order,
@@ -499,6 +509,7 @@ class ControllerCustomerCustomer extends Controller {
 		$data['text_default'] = $this->language->get('text_default');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
+		$data['text_eraser'] = $this->language->get('text_eraser');
 
 		$data['column_name'] = $this->language->get('column_name');
 		$data['column_email'] = $this->language->get('column_email');
@@ -516,6 +527,7 @@ class ControllerCustomerCustomer extends Controller {
 		$data['entry_approved'] = $this->language->get('entry_approved');
 		$data['entry_ip'] = $this->language->get('entry_ip');
 		$data['entry_date_added'] = $this->language->get('entry_date_added');
+		$data['entry_date_added_end'] = $this->language->get('entry_date_added_end');
 
 		$data['button_approve'] = $this->language->get('button_approve');
 		$data['button_add'] = $this->language->get('button_add');
@@ -577,6 +589,10 @@ class ControllerCustomerCustomer extends Controller {
 			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 		}
 
+		if (isset($this->request->get['filter_date_added_end'])) {
+			$url .= '&filter_date_added_end=' . $this->request->get['filter_date_added_end'];
+		}
+
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -624,6 +640,10 @@ class ControllerCustomerCustomer extends Controller {
 			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 		}
 
+		if (isset($this->request->get['filter_date_added_end'])) {
+			$url .= '&filter_date_added_end=' . $this->request->get['filter_date_added_end'];
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -649,6 +669,7 @@ class ControllerCustomerCustomer extends Controller {
 		$data['filter_approved'] = $filter_approved;
 		$data['filter_ip'] = $filter_ip;
 		$data['filter_date_added'] = $filter_date_added;
+		$data['filter_date_added_end'] = $filter_date_added_end;
 
 		$this->load->model('customer/customer_group');
 

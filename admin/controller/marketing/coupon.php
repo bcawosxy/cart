@@ -419,7 +419,7 @@ class ControllerMarketingCoupon extends Controller {
 		} elseif (!empty($coupon_info)) {
 			$data['discount'] = $coupon_info['discount'];
 		} else {
-			$data['discount'] = '';
+			$data['discount'] = '0';
 		}
 
 		if (isset($this->request->post['logged'])) {
@@ -443,7 +443,7 @@ class ControllerMarketingCoupon extends Controller {
 		} elseif (!empty($coupon_info)) {
 			$data['total'] = $coupon_info['total'];
 		} else {
-			$data['total'] = '';
+			$data['total'] = '0';
 		}
 
 		if (isset($this->request->post['coupon_product'])) {
