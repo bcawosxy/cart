@@ -102,7 +102,7 @@ $_['button_order_recurring']    = '檢視定期付款訂單';
 
 // Tab
 $_['tab_address']				= '地址';
-$_['tab_additional']            = '額外的';
+$_['tab_additional']            = '其他資訊';
 $_['tab_admin']					= '管理';
 $_['tab_attribute']		 		= '屬性設定';
 $_['tab_customer']				= '客戶資料';
