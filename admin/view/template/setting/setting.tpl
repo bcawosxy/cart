@@ -1296,7 +1296,8 @@
                     </label>
                   </div>
                 </div>
-                <div class="form-group">
+
+                <div class="form-group"  style="display:none;">
                   <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="<?php echo $help_shared; ?>"><?php echo $entry_shared; ?></span></label>
                   <div class="col-sm-10">
                     <label class="radio-inline">
@@ -1319,6 +1320,7 @@
                     </label>
                   </div>
                 </div>
+
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-encryption"><span data-toggle="tooltip" title="<?php echo $help_encryption; ?>"><?php echo $entry_encryption; ?></span></label>
                   <div class="col-sm-10">

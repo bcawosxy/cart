@@ -442,15 +442,21 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);	
 			}
-			
-			if ($this->user->hasPermission('access', 'user/api')) {		
-				$user[] = array(
-					'name'	   => $this->language->get('text_api'),
-					'href'     => $this->url->link('user/api', 'token=' . $this->session->data['token'], true),
-					'children' => array()		
-				);	
+
+			/**
+			 * 若登入者不為root 則不開啟API選單
+			 */
+
+			if($user_info['user_group_id'] == 1) {
+				if ($this->user->hasPermission('access', 'user/api')) {		
+					$user[] = array(
+						'name'	   => $this->language->get('text_api'),
+						'href'     => $this->url->link('user/api', 'token=' . $this->session->data['token'], true),
+						'children' => array()		
+					);	
+				}
 			}
-			
+
 			if ($user) {
 				$system[] = array(
 					'name'	   => $this->language->get('text_users'),

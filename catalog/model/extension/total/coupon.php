@@ -199,7 +199,13 @@ class ModelExtensionTotalCoupon extends Model {
 			if ($coupon_info) {
 				$this->db->query("INSERT INTO `" . DB_PREFIX . "coupon_history` SET coupon_id = '" . (int)$coupon_info['coupon_id'] . "', order_id = '" . (int)$order_info['order_id'] . "', customer_id = '" . (int)$order_info['customer_id'] . "', amount = '" . (float)$order_total['value'] . "', date_added = NOW()");
 			} else {
-				return $this->config->get('config_fraud_status_id');
+				/**
+				 * 更新訂單狀態的時候, 如果含有免運費的coupon, 這邊會回傳詐欺訂單id = 10 (失敗的)
+				 * 但新安裝的話此處回傳為空值, 使得前台可以正常更新訂單狀態id
+				 * 找到設定方式前, 暫時把這邊設為回傳空值
+				 */
+				return null;
+				// return $this->config->get('config_fraud_status_id');
 			}
 		}
 	}
