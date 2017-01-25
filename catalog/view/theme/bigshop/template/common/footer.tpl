@@ -58,7 +58,6 @@ if((isset($bigshop_feature_box1_title[$lang]) && $bigshop_feature_box1_title[$la
 <?php } ?>
 <?php } ?>
 
-
 <footer id="footer">
   <div class="fpart-first">
     <div class="container">
@@ -85,9 +84,9 @@ if((isset($bigshop_feature_box1_title[$lang]) && $bigshop_feature_box1_title[$la
           <h5><?php echo $text_extra; ?></h5>
           <ul>
             <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
-            <li><a href="<?php echo $voucher; ?>"><?php echo $text_voucher; ?></a></li>
+            <!-- <li><a href="<?php echo $voucher; ?>"><?php echo $text_voucher; ?></a></li> -->
             <?php if($bigshop_affiliate_status == 1) { ?>
-            <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
+            <!-- <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>-->
             <?php } ?>
             <li><a href="<?php echo $special; ?>"><?php echo $text_special; ?></a></li>
           </ul>
@@ -98,7 +97,7 @@ if((isset($bigshop_feature_box1_title[$lang]) && $bigshop_feature_box1_title[$la
             <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a></li>
             <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
             <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
-            <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
+            <!-- <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>-->
           </ul>
         </div>
         <?php if($bigshop_about_contact_details == 1) {
