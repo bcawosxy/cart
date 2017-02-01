@@ -1,10 +1,10 @@
 <?php
 // Heading
-$_['heading_title']      = '會員帳號';
+$_['heading_title']      = '會員中心';
 
 // Text
-$_['text_account']       = '會員帳號';
-$_['text_my_account']    = '會員帳號';
+$_['text_account']       = '會員中心';
+$_['text_my_account']    = '會員中心';
 $_['text_my_orders']     = '訂單紀錄';
 $_['text_my_newsletter'] = '我的訂閱';
 $_['text_edit']          = '會員資料';

@@ -265,13 +265,14 @@
                           <?php  } ?>
                         </div>
                       </div>
-                      <div class="form-group">
+                      <!--不顯式此欄位[電子報] -->
+                      <div class="form-group" style="display: none;">
                         <label class="col-sm-2 control-label" for="input-newsletter"><?php echo $entry_newsletter; ?></label>
                         <div class="col-sm-10">
                           <select name="newsletter" id="input-newsletter" class="form-control">
                             <?php if ($newsletter) { ?>
-                            <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                            <option value="0"><?php echo $text_disabled; ?></option>
+                            <option value="1"><?php echo $text_enabled; ?></option>
+                            <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                             <?php } else { ?>
                             <option value="1"><?php echo $text_enabled; ?></option>
                             <option value="0" selected="selected"><?php echo $text_disabled; ?></option>

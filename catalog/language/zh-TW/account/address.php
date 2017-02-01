@@ -1,10 +1,10 @@
 <?php
 // Heading 
-$_['heading_title']        = '地址簿';
+$_['heading_title']        = '地址清單';
 
 // Text
 $_['text_account']         = '我的帳號';
-$_['text_address_book']    = '地址簿';
+$_['text_address_book']    = '地址清單';
 $_['text_edit_address']    = '編輯地址';
 $_['text_add']             = '地址已新增 !';
 $_['text_edit']            = '地址已更新 !';

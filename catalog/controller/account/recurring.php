@@ -6,7 +6,8 @@ class ControllerAccountRecurring extends Controller {
 
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
-
+		//強制跳轉至首頁
+		$this->response->redirect($this->url->link('common/home', '', true));
 		$this->load->language('account/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
