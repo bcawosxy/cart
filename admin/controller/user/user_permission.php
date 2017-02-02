@@ -408,6 +408,8 @@ class ControllerUserUserPermission extends Controller {
 		    'extension/dashboard/sale',
 		    'extension/openbay',
 		    'localisation/country',
+		    'localisation/tax_class',
+		    'localisation/tax_rate',
 		    'localisation/order_status',
 		    'localisation/return_action',
 		    'localisation/return_reason',
