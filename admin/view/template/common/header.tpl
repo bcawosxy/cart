@@ -66,11 +66,10 @@
         <li><a href="<?php echo $customer_approval; ?>"><span class="label label-danger pull-right"><?php echo $customer_total; ?></span><?php echo $text_approval; ?></a></li>
         <li class="divider"></li>
         <li class="dropdown-header"><?php echo $text_product; ?></li>
-        <li><a href="<?php echo $product; ?>"><span class="label label-danger pull-right"><?php echo $product_total; ?></span><?php echo $text_stock; ?></a></li>
-        <li><a href="<?php echo $review; ?>"><span class="label label-danger pull-right"><?php echo $review_total; ?></span><?php echo $text_review; ?></a></li>
-        <li class="divider"></li>
-        <li class="dropdown-header"><?php echo $text_affiliate; ?></li>
-        <li><a href="<?php echo $affiliate_approval; ?>"><span class="label label-danger pull-right"><?php echo $affiliate_total; ?></span><?php echo $text_approval; ?></a></li>
+        <li><a href="<?php echo $product; ?>"><span class="label label-success pull-right"><?php echo $product_total; ?></span><?php echo $text_stock; ?></a></li>
+        <li><a href="<?php echo $review; ?>"><span class="label label-info pull-right"><?php echo $review_total; ?></span><?php echo $text_review; ?></a></li>
+        <li><a href="<?php echo $product_onsale_url; ?>"><span class="label label-warning pull-right"><?php echo $product_onsale; ?></span><?php echo $text_onsale; ?></a></li>
+        <li><a href="<?php echo $product_outOfStock_url; ?>"><span class="label label-danger pull-right"><?php echo $product_outOfStock; ?></span><?php echo $text_outOfStock; ?></a></li>
       </ul>
     </li>
     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-home fa-lg"></i></a>

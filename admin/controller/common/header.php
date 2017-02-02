@@ -40,6 +40,8 @@ class ControllerCommonHeader extends Controller {
 		$data['text_support'] = $this->language->get('text_support');
 		$data['text_logged'] = sprintf($this->language->get('text_logged'), $this->user->getUserName());
 		$data['text_logout'] = $this->language->get('text_logout');
+		$data['text_onsale'] = $this->language->get('text_onsale');
+		$data['text_outOfStock'] = $this->language->get('text_outOfStock');
 
 		if (!isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
 			$data['logged'] = '';
@@ -92,7 +94,17 @@ class ControllerCommonHeader extends Controller {
 
 			$data['product_total'] = $product_total;
 
+			$product_onsale = $this->model_catalog_product->getTotalProducts(array('filter_status' => 1));
+
+			$data['product_onsale'] = $product_onsale;
+
+			$product_outOfStock = $this->model_catalog_product->getTotalProducts(array('filter_outOfStock' => 0));
+
+			$data['product_outOfStock'] = $product_outOfStock;
+
 			$data['product'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&filter_quantity=0', true);
+			$data['product_onsale_url'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&filter_status=1', true);
+			$data['product_outOfStock_url'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&filter_quantity=0&filter_quantity_end=0', true);
 
 			// Reviews
 			$this->load->model('catalog/review');

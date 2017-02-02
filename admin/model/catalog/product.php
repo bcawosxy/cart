@@ -661,6 +661,10 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND p.quantity >= '" . (int)$data['filter_quantity'] . "'";
 		}
 
+		if (isset($data['filter_outOfStock']) && !is_null($data['filter_outOfStock'])) {
+			$sql .= " AND p.quantity = '" . (int)$data['filter_outOfStock'] . "'";
+		}
+
 		if (isset($data['filter_quantity_end']) && !is_null($data['filter_quantity_end'])) {
 			$sql .= " AND p.quantity <= '" . (int)$data['filter_quantity_end'] . "'";
 		}
