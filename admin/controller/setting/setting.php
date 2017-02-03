@@ -284,6 +284,7 @@ class ControllerSettingSetting extends Controller {
 		$data['help_compression'] = $this->language->get('help_compression');
 		$data['help_version_year'] = $this->language->get('help_version_year');
 		$data['help_file_type'] = $this->language->get('help_file_type');
+		$data['help_logo'] = $this->language->get('help_logo');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');

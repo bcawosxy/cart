@@ -205,6 +205,7 @@ $_['help_compression']				 	= 'GZIP 可更有效地轉移到要求的客戶端�
 $_['help_version_year']				 	= '選擇對應文件的學年度';
 $_['help_file_type']					= '目前僅支援excel(xls,xlsx)格式文件';
 $_['help_customer_activity']			= '透過客戶報告紀錄活動。';
+$_['help_logo']							= '建議大小 : 350px * 150px';
 
 // Error
 $_['error_warning']						= '警告： 請檢查您輸入的資料！';
