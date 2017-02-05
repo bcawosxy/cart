@@ -102,6 +102,7 @@ $_['help_filter']				= '(自動完成)';
 $_['help_download']				= '(自動完成)';
 $_['help_related']				= '(自動完成)';
 $_['help_tag']					= '使用逗號分開';
+$_['help_groups_get_reward']	= '不同群組客戶,購買商品後可獲得的紅利點數';
 
 // Error
 $_['error_warning']				= '警告： 資料未正確輸入！';

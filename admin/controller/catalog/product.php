@@ -728,7 +728,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$data['entry_reward'] = $this->language->get('entry_reward');
 		$data['entry_layout'] = $this->language->get('entry_layout');
-		$data['entry_recurring'] = $this->language->get('entry_recurring');
+		$data['entry_customer_group_get_reward'] = $this->language->get('entry_customer_group_get_reward');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_sku'] = $this->language->get('help_sku');
@@ -746,6 +746,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['help_download'] = $this->language->get('help_download');
 		$data['help_related'] = $this->language->get('help_related');
 		$data['help_tag'] = $this->language->get('help_tag');
+		$data['help_groups_get_reward'] = $this->language->get('help_groups_get_reward');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');

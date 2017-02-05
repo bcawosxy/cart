@@ -871,8 +871,8 @@
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                      <td class="text-left"><?php echo $entry_customer_group; ?></td>
-                      <td class="text-right"><?php echo $entry_reward; ?></td>
+                      <td class="text-left"><span data-toggle="tooltip" title="<?php echo $help_groups_get_reward; ?>"><?php echo $entry_customer_group; ?></span></td>
+                      <td class="text-left"><?php echo $entry_reward; ?></td>
                     </tr>
                   </thead>
                   <tbody>

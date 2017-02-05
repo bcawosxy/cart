@@ -1343,7 +1343,7 @@ border-top:<?php echo $bigshop_menu_link_border_bottom_size ?>px <?php echo $big
           <div id="top-links" class="nav pull-right flip">
             <ul>
               <?php if ($logged) { ?>
-              <li id="my_account" class="dropdown"><a href="<?php echo $account; ?>"><?php echo $text_account; ?> <i class="fa fa-caret-down"></i></a>
+              <li id="my_account" class="dropdown"><a href="<?php echo $account; ?>"><?php echo $text_manu_name; ?> <i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a></li>
                   <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>

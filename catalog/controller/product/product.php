@@ -243,6 +243,8 @@ class ControllerProductProduct extends Controller {
 			$data['text_related'] = $this->language->get('text_related');
 			$data['text_payment_recurring'] = $this->language->get('text_payment_recurring');
 			$data['text_loading'] = $this->language->get('text_loading');
+			$data['text_dollar'] = $this->language->get('text_dollar');
+			$data['text_price'] = $this->language->get('text_price');
 
 			$data['entry_qty'] = $this->language->get('entry_qty');
 			$data['entry_name'] = $this->language->get('entry_name');

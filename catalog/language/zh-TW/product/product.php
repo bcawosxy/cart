@@ -4,11 +4,11 @@ $_['text_search']              = '搜尋';
 $_['text_brand']               = '品牌';
 $_['text_manufacturer']        = '品牌：';
 $_['text_model']               = '型號：';
-$_['text_reward']              = '紅利點數：'; 
-$_['text_points']              = '可使用紅利點數：';
+$_['text_reward']              = '可獲得紅利點數：'; 
+$_['text_points']              = '紅利點數兌換：';
 $_['text_stock']               = '庫存狀態：';
 $_['text_instock']             = '有現貨';
-$_['text_tax']                 = '未稅：'; 
+$_['text_tax']                 = '未稅價格：'; 
 $_['text_discount']            = ' 件(含)以上';
 $_['text_option']              = '選項及配件：';
 $_['text_minimum']             = '本商品的最低訂購數量為 %s';
@@ -30,6 +30,8 @@ $_['text_week']                = '周';
 $_['text_semi_month']          = '半月';
 $_['text_month']               = '月';
 $_['text_year']                = '年';
+$_['text_dollar']	           = '元';
+$_['text_price']	           = '價格：';
 
 // Entry
 $_['entry_qty']                = '數量';

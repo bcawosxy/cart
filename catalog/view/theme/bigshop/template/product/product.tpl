@@ -112,25 +112,26 @@ $("#zoom_01").bind("click", function(e) {
               <li><b><?php echo $text_manufacturer; ?></b> <a href="<?php echo $manufacturers; ?>"><span itemprop="brand"><?php echo $manufacturer; ?></span></a></li>
               <?php } ?>
               <li><b><?php echo $text_model; ?></b> <span itemprop="mpn"><?php echo $model; ?></span></li>
-              <?php if ($reward) { ?>
-              <li><b><?php echo $text_reward; ?></b> <?php echo $reward; ?></li>
-              <?php } ?>
               <li><b><?php echo $text_stock; ?></b> <?php echo $stock; ?></li>
+              <?php if ($reward) { ?>
+              <li><b><?php echo $text_reward; ?></b><span style="color:#ff007c;font-weight: bold;font-size: 1.2em;"><?php echo $reward; ?></span></li>
+              <?php } ?>
             </ul>
             <?php if ($price) { ?>            
             <ul class="price-box" class="list-unstyled">
+            <li><?php echo $text_price; ?></li>
             <?php if (!$special) { ?>
-            <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="real" itemprop="price"><?php echo $price; ?></span><span itemprop="availability" content="<?php echo $stock; ?>"></span></li>
+            <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="real" itemprop="price"><?php echo $price; ?></span><span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span><span itemprop="availability" content="<?php echo $stock; ?>"></span></li>
             <li></li>
             <?php } else { ?>
-            <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="price-old"><?php echo $price; ?></span> <span class="real" itemprop="price"><?php echo $special; ?><span itemprop="availability" content="<?php echo $stock; ?>"></span></span></li>
+            <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="price-old"><?php echo $price; ?></span><span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span><span class="real" itemprop="price"><?php echo $special; ?><span itemprop="availability" content="<?php echo $stock; ?>"></span></span><span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span></li>
             <li></li>
             <?php } ?>
             <?php if ($tax) { ?>
-            <li><?php echo $text_tax; ?> <?php echo $tax; ?></li>
+            <li><?php echo $text_tax; ?> <?php echo $tax; ?> <span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span></li>
             <?php } ?>
             <?php if ($points) { ?>
-            <li><?php echo $text_points; ?> <?php echo $points; ?></li>
+            <li><?php echo $text_points; ?><span style="color:#ff007c;font-weight: bold;font-size: 1.2em;"> <?php echo $points; ?></li>
             <?php } ?>
             <?php if ($discounts) { ?>
             <li></li>
