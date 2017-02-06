@@ -971,7 +971,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['price'] = $product_info['price'];
 		} else {
-			$data['price'] = '';
+			$data['price'] = 0;
 		}
 
 		$this->load->model('catalog/recurring');
@@ -1063,7 +1063,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['weight'] = $product_info['weight'];
 		} else {
-			$data['weight'] = '';
+			$data['weight'] = 0;
 		}
 
 		$this->load->model('localisation/weight_class');
@@ -1083,7 +1083,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['length'] = $product_info['length'];
 		} else {
-			$data['length'] = '';
+			$data['length'] = 0;
 		}
 
 		if (isset($this->request->post['width'])) {
@@ -1091,7 +1091,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['width'] = $product_info['width'];
 		} else {
-			$data['width'] = '';
+			$data['width'] = 0;
 		}
 
 		if (isset($this->request->post['height'])) {
@@ -1099,7 +1099,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['height'] = $product_info['height'];
 		} else {
-			$data['height'] = '';
+			$data['height'] = 0;
 		}
 
 		$this->load->model('localisation/length_class');
