@@ -238,14 +238,21 @@ class ControllerCommonFileManager extends Controller {
 						'error'    => $this->request->files['file']['error'][$key],
 						'size'     => $this->request->files['file']['size'][$key]
 					);
-				}
+				}				
 			}
 
 			foreach ($files as $file) {
 				if (is_file($file['tmp_name'])) {
+					
+					//當含有中文檔名時
+				    if(preg_match('/[\x{4e00}-\x{9fa5}]/u', mb_convert_encoding($file['name'], "UTF-8"))) {
+				    	$extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+				    	$file['name'] = uniqid().'.'.$extension;
+				    }	
+
 					// Sanitize the filename
 					$filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
-
+			
 					// Validate the filename length
 					if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 255)) {
 						$json['error'] = $this->language->get('error_filename');

@@ -19,6 +19,11 @@
             </span></div>
         </div>
       </div>
+      <div class="row">
+      	 <div class="col-sm-5">
+      	 	<span style="color:red;">*若使用中文檔案名稱則會重新命名</span>
+      	 </div>
+      </div>
       <hr />
       <?php foreach (array_chunk($images, 4) as $image) { ?>
       <div class="row">
