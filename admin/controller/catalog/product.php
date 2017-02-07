@@ -1234,7 +1234,7 @@ class ControllerCatalogProduct extends Controller {
 						'option_value_id'         => $product_option_value['option_value_id'],
 						'quantity'                => $product_option_value['quantity'],
 						'subtract'                => $product_option_value['subtract'],
-						'price'                   => $product_option_value['price'],
+						'price'                   => number_format($product_option_value['price']),
 						'price_prefix'            => $product_option_value['price_prefix'],
 						'points'                  => $product_option_value['points'],
 						'points_prefix'           => $product_option_value['points_prefix'],
