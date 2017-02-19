@@ -27,6 +27,7 @@ $_['text_no_results']			= '尚無資料！';
 $_['text_confirm']				= '確定嗎？';
 $_['text_home']			  		= '首頁';
 
+
 // Button
 $_['button_add']				= '新增';
 $_['button_delete']				= '刪除';
@@ -112,6 +113,7 @@ $_['tab_discount']				= '量大折扣';
 $_['tab_general']				= '基本資料';
 $_['tab_history']				= '訂單歷史';
 $_['tab_ftp']					= 'FTP';
+$_['tab_fee']					= '手續費用';
 $_['tab_ip']					= 'IP地址';
 $_['tab_links']			 		= '分類設定';
 $_['tab_log']					= '日誌';

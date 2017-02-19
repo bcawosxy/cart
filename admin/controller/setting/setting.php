@@ -68,7 +68,9 @@ class ControllerSettingSetting extends Controller {
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			
 			$this->model_setting_setting->editSetting('config', $this->request->post);
+			$this->model_setting_setting->editeSettingFee1($this->request->post);
 
 			if ($this->config->get('config_currency_auto')) {
 				$this->load->model('localisation/currency');
@@ -79,6 +81,7 @@ class ControllerSettingSetting extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('setting/store', 'token=' . $this->session->data['token'], true));
+
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -120,6 +123,7 @@ class ControllerSettingSetting extends Controller {
 		$data['text_senior'] = $this->language->get('text_senior');
 		$data['text_optionDefault'] = $this->language->get('text_optionDefault');
 		$data['text_insert'] = $this->language->get('text_insert');
+		$data['text_flat'] = $this->language->get('text_flat');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_owner'] = $this->language->get('entry_owner');
@@ -220,6 +224,9 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_fileList'] = $this->language->get('entry_fileList');
 		$data['entry_insert'] = $this->language->get('entry_insert');
 		$data['entry_file_upload'] = $this->language->get('entry_file_upload');
+		$data['entry_flat_fee'] = $this->language->get('entry_flat_fee');
+		$data['entry_flat_text'] = $this->language->get('entry_flat_text');
+		$data['entry_min_total'] = $this->language->get('entry_min_total');
 
 
 		$data['help_geocode'] = $this->language->get('help_geocode');
@@ -285,6 +292,9 @@ class ControllerSettingSetting extends Controller {
 		$data['help_version_year'] = $this->language->get('help_version_year');
 		$data['help_file_type'] = $this->language->get('help_file_type');
 		$data['help_logo'] = $this->language->get('help_logo');
+		$data['help_flat_fee'] = $this->language->get('help_flat_fee');
+		$data['help_flat_text'] = $this->language->get('help_flat_text');
+		$data['help_min_total'] = $this->language->get('help_min_total');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -298,6 +308,7 @@ class ControllerSettingSetting extends Controller {
 		$data['tab_mail'] = $this->language->get('tab_mail');
 		$data['tab_server'] = $this->language->get('tab_server');
 		$data['tab_version'] = '參考書版本';
+		$data['tab_fee'] = '免運費設定';
 
 		$data['error_yearsGrade'] = $this->language->get('error_yearsGrade');
 		$data['error_schoolType'] = $this->language->get('error_schoolType');
@@ -581,6 +592,28 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$data['config_image'] = $this->config->get('config_image');
 		}
+
+		/**
+		 * fee設定
+		 */
+		if (isset($this->request->post['flat_cost'])) {
+			$data['flat_cost'] = $this->request->post['flat_cost'];
+		} else {
+			$data['flat_cost'] = $this->config->get('flat_cost');
+		}
+		if (isset($this->request->post['xfee_name1'])) {
+			$data['xfee_name1'] = $this->request->post['xfee_name1'];
+		} else {
+			$data['xfee_name1'] = $this->config->get('xfee_name1');
+		}
+		if (isset($this->request->post['xfee_total1'])) {
+			$data['xfee_total1'] = $this->request->post['xfee_total1'];
+		} else {
+			$data['xfee_total1'] = $this->config->get('xfee_total1');
+		}
+
+
+
 
 		$this->load->model('tool/image');
 

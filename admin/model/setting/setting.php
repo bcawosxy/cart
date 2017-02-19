@@ -51,4 +51,35 @@ class ModelSettingSetting extends Model {
 			$this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape(json_encode($value)) . "', serialized = '1' WHERE `code` = '" . $this->db->escape($code) . "' AND `key` = '" . $this->db->escape($key) . "' AND store_id = '" . (int)$store_id . "'");
 		}
 	}
+
+
+	/**
+	 * 170219 - 由settings::settings 調整郵寄/宅配的相關設定, 將原生的運送方式搭配x-fee的免運模組
+	 * 資料庫 : settings 
+	 * column Name[code] : flat / xfee
+	 * column Name[key] : flat_cost(運費) / xfee_name1(免運標題) / xfee_total1(免運門檻)
+	 * 
+	 * 頁面 : 運送模組(shipping::flat)及總計模組(total::x-fee)
+	 */
+	public function editeSettingFee1($data, $store_id = 0) {
+		
+		//這邊用的code與key須與db使用的一樣
+		$editData = [
+			'flat' => [
+				'flat_cost' => $data['flat_cost'],
+			], 			
+			'xfee' => [
+				'xfee_name1' => $data['xfee_name1'],
+				'xfee_cost1' => (0-$data['flat_cost']), //免運的金額應與運費相等, 故此處代入運費金額並轉為負數
+				'xfee_total1' => $data['xfee_total1'], 
+			],
+		];
+
+		foreach ($editData as $k0 => $v0) {
+			foreach ($v0 as $k1 => $v1) {
+				$this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape($v1) . "', serialized = '0'  WHERE `code` = '" . $this->db->escape($k0) . "' AND `key` = '" . $this->db->escape($k1) . "' AND store_id = '" . (int)$store_id . "'");
+
+			}
+		}
+	}
 }

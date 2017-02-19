@@ -35,6 +35,7 @@
             <li><a href="#tab-store" data-toggle="tab"><?php echo $tab_store; ?></a></li>
             <li><a href="#tab-local" data-toggle="tab"><?php echo $tab_local; ?></a></li>
             <li><a href="#tab-option" data-toggle="tab"><?php echo $tab_option; ?></a></li>
+            <li><a href="#tab-fee" data-toggle="tab"><?php echo $tab_fee; ?></a></li>
             <li><a href="#tab-image" data-toggle="tab"><?php echo $tab_image; ?></a></li>
             <!-- 不提供FTP設定 -->
             <!-- <li><a href="#tab-ftp" data-toggle="tab"><?php echo $tab_ftp; ?></a></li> -->
@@ -66,7 +67,6 @@
                 </div>
               </div>
               <!--不顯示此欄位[版型][布局] -->
-              
               <div class="form-group" style="display: none;" >
                 <label class="col-sm-2 control-label" for="input-theme"><?php echo $entry_theme; ?></label>
                 <div class="col-sm-10">
@@ -96,7 +96,6 @@
                   </select>
                 </div>
               </div>
-              
             </div>
             <div class="tab-pane" id="tab-store">
               <div class="form-group required">
@@ -1018,6 +1017,37 @@
                 </div>
               </fieldset>
             </div>
+
+            <!-- 額外費用設定 fee Tab -->
+            <div class="tab-pane" id="tab-fee">
+              <fieldset>
+                <legend><?php echo $text_flat; ?></legend>
+               
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-flat-fee"><span data-toggle="tooltip" title="<?php echo $help_flat_fee; ?>"><?php echo $entry_flat_fee; ?></span></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="flat_cost" value="<?php echo $flat_cost; ?>" placeholder="<?php echo $entry_flat_fee; ?>" id="input-flat-fee" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-flat-text"><span data-toggle="tooltip" title="<?php echo $help_flat_text; ?>"><?php echo $entry_flat_text; ?></span></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="xfee_name1" value="<?php echo $xfee_name1; ?>" placeholder="<?php echo $entry_flat_text; ?>" id="input-flat-text" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-min-total"><span data-toggle="tooltip" title="<?php echo $help_min_total; ?>"><?php echo $entry_min_total; ?></span></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="xfee_total1" value="<?php echo $xfee_total1; ?>" placeholder="<?php echo $entry_min_total; ?>" id="input-min-total" class="form-control" />
+                  </div>
+                </div>
+
+              </fieldset>
+            </div>
+            <!-- End 額外費用設定 fee Tab -->
+
             <div class="tab-pane" id="tab-image">
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-logo"><span data-toggle="tooltip" title="<?php echo $help_logo; ?>"><?php echo $entry_logo; ?></span></label>

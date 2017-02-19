@@ -38,7 +38,7 @@ $_['text_junior']						= '國中';
 $_['text_senior']						= '高中';
 $_['text_optionDefault']				= '請選擇';
 $_['text_insert']						= '匯入';
-
+$_['text_flat']			  				= '郵寄/宅配 設定';
 
 
 // Entry
@@ -140,6 +140,9 @@ $_['entry_school_type']					= '學校(國小 / 國中 / 高中)';
 $_['entry_fileList']					= '檔案清單';
 $_['entry_insert']						= '匯入檔案';
 $_['entry_file_upload']					= '上傳檔案';
+$_['entry_flat_fee']					= '運費';
+$_['entry_flat_text']					= '說明標題';
+$_['entry_min_total']					= '免運費消費金額';
 
 
 // Help
@@ -209,6 +212,9 @@ $_['help_version_year']				 	= '選擇對應文件的學年度';
 $_['help_file_type']					= '目前僅支援excel(xls,xlsx)格式文件';
 $_['help_customer_activity']			= '透過客戶報告紀錄活動。';
 $_['help_logo']							= '建議大小 : 350px * 150px';
+$_['help_flat_fee']						= '當消費者選擇郵寄/宅配時所產生的運費金額';
+$_['help_flat_text']					= '當消費者觸發條件時的標題文字';
+$_['help_min_total']					= '免運費門檻';
 
 // Error
 $_['error_warning']						= '警告： 請檢查您輸入的資料！';
