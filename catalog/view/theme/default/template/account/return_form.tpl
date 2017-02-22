@@ -66,13 +66,23 @@
               <div class="text-danger"><?php echo $error_order_id; ?></div>
               <?php } ?>
             </div>
-          </div>
+          </div> 
+
+
+
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-date-ordered"><?php echo $entry_date_ordered; ?></label>
             <div class="col-sm-3">
               <div class="input-group date"><input type="text" name="date_ordered" value="<?php echo $date_ordered; ?>" placeholder="<?php echo $entry_date_ordered; ?>" data-date-format="YYYY-MM-DD" id="input-date-ordered" class="form-control" /><span class="input-group-btn">
                 <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                 </span></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-order-id"></label>
+            <div class="col-sm-10">
+              <?php echo $text_get_order_id; ?>
             </div>
           </div>
         </fieldset>

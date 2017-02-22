@@ -325,6 +325,7 @@ class ControllerAccountReturn extends Controller {
 		$data['text_product'] = $this->language->get('text_product');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
+		$data['text_get_order_id'] = sprintf($this->language->get('text_get_order_id'), $this->url->link('account/order', '', true));
 
 		$data['entry_order_id'] = $this->language->get('entry_order_id');
 		$data['entry_date_ordered'] = $this->language->get('entry_date_ordered');

@@ -5,11 +5,11 @@ $_['heading_title']                = '會員登入';
 // Text
 $_['text_account']                 = '我的帳號';
 $_['text_login']                   = '登入';
-$_['text_new_customer']            = '新客戶';
-$_['text_register']                = '註冊帳號';
-$_['text_register_account']        = '註冊一個帳號以便您能更快速的購物、檢視訂單狀態、檢視訂購記錄、和更多的管理項目。';
+$_['text_new_customer']            = '沒有帳號嗎？';
+$_['text_register']                = '註冊新帳號';
+$_['text_register_account']        = '註冊一個帳號讓您能更快速的購物、檢視訂單狀態以及取得更多的服務項目。';
 $_['text_returning_customer']      = '會員登入';
-$_['text_i_am_returning_customer'] = '如果您已經是本站會員，請直接登入。';
+$_['text_i_am_returning_customer'] = '如果您已經是我們的會員，請直接登入帳號。';
 $_['text_forgotten']               = '忘記密碼？';
 
 // Entry

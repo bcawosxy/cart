@@ -5,7 +5,7 @@ $_['heading_title']        = '註冊帳號';
 // Text
 $_['text_account']         = '我的帳號';
 $_['text_register']        = '註冊帳號';
-$_['text_account_already'] = '如果您是新客戶，請填寫下面的表單進行註冊。如果您已經是本站的會員，請您直接<a href="%s">登入</a>。';
+$_['text_account_already'] = '如果您已經是本站的會員，您可以直接<a href="%s">登入</a>, 或請填寫下面的表單加入我們。';
 $_['text_your_details']    = '個人資料';
 $_['text_your_address']    = '地址資料';
 $_['text_newsletter']      = '訂閱電子報';

@@ -6,8 +6,8 @@ $_['heading_title']   = '忘記密碼?';
 $_['text_account']    = '我的帳號';
 $_['text_forgotten']  = '忘記密碼';
 $_['text_your_email'] = 'Email 信箱';
-$_['text_email']      = '請輸入您註冊帳號時填寫的 Email 信箱，並點擊繼續以發送新密碼到您的 Email 信箱！';
-$_['text_success']    = '成功： 新密碼已發送到您的 Email 信箱 ！';
+$_['text_email']      = '請輸入您註冊帳號時填寫的 Email 信箱，並點擊繼續以發送設定密碼連結到您的 Email 信箱！';
+$_['text_success']    = '成功： 設定密碼連結已發送到您的 Email 信箱 ！';
 
 // Entry
 $_['entry_email']     = 'Email 信箱';

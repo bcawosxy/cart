@@ -6,7 +6,7 @@ $_['heading_title']      = '商品退換';
 $_['text_account']       = '會員帳號';
 $_['text_return']        = '退換貨資料';
 $_['text_return_detail'] = '退換貨明細';
-$_['text_description']   = '<p>請填寫下表以取得 RMA 號碼。</p>';
+$_['text_description']   = '<p>請填寫下表以取得退換貨處理編號。</p>';
 $_['text_order']         = '訂單資料';
 $_['text_product']       = '商品資料';
 $_['text_reason']        = '退換貨原因';
@@ -20,6 +20,7 @@ $_['text_comment']       = '退換備註';
 $_['text_history']       = '退換記錄';
 $_['text_empty']         = '您目前沒有商品退換記錄。';
 $_['text_agree']         = '我已經閱讀並同意<a href="%s"  class="agree"><b>%s</b></a>條款。';
+$_['text_get_order_id']  = '<p><a href="%s" target="_blank"><i class="fa fa-shopping-cart fa-fw"></i><b> 查詢您的訂單資料</b></a></p>';
 
 // Column
 $_['column_return_id']   = '退換號碼';
