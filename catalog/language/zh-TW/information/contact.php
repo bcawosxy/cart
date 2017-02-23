@@ -11,7 +11,7 @@ $_['text_telephone'] = '電話';
 $_['text_fax']       = '傳真';
 $_['text_open']      = '營業時間';
 $_['text_comment']   = '備註';
-$_['text_success']   = '<p>你的意見已送出！</p>';
+$_['text_success']   = '<p>你的意見已送出！我們將會盡快給您回復。</p>';
 
 // Entry
 $_['entry_name']     = '您的姓名';
