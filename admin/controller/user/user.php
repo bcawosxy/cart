@@ -384,10 +384,10 @@ class ControllerUserUser extends Controller {
 		$this->load->model('user/user_group');
 
 		$data['user_groups'] = $this->model_user_user_group->getUserGroups();
-		
+
 		/*如果不是最高管理員登入則不顯示該欄位*/
-		$user_info = $this->model_user_user->getUser($this->user->getId());
-		if($user_info['user_group_id'] != 1) {
+		$login_user_info = $this->model_user_user->getUser($this->user->getId());
+		if($login_user_info['user_group_id'] != 1) {
 			foreach ($data['user_groups'] as $k0 => $v0) {
 				if($v0['user_group_id'] == 1) unset($data['user_groups'][$k0]);
 			}

@@ -104,7 +104,6 @@ function setSchool(data=[]) {
 }
 
 $(document).ready(function(){
-
   $('#countyList').chosen({
     placeholder_text_single : '<?php echo $text_county; ?>',
     no_results_text: '<?php echo $text_no_results_text; ?>',

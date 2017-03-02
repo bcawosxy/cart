@@ -218,16 +218,31 @@ class ControllerInformationVersion extends Controller {
 		$gradeYears = (in_array(date('m'), ['01', '02', '03', '04', '05', '06', '07'])) ? date('Y')-1912 : date('Y')-1911 ;
 		$fetchVersion = $this->db->query('SELECT * FROM `book2school`.`'.$gradeYears.'_'.$type.'` WHERE `zone` = "'.$countyName.'" AND `name` LIKE "%'.$schoolName.'";');
 		
+		//取得品牌清單
+		$this->load->model('catalog/manufacturer');
+
+		$results = $this->model_catalog_manufacturer->getManufacturers();
+
+		foreach ($results as $result) {
+			$manufacturer[] = array(
+				'name' => $result['name'],
+				'href' => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $result['manufacturer_id'])
+			);
+		}
+
 		if($fetchVersion->num_rows == 1) {
 			foreach ($fetchVersion->row as $k0 => $v0) { $data[$k0] = ($k0 == 'grades') ? json_decode($v0 , true) : $v0; }
-			
-			$arr = ['南一','康軒','翰林', '康熹', '三民', '龍騰', '全華', '泰宇'];
 			foreach ($data['grades'] as $k0 => $v0) {
 				foreach ($v0 as $k1 => $v1) {
+					
 					if( strpos($v1 ,'(' ) ) $data['grades'][$k0][$k1] = $v1 = substr($v1, 0, strpos($v1 ,'(' ));
 					if (is_null($v1)) $data['grades'][$k0][$k1] = '';
-					if( in_array($v1, $arr) ) {
-						$data['grades'][$k0][$k1] = '<a href="#'.array_search($v1, $arr).'">'.$v1.'</a>';
+					
+					$data['grades'][$k0][$k1] = '<span style="color:#8a6d3b">'.$v1.'</span>';
+					foreach ($manufacturer as $k2 => $v2) {
+						if( strpos($v2['name'], $v1) !== false) {
+							$data['grades'][$k0][$k1] = '<a target="_blank" href="'.$v2['href'].'">'.$v1.'</a>';
+						} 
 					}
 				}
 			}
