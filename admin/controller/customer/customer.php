@@ -730,6 +730,7 @@ class ControllerCustomerCustomer extends Controller {
 
 		$data['help_safe'] = $this->language->get('help_safe');
 		$data['help_points'] = $this->language->get('help_points');
+		$data['help_transaction'] = $this->language->get('help_transaction');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -1423,6 +1424,7 @@ class ControllerCustomerCustomer extends Controller {
 
 		$data['column_ip'] = $this->language->get('column_ip');
 		$data['column_total'] = $this->language->get('column_total');
+		$data['column_ip_login_total'] = $this->language->get('column_ip_login_total');
 		$data['column_date_added'] = $this->language->get('column_date_added');
 
 		if (isset($this->request->get['page'])) {

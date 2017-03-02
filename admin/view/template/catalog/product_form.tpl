@@ -28,6 +28,7 @@
           <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
             <li><a href="#tab-data" data-toggle="tab"><?php echo $tab_data; ?></a></li>
+            <li><a href="#tab-image" data-toggle="tab"><?php echo $tab_image; ?></a></li>
             <li><a href="#tab-links" data-toggle="tab"><?php echo $tab_links; ?></a></li>
             <li><a href="#tab-attribute" data-toggle="tab"><?php echo $tab_attribute; ?></a></li>
             <li><a href="#tab-option" data-toggle="tab"><?php echo $tab_option; ?></a></li>
@@ -35,7 +36,6 @@
             <!-- <li><a href="#tab-recurring" data-toggle="tab"><?php echo $tab_recurring; ?></a></li> -->
             <li><a href="#tab-discount" data-toggle="tab"><?php echo $tab_discount; ?></a></li>
             <li><a href="#tab-special" data-toggle="tab"><?php echo $tab_special; ?></a></li>
-            <li><a href="#tab-image" data-toggle="tab"><?php echo $tab_image; ?></a></li>
             <li><a href="#tab-reward" data-toggle="tab"><?php echo $tab_reward; ?></a></li>
             <!--暫不使用此功能[版面設計]-->
             <!--<li><a href="#tab-design" data-toggle="tab"><?php echo $tab_design; ?></a></li>-->
@@ -329,6 +329,51 @@
                 </div>
               </div>
             </div>
+            <div class="tab-pane" id="tab-image">
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left"><?php echo $entry_image; ?></td>
+                    </tr>
+                  </thead>
+                  
+                  <tbody>
+                    <tr>
+                      <td class="text-left"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" /></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-responsive">
+                <table id="images" class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left"><?php echo $entry_additional_image; ?></td>
+                      <td class="text-right"><?php echo $entry_sort_order; ?></td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $image_row = 0; ?>
+                    <?php foreach ($product_images as $product_image) { ?>
+                    <tr id="image-row<?php echo $image_row; ?>">
+                      <td class="text-left"><a href="" id="thumb-image<?php echo $image_row; ?>" data-toggle="image" class="img-thumbnail"><img src="<?php echo $product_image['thumb']; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="input-image<?php echo $image_row; ?>" /></td>
+                      <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $product_image['sort_order']; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>
+                      <td class="text-left"><button type="button" onclick="$('#image-row<?php echo $image_row; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                    </tr>
+                    <?php $image_row++; ?>
+                    <?php } ?>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="2"></td>
+                      <td class="text-left"><button type="button" onclick="addImage();" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>            
             <div class="tab-pane" id="tab-links">
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-manufacturer"><span data-toggle="tooltip" title="<?php echo $help_manufacturer; ?>"><?php echo $entry_manufacturer; ?></span></label>
@@ -810,51 +855,6 @@
                     <tr>
                       <td colspan="5"></td>
                       <td class="text-left"><button type="button" onclick="addSpecial();" data-toggle="tooltip" title="<?php echo $button_special_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
-            <div class="tab-pane" id="tab-image">
-              <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <td class="text-left"><?php echo $entry_image; ?></td>
-                    </tr>
-                  </thead>
-                  
-                  <tbody>
-                    <tr>
-                      <td class="text-left"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" /></td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="table-responsive">
-                <table id="images" class="table table-striped table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <td class="text-left"><?php echo $entry_additional_image; ?></td>
-                      <td class="text-right"><?php echo $entry_sort_order; ?></td>
-                      <td></td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php $image_row = 0; ?>
-                    <?php foreach ($product_images as $product_image) { ?>
-                    <tr id="image-row<?php echo $image_row; ?>">
-                      <td class="text-left"><a href="" id="thumb-image<?php echo $image_row; ?>" data-toggle="image" class="img-thumbnail"><img src="<?php echo $product_image['thumb']; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="product_image[<?php echo $image_row; ?>][image]" value="<?php echo $product_image['image']; ?>" id="input-image<?php echo $image_row; ?>" /></td>
-                      <td class="text-right"><input type="text" name="product_image[<?php echo $image_row; ?>][sort_order]" value="<?php echo $product_image['sort_order']; ?>" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>
-                      <td class="text-left"><button type="button" onclick="$('#image-row<?php echo $image_row; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
-                    </tr>
-                    <?php $image_row++; ?>
-                    <?php } ?>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="2"></td>
-                      <td class="text-left"><button type="button" onclick="addImage();" data-toggle="tooltip" title="<?php echo $button_image_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
                     </tr>
                   </tfoot>
                 </table>

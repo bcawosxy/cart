@@ -578,7 +578,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-amount"><?php echo $entry_amount; ?></label>
+                <label class="col-sm-2 control-label" for="input-amount"><span data-toggle="tooltip" title="<?php echo $help_transaction; ?>"><?php echo $entry_amount; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="amount" value="" placeholder="<?php echo $entry_amount; ?>" id="input-amount" class="form-control" />
                 </div>

@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <td class="text-left"><?php echo $column_ip; ?></td>
-        <td class="text-right"><?php echo $column_total; ?></td>
+        <td class="text-right"><?php echo $column_ip_login_total; ?></td>
         <td class="text-left"><?php echo $column_date_added; ?></td>
       </tr>
     </thead>

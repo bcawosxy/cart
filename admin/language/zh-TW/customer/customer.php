@@ -23,6 +23,7 @@ $_['column_amount']         = '總額';
 $_['column_points']         = '點數';
 $_['column_ip']             = 'IP';
 $_['column_total']          = '金額總計';
+$_['column_ip_login_total']          = '登入次數';
 $_['column_action']         = '管理';
 
 // Entry
@@ -58,6 +59,7 @@ $_['entry_date_added_end']  = '至';
 // Help
 $_['help_safe']             = '請設定是(true)以避免客戶被反詐欺系統攔截。';
 $_['help_points']           = '使用減號來扣減點數';
+$_['help_transaction']      = '使用減號來扣減金額';
 
 // Error
 $_['error_warning']         = '警告: 請確實檢查填寫內容!';
