@@ -1,11 +1,11 @@
 <?php
 // Heading
-$_['heading_title']     = '檢視您喜愛的品牌';
+$_['heading_title']     = '檢視品牌列表';
 
 // Text
 $_['text_brand']        = '品牌';
-$_['text_index']        = '品牌列表：';
-$_['text_error']        = '找不到品牌！';
+$_['text_index']        = '品牌分類：';
+$_['text_error']        = '找不到品牌列表！';
 $_['text_empty']        = '暫時沒有相關商品。';
 $_['text_quantity']     = '數量：';
 $_['text_manufacturer'] = '品牌：';
