@@ -1,10 +1,13 @@
 <?php echo $header; ?><?php echo $column_left; ?>
+<?php 
+$disable = ( strpos($_SERVER['QUERY_STRING'], 'design') !== false ) ? 'style="display:none;"' : null ; 
+?>
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-featured" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
-        <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+        <a <?php echo $disable; ?> href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
       <h1><?php echo $heading_title; ?></h1>
       <ul class="breadcrumb">
         <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -53,7 +56,7 @@
               <input type="text" name="limit" value="<?php echo $limit; ?>" placeholder="<?php echo $entry_limit; ?>" id="input-limit" class="form-control" />
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" <?php echo $disable; ?>>
             <label class="col-sm-2 control-label" for="input-width"><?php echo $entry_width; ?></label>
             <div class="col-sm-10">
               <input type="text" name="width" value="<?php echo $width; ?>" placeholder="<?php echo $entry_width; ?>" id="input-width" class="form-control" />
@@ -62,7 +65,7 @@
               <?php } ?>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" <?php echo $disable; ?>>
             <label class="col-sm-2 control-label" for="input-height"><?php echo $entry_height; ?></label>
             <div class="col-sm-10">
               <input type="text" name="height" value="<?php echo $height; ?>" placeholder="<?php echo $entry_height; ?>" id="input-height" class="form-control" />

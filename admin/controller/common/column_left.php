@@ -257,6 +257,15 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
+
+			//首頁特色商品 featured
+			if ($this->user->hasPermission('access', 'design/featured')) {
+				$design[] = array(
+					'name'	   => $this->language->get('text_featured'),
+					'href'     => $this->url->link('design/featured', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);
+			}
 			
 			if ($design) {
 				$data['menus'][] = array(

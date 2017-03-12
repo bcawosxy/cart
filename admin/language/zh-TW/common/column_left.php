@@ -101,3 +101,4 @@ $_['text_paypal_search']               = '搜尋交易記錄';
 $_['text_complete_status']             = '已完成訂單數'; 
 $_['text_processing_status']           = '處理中訂單數'; 
 $_['text_other_status']                = '其他訂單數'; 
+$_['text_featured']               	   = '特色商品設計'; 
