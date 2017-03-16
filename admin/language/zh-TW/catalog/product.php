@@ -103,6 +103,7 @@ $_['help_download']				= '輸入字首後自動搜尋';
 $_['help_related']				= '輸入字首後自動搜尋';
 $_['help_tag']					= '使用逗號分開';
 $_['help_groups_get_reward']	= '不同群組客戶,購買商品後可獲得的紅利點數';
+$_['help_additional_image']		= '500px*500px或長/寬比例不大於3';
 
 // Error
 $_['error_warning']				= '警告： 資料未正確輸入！';

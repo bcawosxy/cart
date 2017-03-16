@@ -63,7 +63,7 @@
                   <tr>
                     <td class="text-left"><?php echo $entry_title; ?></td>
                     <td class="text-left"><?php echo $entry_link; ?></td>
-                    <td class="text-center"><?php echo $entry_image; ?></td>
+                    <td class="text-center"><span data-toggle="tooltip" title="<?php echo $help_image; ?>"><?php echo $entry_image; ?></span></td>
                     <td class="text-right"><?php echo $entry_sort_order; ?></td>
                     <td></td>
                   </tr>

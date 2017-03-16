@@ -31,6 +31,11 @@ $_['entry_option_value'] = '選項值：';
 $_['entry_image']        = '圖片：';
 $_['entry_sort_order']   = '排序：';
 
+
+$_['help_image']   		 = '矩形圖片或長/寬比例不超過3';
+
+
+
 // Error
 $_['error_permission']   = '警告：您沒有權限修改商品選項！';
 $_['error_name']         = '選項名稱必須介於1和128字之間！';

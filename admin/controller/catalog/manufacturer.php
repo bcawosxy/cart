@@ -277,6 +277,7 @@ class ControllerCatalogManufacturer extends Controller {
 		$data['entry_customer_group'] = $this->language->get('entry_customer_group');
 
 		$data['help_keyword'] = $this->language->get('help_keyword');
+		$data['help_image'] = $this->language->get('help_image');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -455,9 +456,7 @@ class ControllerCatalogManufacturer extends Controller {
 			$filter_data = array(
 				'filter_name' => $this->request->get['filter_name'],
 				'start'       => 0,
-				
 				'limit'       => 20
-				
 			);
 
 			$results = $this->model_catalog_manufacturer->getManufacturers($filter_data);

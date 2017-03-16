@@ -22,6 +22,9 @@ $_['entry_image']        = '圖片：';
 $_['entry_status']       = '狀態：';
 $_['entry_sort_order']   = '排序：';
 
+
+$_['help_image']  		 = '無限定比例, 依照要使用的區塊上傳即可';
+
 // Error
 $_['error_permission']   = '警告： 您沒有權限修改橫幅圖片！';
 $_['error_name']         = '橫幅圖片名稱必須在3至64個字之間！';

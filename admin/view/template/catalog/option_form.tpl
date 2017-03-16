@@ -108,7 +108,7 @@
             <thead>
               <tr>
                 <td class="text-left required" style="width:60%;"><?php echo $entry_option_value; ?></td>
-                <td class="text-left"><?php echo $entry_image; ?></td>
+                <td class="text-left"><span data-toggle="tooltip" title="<?php echo $help_image; ?>"><?php echo $entry_image; ?></span></td>
                 <td class="text-right"><?php echo $entry_sort_order; ?></td>
                 <td></td>
               </tr>

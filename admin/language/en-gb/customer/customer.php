@@ -72,3 +72,4 @@ $_['error_city']            = 'City must be between 2 and 128 characters!';
 $_['error_postcode']        = 'Postcode must be between 2 and 10 characters for this country!';
 $_['error_country']         = 'Please select a country!';
 $_['error_zone']            = '%s required!';
+$_['error_custom_field']    = '此欄位為必填欄位';

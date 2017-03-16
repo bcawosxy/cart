@@ -22,5 +22,5 @@ $_['entry_sort_order']      = '排序：';
 // Error
 $_['error_permission']       = '警告：您沒有權限修改屬性！';
 $_['error_attribute_group']  = '屬性群組必須輸入!';
-$_['error_name']             = '屬性名稱必須為3到64個字！';
+$_['error_name']             = '屬性名稱必須為2到64個字！';
 $_['error_product']          = '警告：該屬性不能被刪除，因為目前已經有 %s 項商品使用中！';

@@ -37,6 +37,7 @@ $_['help_keyword']				= '不要用空格，使用「-」連接關鍵字。';
 $_['help_top']					= '在頁面上方導覽列顯示，僅適用頂層分類。';
 $_['help_column']				= '在頁面上方主分類下的子分類顯示時排列的行數。 僅適用頂層分類。';
 $_['help_category_description']	= '網頁的標題, 讓搜尋引擎蒐錄此頁名稱';
+$_['help_image']				= '約80px*80px';
 
 // Error 
 $_['error_warning']				= '警告：相關欄位資料未輸入！';

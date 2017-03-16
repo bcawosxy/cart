@@ -747,6 +747,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['help_related'] = $this->language->get('help_related');
 		$data['help_tag'] = $this->language->get('help_tag');
 		$data['help_groups_get_reward'] = $this->language->get('help_groups_get_reward');
+		$data['help_additional_image'] = $this->language->get('help_additional_image');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');

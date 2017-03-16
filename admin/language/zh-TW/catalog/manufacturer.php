@@ -26,6 +26,7 @@ $_['entry_type']			= '類型：';
 
 // Help
 $_['help_keyword']			= '請確定關鍵字的唯一性，並請使用 "-" 來替代空格。';
+$_['help_image']			= '130px*100px或相等比例圖片';
 
 // Error
 $_['error_permission']		= '警告：您沒有權限更改品牌資料！';

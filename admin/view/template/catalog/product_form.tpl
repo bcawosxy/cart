@@ -334,10 +334,9 @@
                 <table class="table table-striped table-bordered table-hover">
                   <thead>
                     <tr>
-                      <td class="text-left"><?php echo $entry_image; ?></td>
+                      <td class="text-left"><span data-toggle="tooltip" title="<?php echo $help_additional_image; ?>"><?php echo $entry_image; ?></span></td>
                     </tr>
                   </thead>
-                  
                   <tbody>
                     <tr>
                       <td class="text-left"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo $thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="image" value="<?php echo $image; ?>" id="input-image" /></td>
@@ -349,7 +348,7 @@
                 <table id="images" class="table table-striped table-bordered table-hover">
                   <thead>
                     <tr>
-                      <td class="text-left"><?php echo $entry_additional_image; ?></td>
+                      <td class="text-left"><span data-toggle="tooltip" title="<?php echo $help_additional_image; ?>"><?php echo $entry_additional_image; ?></span></td>
                       <td class="text-right"><?php echo $entry_sort_order; ?></td>
                       <td></td>
                     </tr>
