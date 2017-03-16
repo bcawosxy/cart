@@ -69,7 +69,12 @@ class ControllerApiCustomer extends Controller {
 
 			foreach ($custom_fields as $custom_field) {
 				if (($custom_field['location'] == 'account') && $custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['custom_field_id']])) {
-					$json['error']['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
+					/*  
+						因為編輯訂單的表單不會將自訂欄位代出來,所以也不會有post資料過來, 造成 " empty($this->request->post['custom_field'][$custom_field['custom_field_id']]) " 為真
+						但此處是編輯該訂單內容而非改變客戶資料, 故暫時不考慮加入客製化欄位的資料, 直接略過檢查
+					*/
+				
+					// $json['error']['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 				} elseif (($custom_field['location'] == 'account') && ($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !filter_var($this->request->post['custom_field'][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => $custom_field['validation'])))) {
 					$json['error']['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 				}
