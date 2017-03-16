@@ -104,6 +104,8 @@ $_['help_related']				= '輸入字首後自動搜尋';
 $_['help_tag']					= '使用逗號分開';
 $_['help_groups_get_reward']	= '不同群組客戶,購買商品後可獲得的紅利點數';
 $_['help_additional_image']		= '500px*500px或長/寬比例不大於3';
+$_['help_meta_title']			= '商品頁面的標題, 良好的標題內容可以增加SEO優化';
+$_['help_meta_description']		= '用於搜尋引擎動態取得描述標籤後，顯示在搜尋結果頁面，建議文字數量以不超過160個字符，也就是80個中文字以內。';
 
 // Error
 $_['error_warning']				= '警告： 資料未正確輸入！';

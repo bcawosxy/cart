@@ -295,6 +295,8 @@ class ControllerSettingSetting extends Controller {
 		$data['help_flat_fee'] = $this->language->get('help_flat_fee');
 		$data['help_flat_text'] = $this->language->get('help_flat_text');
 		$data['help_min_total'] = $this->language->get('help_min_total');
+		$data['help_meta_title'] = $this->language->get('help_meta_title');
+		$data['help_meta_description'] = $this->language->get('help_meta_description');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');

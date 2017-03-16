@@ -66,8 +66,9 @@
                     </div>
                   </div>
                   <div class="form-group required">
-                    <label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>"><?php echo $entry_meta_title; ?></label>
+                    <label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>"><span data-toggle="tooltip" title="<?php echo $help_meta_title; ?>"><?php echo $entry_meta_title; ?></span></label>
                     <div class="col-sm-10">
+                      <div id="edit_meta_title" style="display: none;"><span class="adjust_text" style="color: #9c9c9c;">建議使用：</span><span id="adjust_meta_title"></span>  <a href="javascript:void(0)" id="add_adjust" data-usefor="input-meta-title1">[加入]</a></div>
                       <input type="text" name="product_description[<?php echo $language['language_id']; ?>][meta_title]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_title'] : ''; ?>" placeholder="<?php echo $entry_meta_title; ?>" id="input-meta-title<?php echo $language['language_id']; ?>" class="form-control" />
                       <?php if (isset($error_meta_title[$language['language_id']])) { ?>
                       <div class="text-danger"><?php echo $error_meta_title[$language['language_id']]; ?></div>
@@ -75,12 +76,13 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-2 control-label" for="input-meta-description<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>
+                    <label class="col-sm-2 control-label" for="input-meta-description<?php echo $language['language_id']; ?>"><span data-toggle="tooltip" title="<?php echo $help_meta_description; ?>"><?php echo $entry_meta_description; ?></span></label>
                     <div class="col-sm-10">
                       <textarea name="product_description[<?php echo $language['language_id']; ?>][meta_description]" rows="5" placeholder="<?php echo $entry_meta_description; ?>" id="input-meta-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : ''; ?></textarea>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <!--暫不使用此欄位[meta-keyword] -->
+                  <div class="form-group" style="display: none;">
                     <label class="col-sm-2 control-label" for="input-meta-keyword<?php echo $language['language_id']; ?>"><?php echo $entry_meta_keyword; ?></label>
                     <div class="col-sm-10">
                       <textarea name="product_description[<?php echo $language['language_id']; ?>][meta_keyword]" rows="5" placeholder="<?php echo $entry_meta_keyword; ?>" id="input-meta-keyword<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_keyword'] : ''; ?></textarea>
@@ -88,7 +90,7 @@
                   </div>
                   <div class="form-group">
                     <label class="col-sm-2 control-label" for="input-tag<?php echo $language['language_id']; ?>"><span data-toggle="tooltip" title="<?php echo $help_tag; ?>"><?php echo $entry_tag; ?></span></label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10">                      
                       <input type="text" name="product_description[<?php echo $language['language_id']; ?>][tag]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['tag'] : ''; ?>" placeholder="<?php echo $entry_tag; ?>" id="input-tag<?php echo $language['language_id']; ?>" class="form-control" />
                     </div>
                   </div>
@@ -239,7 +241,8 @@
                   </label>
                 </div>
               </div>
-              <div class="form-group">
+               <!--暫不使用此欄位[Keyword] -->
+              <div class="form-group" style="display: none;">
                 <label class="col-sm-2 control-label" for="input-keyword"><span data-toggle="tooltip" title="<?php echo $help_keyword; ?>"><?php echo $entry_keyword; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="<?php echo $entry_keyword; ?>" id="input-keyword" class="form-control" />
@@ -1421,5 +1424,20 @@ $('.datetime').datetimepicker({
   <script type="text/javascript"><!--
 $('#language a:first').tab('show');
 $('#option a:first').tab('show');
+
+$(document).on('keyup', '#input-name1', function(){
+  if(!$(this).val()) {
+    $('div#edit_meta_title').hide();
+  }else{
+    $('span#adjust_meta_title').html($(this).val()+' - <?php echo $config_name ?>');
+    $('div#edit_meta_title').show();
+  }
+});
+
+$(document).on('click', '#add_adjust', function(){
+  var _target = $(this).data('usefor'),
+      _value  = $(this).prev('span').html();
+      $('#'+_target).val(_value);
+})
 //--></script></div>
 <?php echo $footer; ?>

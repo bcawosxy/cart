@@ -46,7 +46,7 @@
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
               <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-meta-title"><?php echo $entry_meta_title; ?></label>
+                <label class="col-sm-2 control-label" for="input-meta-title"><span data-toggle="tooltip" title="<?php echo $help_meta_title; ?>"><?php echo $entry_meta_title; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="config_meta_title" value="<?php echo $config_meta_title; ?>" placeholder="<?php echo $entry_meta_title; ?>" id="input-meta-title" class="form-control" />
                   <?php if ($error_meta_title) { ?>
@@ -55,18 +55,18 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-meta-description"><?php echo $entry_meta_description; ?></label>
+                <label class="col-sm-2 control-label" for="input-meta-description"><span data-toggle="tooltip" title="<?php echo $help_meta_title; ?>"><?php echo $entry_meta_description; ?></span></label>
                 <div class="col-sm-10">
-                  <textarea name="config_meta_description" rows="5" placeholder="<?php echo $entry_meta_description; ?>" id="input-meta-description" class="form-control"><?php echo $config_meta_description; ?></textarea>
+                  <textarea name="config_meta_description" rows="5" placeholder="<?php echo $help_meta_description; ?>" id="input-meta-description" class="form-control"><?php echo $config_meta_description; ?></textarea>
                 </div>
               </div>
-              <div class="form-group">
+              <!--不顯示此欄位[版型][布局][meta-keyword] -->
+              <div class="form-group" style="display: none;" >
                 <label class="col-sm-2 control-label" for="input-meta-keyword"><?php echo $entry_meta_keyword; ?></label>
                 <div class="col-sm-10">
                   <textarea name="config_meta_keyword" rows="5" placeholder="<?php echo $entry_meta_keyword; ?>" id="input-meta-keyword" class="form-control"><?php echo $config_meta_keyword; ?></textarea>
                 </div>
               </div>
-              <!--不顯示此欄位[版型][布局] -->
               <div class="form-group" style="display: none;" >
                 <label class="col-sm-2 control-label" for="input-theme"><?php echo $entry_theme; ?></label>
                 <div class="col-sm-10">

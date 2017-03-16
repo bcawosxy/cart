@@ -748,6 +748,8 @@ class ControllerCatalogProduct extends Controller {
 		$data['help_tag'] = $this->language->get('help_tag');
 		$data['help_groups_get_reward'] = $this->language->get('help_groups_get_reward');
 		$data['help_additional_image'] = $this->language->get('help_additional_image');
+		$data['help_meta_title'] = $this->language->get('help_meta_title');
+		$data['help_meta_description'] = $this->language->get('help_meta_description');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -772,7 +774,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['tab_reward'] = $this->language->get('tab_reward');
 		$data['tab_design'] = $this->language->get('tab_design');
 		$data['tab_openbay'] = $this->language->get('tab_openbay');
-
+		
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -1442,6 +1444,9 @@ class ControllerCatalogProduct extends Controller {
 		$data['width'] = number_format($data['width']);
 		$data['height'] = number_format($data['height']);
 		$data['weight'] = number_format($data['weight']);
+
+		//商店名稱, 建議字詞用
+		$data['config_name'] = $this->config->get('config_name');
 
 		$this->response->setOutput($this->load->view('catalog/product_form', $data));
 	}

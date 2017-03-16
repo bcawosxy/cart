@@ -685,7 +685,10 @@ class ControllerCustomerCustomer extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
+		
+		//商店名稱, 登入商店用
+		$data['config_name'] = $this->config->get('config_name');
+		
 		$this->response->setOutput($this->load->view('customer/customer_list', $data));
 	}
 
