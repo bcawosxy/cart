@@ -464,6 +464,27 @@ class ModelCatalogProduct extends Model {
 		return $product_category_data;
 	}
 
+	public function getProductsHotTags() {
+		$return = array(); $tags = array(); 
+		$query = $this->db->query("SELECT `tag` FROM " . DB_PREFIX . "product_description");
+		foreach ($query->rows as $result) {
+			if(!empty($result['tag'])) {
+				$_tag = explode(',', $result['tag']);
+				foreach ($_tag as $k0 => $v0) {
+					if(array_key_exists($v0, $tags)) {
+						$tags[$v0] = ($tags[$v0]+1);
+					} else {
+						$tags[$v0] = 1;	
+					}
+				}
+			}
+		}
+		arsort($tags);
+		$return = $tags;
+
+		return $return;
+	}
+
 	public function getProductFilters($product_id) {
 		$product_filter_data = array();
 

@@ -877,6 +877,9 @@ class ControllerCatalogProduct extends Controller {
 			$data['product_description'] = array();
 		}
 
+		$hotTags = $this->model_catalog_product->getProductsHotTags();
+		$data['hotTags'] = $hotTags;
+
 		if (isset($this->request->post['model'])) {
 			$data['model'] = $this->request->post['model'];
 		} elseif (!empty($product_info)) {

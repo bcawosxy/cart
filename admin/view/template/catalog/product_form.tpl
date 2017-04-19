@@ -92,6 +92,20 @@
                     <label class="col-sm-2 control-label" for="input-tag<?php echo $language['language_id']; ?>"><span data-toggle="tooltip" title="<?php echo $help_tag; ?>"><?php echo $entry_tag; ?></span></label>
                     <div class="col-sm-10">                      
                       <input type="text" name="product_description[<?php echo $language['language_id']; ?>][tag]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['tag'] : ''; ?>" placeholder="<?php echo $entry_tag; ?>" id="input-tag<?php echo $language['language_id']; ?>" class="form-control" />
+                      <div id="hottags">
+                        常用標籤 : 
+                        <?php
+                          $n = 0;
+                          foreach($hotTags as $k0 => $v0) {
+                            $n++;
+                            if($n > 30) {
+                              break;
+                            } else {
+                              echo '<a onclick="addtags(this);" data-tags="'.$k0.'" href="javascript:void(0)">['.$k0.']</a>&nbsp;';
+                            }                            
+                          }
+                        ?>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1102,6 +1116,11 @@ function addAttribute() {
 	attributeautocomplete(attribute_row);
 
 	attribute_row++;
+}
+
+function addtags(obj) {
+  var tags = $(obj).data('tags');
+  $('input#input-tag1').val( $('input#input-tag1').val()+tags+',' );
 }
 
 function attributeautocomplete(attribute_row) {
