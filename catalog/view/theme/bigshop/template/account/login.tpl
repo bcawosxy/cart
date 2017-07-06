@@ -40,15 +40,21 @@
                 <label class="control-label" for="input-password"><?php echo $entry_password; ?></label>
                 <input type="password" name="password" value="<?php echo $password; ?>" placeholder="<?php echo $entry_password; ?>" id="input-password" class="form-control" />
                 <br /><a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a></div>
+              <?php echo $captcha; ?>
               <input type="submit" value="<?php echo $button_login; ?>" class="btn btn-primary" />
               <?php if ($redirect) { ?>
               <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
               <?php } ?>
             </form>
-          
         </div>
       </div>
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
+<script type="text/javascript">
+$(function(){
+  $('label[name="entry_captcha"]').removeClass('col-sm-2');
+  $('div[name="captcha_div"]').removeClass('col-sm-10');
+})
+</script>
 <?php echo $footer; ?>

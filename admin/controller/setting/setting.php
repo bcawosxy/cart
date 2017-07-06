@@ -1007,6 +1007,11 @@ class ControllerSettingSetting extends Controller {
 		);
 		
 		$data['captcha_pages'][] = array(
+			'text'  => $this->language->get('text_login'),
+			'value' => 'login'
+		);
+		
+		$data['captcha_pages'][] = array(
 			'text'  => $this->language->get('text_guest'),
 			'value' => 'guest'
 		);
