@@ -49,6 +49,7 @@
               <?php if ($error_firstname) { ?>
               <div class="text-danger"><?php echo $error_firstname; ?></div>
               <?php } ?>
+              <div class="text-muted"><?php echo $tips_name; ?></div>
             </div>
           </div>
 
@@ -59,6 +60,7 @@
               <?php if ($error_email) { ?>
               <div class="text-danger"><?php echo $error_email; ?></div>
               <?php } ?>
+              <div class="text-muted"><?php echo $tips_email; ?></div>
             </div>
           </div>
           <div class="form-group required">
@@ -68,6 +70,7 @@
               <?php if ($error_telephone) { ?>
               <div class="text-danger"><?php echo $error_telephone; ?></div>
               <?php } ?>
+              <div class="text-muted"><?php echo $tips_telephone; ?></div>
             </div>
           </div>
 
@@ -224,9 +227,6 @@
           <?php } ?>
           <?php } ?>
           <?php } ?>
-
-
-
 
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
@@ -430,6 +430,7 @@
               <?php if ($error_password) { ?>
               <div class="text-danger"><?php echo $error_password; ?></div>
               <?php } ?>
+              <div class="text-muted"><?php echo $tips_password; ?></div>
             </div>
           </div>
           <div class="form-group required">
@@ -437,8 +438,9 @@
             <div class="col-sm-10">
               <input type="password" name="confirm" value="<?php echo $confirm; ?>" placeholder="<?php echo $entry_confirm; ?>" id="input-confirm" class="form-control" />
               <?php if ($error_confirm) { ?>
-              <div class="text-danger"><?php echo $error_confirm; ?></div>
+              <div class="text-danger"><?php echo $error_confirm; ?></div>              
               <?php } ?>
+              <div class="text-muted"><?php echo $tips_repassword; ?></div>
             </div>
           </div>
           <!-- 暫不開放訂閱電子報 -->
