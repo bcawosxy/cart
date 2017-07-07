@@ -105,6 +105,10 @@ class ModelAccountCustomer extends Model {
 		return $customer_id;
 	}
 
+	public function addCustomerVerify($data) {
+		$this->db->query("INSERT INTO " . DB_PREFIX . "customer_verify SET customer_id = '" . (int)$data . "', token = '" . (int)$data . "', inserttime = NOW()");
+	}
+
 	public function editCustomer($data) {
 
 		if (!isset($data['lastname'])) {
