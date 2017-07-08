@@ -1,20 +1,4 @@
 <?php echo $header; ?>
-<style type="text/css">
-.glyphicon-refresh-animate {
-    -animation: spin .7s infinite linear;
-    -webkit-animation: spin2 .7s infinite linear;
-}
-
-@-webkit-keyframes spin2 {
-    from { -webkit-transform: rotate(0deg);}
-    to { -webkit-transform: rotate(360deg);}
-}
-
-@keyframes spin {
-    from { transform: scale(1) rotate(0deg);}
-    to { transform: scale(1) rotate(360deg);}
-}
-</style>
 <div class="container">
   <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -49,21 +33,10 @@
           <div class="pull-left"><a href="<?php echo $back; ?>" class="btn btn-default"><?php echo $button_back; ?></a></div>
           <div class="pull-right">
             <input type="submit" value="<?php echo $button_continue; ?>" class="btn btn-primary" />
-            <button style="display: none;" class="btn btn-sm btn-warning" name="loading_btn">
-              <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
-            </button>          
           </div>
         </div>
       </form>
       <?php echo $content_bottom; ?></div>
     <?php echo $column_right; ?></div>
 </div>
-<script type="text/javascript">
-$(function(){
-  $('input[type="submit"]').on('click', function(){
-    $(this).hide();
-    $('button[name="loading_btn"]').show();
-  })
-})
-</script>
 <?php echo $footer; ?>
