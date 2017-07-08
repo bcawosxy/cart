@@ -19,9 +19,6 @@ class ControllerAccountRegister extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$customer_id = $this->model_account_customer->addCustomer($this->request->post);
-			
-			//預計進行信件自動驗證帳號流程, 此處填入驗證碼至資料表
-			$this->model_account_customer->addCustomerVerify($customer_id);
 
 			// Clear any previous login attempts for unregistered accounts.
 			$this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
