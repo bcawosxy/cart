@@ -39,7 +39,6 @@ $_['text_senior']						= '高中';
 $_['text_optionDefault']				= '請選擇';
 $_['text_insert']						= '匯入';
 $_['text_flat']			  				= '郵寄/宅配 設定';
-$_['text_login']			  			= '登入頁';
 
 
 // Entry

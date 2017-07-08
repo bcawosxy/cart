@@ -172,13 +172,6 @@ class ControllerAccountLogin extends Controller {
 			$data['password'] = '';
 		}
 
-		// Captcha
-		if ($this->config->get($this->config->get('config_captcha') . '_status') && in_array('register', (array)$this->config->get('config_captcha_page'))) {
-			$data['captcha'] = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha'), $this->error);
-		} else {
-			$data['captcha'] = '';
-		}
-
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
@@ -202,15 +195,6 @@ class ControllerAccountLogin extends Controller {
 
 		if ($customer_info && !$customer_info['approved']) {
 			$this->error['warning'] = $this->language->get('error_approved');
-		}
-
-		// Captcha
-		if ($this->config->get($this->config->get('config_captcha') . '_status') && in_array('register', (array)$this->config->get('config_captcha_page'))) {
-			$captcha = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha') . '/validate');
-
-			if ($captcha) {
-				$this->error['captcha'] = $captcha;
-			}
 		}
 
 		if (!$this->error) {
