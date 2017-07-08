@@ -49,7 +49,7 @@ $_['error_postcode']       = '郵遞區號必須在 2 到 10 個字之間！';
 $_['error_country']        = '請選擇一個國家！';
 $_['error_zone']           = '請選擇縣市/地區！';
 $_['error_custom_field']   = '%s 必須填寫！';
-$_['error_password']       = '密碼必須在 8 到 20 個字之間！';
+$_['error_password']       = '密碼必須在 4 到 20 個字之間！';
 $_['error_confirm']        = '確認密碼與密碼不一致！';
 $_['error_agree']          = '警告： 您尚未同意會員條款 %s！';
 
