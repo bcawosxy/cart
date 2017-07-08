@@ -30,13 +30,6 @@ $_['entry_newsletter']     = '訂閱電子報';
 $_['entry_password']       = '密碼';
 $_['entry_confirm']        = '確認密碼';
 
-//
-$_['tips_name']			   = '為避免日後無法正常收件請您填寫正確姓名';
-$_['tips_email']		   = 'Email信箱即是您的會員帳號，請填寫您常使用的Email<br>系統會寄送認證信件至您的電子信箱中, 請您務必填寫正確的信箱地址收取認證信件';
-$_['tips_telephone']	   = '若您有使用的問題我們將盡快與您聯繫, 請提供正確的連絡電話';
-$_['tips_password']	   	   = '請使用 8 ~ 20 個字元<br> 並避免使用空格、單雙引號等特殊字元';
-$_['tips_repassword']	   = '請再次填寫密碼';
-
 // Error
 $_['error_exists']         = '警告： 該 Email 信箱已被註冊、請更換另一個電子信箱！';
 $_['error_firstname']      = '名字必須在 1 到 32 字之間！';
@@ -52,4 +45,3 @@ $_['error_custom_field']   = '%s 必須填寫！';
 $_['error_password']       = '密碼必須在 4 到 20 個字之間！';
 $_['error_confirm']        = '確認密碼與密碼不一致！';
 $_['error_agree']          = '警告： 您尚未同意會員條款 %s！';
-
