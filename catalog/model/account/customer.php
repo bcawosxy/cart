@@ -105,8 +105,12 @@ class ModelAccountCustomer extends Model {
 		return $customer_id;
 	}
 
-	public function addCustomerVerify($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "customer_verify SET customer_id = '" . (int)$data . "', token = '" . (int)$data . "', inserttime = NOW()");
+	public function addCustomerVerify($customer_id) {
+		//使用 salt.password 作 sha1加密後做為驗證使用者帳號的token
+		$sql = 'select `salt`, `password` from oc_customer where customer_id = '. $customer_id;		
+		$r = $this->db->query($sql);
+		$token = sha1($r->row['salt'].$r->row['password']);		
+		$this->db->query("INSERT INTO " . DB_PREFIX . "customer_verify SET customer_id = '" . (int)$customer_id . "', token = '" . $token . "', inserttime = NOW()");
 	}
 
 	public function editCustomer($data) {
