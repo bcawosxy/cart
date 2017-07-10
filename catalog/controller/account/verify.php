@@ -26,8 +26,15 @@ class ControllerAccountVerify extends Controller {
 		$reMakeToken = sha1($r->row['salt'].$r->row['password']);
 				
 		if( ($token === $MakedToken) && ($token === $reMakeToken) && ($MakedToken === $reMakeToken)) {
+			//移除驗證資料
 			$sql = 'DELETE FROM '.DB_PREFIX.'customer_verify where customer_id = ' . $id;
 			$r = $this->db->query($sql);
+
+			//將會員資料標記為審核通過
+			$sql = 'UPDATE '.DB_PREFIX.'customer SET `approved` = 1 where customer_id = ' . $id;
+			$r = $this->db->query($sql);
+
+			//跳轉至訊息頁
 			$this->response->redirect($this->url->link('account/verifysuccess'));
 		} else {
 			$this->response->redirect($this->url->link('error/NotFound'));

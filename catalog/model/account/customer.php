@@ -32,6 +32,10 @@ class ModelAccountCustomer extends Model {
 
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$customer_id . "'");
 
+		//170710 - 組出token供驗證
+		$token = sha1($salt.$this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))));
+		$url = $this->url->link('account/verify', ['id'=>$customer_id, 'token'=> $token] , true);
+
 		$this->load->language('mail/customer');
 
 		$subject = sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
@@ -40,12 +44,15 @@ class ModelAccountCustomer extends Model {
 
 		if (!$customer_group_info['approval']) {
 			$message .= $this->language->get('text_login') . "\n";
+			$message .= $this->url->link('account/login', '', true) . "\n\n";
 		} else {
 			$message .= $this->language->get('text_approval') . "\n";
+			$message .= $this->url->link('account/login', '', true) . "\n\n";
+			$message .= '<br>1. 點擊以下網址進行帳號驗證, 或將網址複製後貼上網址列進行驗證';
+			$message .= '<br><a href="'.$url.'">'.$url.'</a>';			
 		}
 
-		$message .= $this->url->link('account/login', '', true) . "\n\n";
-		$message .= $this->language->get('text_services') . "\n\n";
+		$message .= '<br><br>'.$this->language->get('text_services') . "\n\n";
 		$message .= $this->language->get('text_thanks') . "\n";
 		$message .= html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
@@ -107,7 +114,7 @@ class ModelAccountCustomer extends Model {
 
 	public function addCustomerVerify($customer_id) {
 		//使用 salt.password 作 sha1加密後做為驗證使用者帳號的token
-		$sql = 'select `salt`, `password` from oc_customer where customer_id = '. $customer_id;		
+		$sql = 'select `salt`, `password` from '.DB_PREFIX.'customer where customer_id = '. $customer_id;		
 		$r = $this->db->query($sql);
 		$token = sha1($r->row['salt'].$r->row['password']);		
 		$this->db->query("INSERT INTO " . DB_PREFIX . "customer_verify SET customer_id = '" . (int)$customer_id . "', token = '" . $token . "', inserttime = NOW()");
