@@ -34,7 +34,7 @@ class ModelAccountCustomer extends Model {
 
 		//170710 - 組出token供驗證
 		$token = sha1($salt.$this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))));
-		$url = $this->url->link('account/verify', ['id'=>$customer_id, 'token'=> $token] , true);
+		$url = htmlspecialchars_decode($this->url->link('account/verify', ['id'=>$customer_id, 'token'=> $token] , true));
 
 		$this->load->language('mail/customer');
 
@@ -48,11 +48,11 @@ class ModelAccountCustomer extends Model {
 		} else {
 			$message .= $this->language->get('text_approval') . "\n";
 			$message .= $this->url->link('account/login', '', true) . "\n\n";
-			$message .= '<br>1. 點擊以下網址進行帳號驗證, 或將網址複製後貼上網址列進行驗證';
-			$message .= '<br><a href="'.$url.'">'.$url.'</a>';			
+			$message .= '點擊以下網址進行帳號驗證, 或將網址複製後貼上網址列進行驗證'. "\n";
+			$message .= $url. "\n\n";
 		}
 
-		$message .= '<br><br>'.$this->language->get('text_services') . "\n\n";
+		$message .= $this->language->get('text_services') . "\n\n";
 		$message .= $this->language->get('text_thanks') . "\n";
 		$message .= html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
