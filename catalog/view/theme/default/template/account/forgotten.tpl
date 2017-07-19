@@ -35,7 +35,7 @@
     <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
       <h1><?php echo $heading_title; ?></h1>
       <p><?php echo $text_email; ?></p>
-      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+      <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" class="form-horizontal" id="forgot">
         <fieldset>
           <legend><?php echo $text_your_email; ?></legend>
           <div class="form-group required">
@@ -48,10 +48,10 @@
         <div class="buttons clearfix">
           <div class="pull-left"><a href="<?php echo $back; ?>" class="btn btn-default"><?php echo $button_back; ?></a></div>
           <div class="pull-right">
-            <input type="submit" value="<?php echo $button_continue; ?>" class="btn btn-primary" />
-            <button style="display: none;" class="btn btn-sm btn-warning" name="loading_btn">
-              <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
-            </button>          
+            <input id="formBtn" type="button" value="<?php echo $button_continue; ?>" class="btn btn-primary" />
+            <!-- <button style="display: none;" class="btn btn-sm btn-warning" name="loading_btn"> -->
+              <div style="display: none;" name="loading_btn"><span name="loading_btn" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</div>
+            <!-- </button> -->
           </div>
         </div>
       </form>
@@ -60,9 +60,10 @@
 </div>
 <script type="text/javascript">
 $(function(){
-  $('input[type="submit"]').on('click', function(){
+  $('#formBtn').on('click', function(){
     $(this).hide();
-    $('button[name="loading_btn"]').show();
+    $('div[name="loading_btn"]').show();
+    setTimeout(function(){ $('form#forgot').submit(); }, 1000);
   })
 })
 </script>
