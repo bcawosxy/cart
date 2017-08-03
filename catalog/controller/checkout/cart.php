@@ -251,6 +251,12 @@ class ControllerCheckoutCart extends Controller {
 				}
 			}
 
+			/**
+			 * 170803 - 購物車頁面不使用模組內的附加功能, 轉由結帳頁面(one page check)處理
+			 * 所以在這邊將 modules 的內容初始化, 未來若需要重新開放刪除下面這行即可
+			 */
+			$data['modules'] = array();
+
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
 			$data['content_top'] = $this->load->controller('common/content_top');

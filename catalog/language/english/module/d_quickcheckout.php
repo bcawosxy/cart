@@ -33,21 +33,21 @@
 
 // Chinese ver
 
-$_['title_payment_address']  						= '付款資訊';
+$_['title_payment_address']  						= '1.付款資訊';
 $_['description_payment_address']  					= '';
-$_['title_shipping_address']  						= '交貨資訊';
+$_['title_shipping_address']  						= '2.交貨資訊';
 $_['description_shipping_address'] 					= '';
-$_['title_shipping_method']  						= '運送方式';
+$_['title_shipping_method']  						= '3.運送方式';
 $_['description_shipping_method'] 					= '';
-$_['title_payment_method'] 							= '付款方式';
+$_['title_payment_method'] 							= '4.付款方式';
 $_['description_payment_method'] 					= '';
-$_['title_shopping_cart'] 							= '購物車';
+$_['title_shopping_cart'] 							= '5.購物車';
 $_['description_shopping_сart'] 					= '';
 
 
 // $_['placeholder_telephone'] 						= '050 123 45 54';
 
-$_['error_field_required'] 							= '必須同意才可進行結帳';
+$_['error_field_required'] 							= '此為必填欄位';
 $_['error_valid_telephone'] 						= '請輸入合法的電話號碼';
 $_['entry_email_confirm'] 							= '信箱確認';
 $_['error_email_confirm'] 							= '電子信箱不相符';

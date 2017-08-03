@@ -132,34 +132,7 @@
 			        
 			        <% }) %>
 				</div>
-				<div class=" form-group qc-voucher <%= parseInt(model.config.option.voucher.display) ? '' : 'hidden' %>">
-					<% if(model.errors.voucher){ %>
-						<div class="col-sm-12">
-							<div class="alert alert-danger">
-								<i class="fa fa-exclamation-circle"></i> <%= model.errors.voucher %>
-							</div>
-						</div>
-					<% } %>
-					<% if(model.successes.voucher){ %>
-						<div class="col-sm-12">
-							<div class="alert alert-success">
-								<i class="fa fa-exclamation-circle"></i> <%= model.successes.voucher %>
-							</div>
-						</div>
-					<% } %>
 
-					<label class="col-sm-4 control-label" >
-						<?php echo $text_use_voucher; ?>
-					</label>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<input type="text" value="<%= model.voucher ? model.voucher : '' %>" name="voucher" id="voucher" <% if(Number(config.design.placeholder)) {  %>placeholder="<?php echo $text_use_voucher; ?>" <% } %>  class="form-control"/>
-							<span class="input-group-btn">
-								<button class="btn btn-primary" id="confirm_voucher" type="button"><i class="fa fa-check"></i></button>
-							</span>
-						</div>
-					</div>
-				</div>
 				<?php if($reward_points) {?>
 				<div class=" form-group qc-reward <%= parseInt(model.config.option.reward.display) ? '' : 'hidden' %>">
 					<% if(model.errors.reward){ %>
