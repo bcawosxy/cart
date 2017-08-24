@@ -71,6 +71,12 @@
                 </div>
               </div>
 
+              <div class="form-group required" style="display: none;">
+                <div class="col-sm-10">
+                  <input type="text" name="lastname" value="" id="input-lastname" class="form-control" />
+                </div>
+              </div>
+
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
                 <div class="col-sm-10">
