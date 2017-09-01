@@ -31,7 +31,6 @@ class ControllerindexSettinginfo extends Controller {
 			'bigshop_feature_box3_subtitle',
 		];
 
-
         foreach ($config_data as $conf) {
             if (isset($this->request->post[$conf])) {
                 $data[$conf] = $this->request->post[$conf];
@@ -40,13 +39,6 @@ class ControllerindexSettinginfo extends Controller {
             }
         }
 		
-
-		/* old */
-		//取得indexTital的相關資料
-		// $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "module` WHERE `code` = '" . $this->db->escape($code) . "' AND `name` = '" . $this->db->escape($name) . "' ORDER BY `name`");
-		// $module_info = json_decode($query->row['setting'], true);
-		// $module_id = $query->row['module_id'];
-
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			
 			print_r($this->request->post);

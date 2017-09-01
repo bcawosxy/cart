@@ -129,9 +129,9 @@
               <fieldset>
                 <legend>商店特色</legend>
                 <ul id="custom_feature_box" class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#feature_box_1">Feature Box 1</a></li>
-                  <li><a data-toggle="tab" href="#feature_box_2">Feature Box 2</a></li>
-                  <li><a data-toggle="tab" href="#feature_box_3">Feature Box 3</a></li>
+                  <li class="active"><a data-toggle="tab" href="#feature_box_1">特色 1</a></li>
+                  <li><a data-toggle="tab" href="#feature_box_2">特色 2</a></li>
+                  <li><a data-toggle="tab" href="#feature_box_3">特色 3</a></li>
                 </ul>
                 <div class="tab-content">
                   <div id="feature_box_1" class="tab-pane active">
