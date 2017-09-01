@@ -102,3 +102,8 @@ $_['text_complete_status']             = '已完成訂單數';
 $_['text_processing_status']           = '處理中訂單數'; 
 $_['text_other_status']                = '其他訂單數'; 
 $_['text_featured']               	   = '特色商品設計'; 
+
+
+$_['text_indexSettings']           	   = '首頁設定'; 
+$_['text_indexTitle']           	   = '首頁標題'; 
+$_['text_indexInfo']           	   	   = '首頁資訊設定'; 

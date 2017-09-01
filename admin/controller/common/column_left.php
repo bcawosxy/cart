@@ -434,6 +434,30 @@ class ControllerCommonColumnLeft extends Controller {
 				);	
 			}
 		
+
+			/*Mars 客製*/
+			$indexTextSetting = array();
+
+			$indexTextSetting[] = array(
+				'name'	   => $this->language->get('text_indexTitle'),
+				'href'     => $this->url->link('indexsetting/title', 'token=' . $this->session->data['token'], true),
+				'children' => array()		
+			);	
+
+			$indexTextSetting[] = array(
+				'name'	   => $this->language->get('text_indexInfo'),
+				'href'     => $this->url->link('indexsetting/info', 'token=' . $this->session->data['token'], true),
+				'children' => array()		
+			);	
+
+			if ($indexTextSetting) {
+				$system[] = array(
+					'name'	   => $this->language->get('text_indexSettings'),
+					'href'     => '',
+					'children' => $indexTextSetting		
+				);
+			}
+
 			// Users
 			$user = array();
 			
