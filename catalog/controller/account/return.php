@@ -67,7 +67,7 @@ class ControllerAccountReturn extends Controller {
 			$data['returns'][] = array(
 				'return_id'  => $result['return_id'],
 				'order_id'   => $result['order_id'],
-				'name'       => $result['firstname'] . ' ' . $result['lastname'],
+				'name'       => $result['firstname'],
 				'status'     => $result['status'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'href'       => $this->url->link('account/return/info', 'return_id=' . $result['return_id'] . $url, true)
@@ -180,7 +180,6 @@ class ControllerAccountReturn extends Controller {
 			$data['date_ordered'] = date($this->language->get('date_format_short'), strtotime($return_info['date_ordered']));
 			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($return_info['date_added']));
 			$data['firstname'] = $return_info['firstname'];
-			$data['lastname'] = $return_info['lastname'];
 			$data['email'] = $return_info['email'];
 			$data['telephone'] = $return_info['telephone'];
 			$data['product'] = $return_info['product'];
@@ -268,7 +267,7 @@ class ControllerAccountReturn extends Controller {
 
 		$this->load->model('account/return');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {			
 			$return_id = $this->model_account_return->addReturn($this->request->post);
 
 			// Add to activity log
@@ -278,14 +277,14 @@ class ControllerAccountReturn extends Controller {
 				if ($this->customer->isLogged()) {
 					$activity_data = array(
 						'customer_id' => $this->customer->getId(),
-						'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
+						'name'        => $this->customer->getFirstName(),
 						'return_id'   => $return_id
 					);
 
 					$this->model_account_activity->addActivity('return_account', $activity_data);
 				} else {
 					$activity_data = array(
-						'name'      => $this->request->post['firstname'] . ' ' . $this->request->post['lastname'],
+						'name'      => $this->request->post['firstname'],
 						'return_id' => $return_id
 					);
 
@@ -549,10 +548,6 @@ class ControllerAccountReturn extends Controller {
 
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
-		}
-
-		if ((utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
-			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
 		if ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {

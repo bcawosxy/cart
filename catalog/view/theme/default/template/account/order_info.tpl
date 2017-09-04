@@ -65,6 +65,8 @@
           </tr>
         </tbody>
       </table>
+      
+
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
           <thead>
@@ -79,6 +81,7 @@
               <?php } ?>
             </tr>
           </thead>
+
           <tbody>
             <?php foreach ($products as $product) { ?>
             <tr>
@@ -91,10 +94,18 @@
               <td class="text-right"><?php echo $product['quantity']; ?></td>
               <td class="text-right"><?php echo $product['price']; ?></td>
               <td class="text-right"><?php echo $product['total']; ?></td>
-              <td class="text-right" style="white-space: nowrap;"><?php if ($product['reorder']) { ?>
-                <a href="<?php echo $product['reorder']; ?>" data-toggle="tooltip" title="<?php echo $button_reorder; ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></a>
+              <td class="text-right" style="white-space: nowrap;">
+
+                <?php if(is_null($product['return_info'])) { ?>
+                  <?php if ($product['reorder']) { ?>
+                  <a href="<?php echo $product['reorder']; ?>" data-toggle="tooltip" title="<?php echo $button_reorder; ?>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></a>
+                  <?php } ?>
+                  <a href="<?php echo $product['return']; ?>" data-toggle="tooltip" title="<?php echo $button_return; ?>" class="btn btn-danger"><i class="fa fa-reply"></i></a>
+                <?php } else { ?>
+                  <a href="<?php echo $product['return_info']; ?>" data-toggle="tooltip" title="<?php echo $button_return_info; ?>" class="btn btn-success"><i class="fa fa-info"></i></a>
                 <?php } ?>
-                <a href="<?php echo $product['return']; ?>" data-toggle="tooltip" title="<?php echo $button_return; ?>" class="btn btn-danger"><i class="fa fa-reply"></i></a></td>
+
+              </td>
             </tr>
             <?php } ?>
             <?php foreach ($vouchers as $voucher) { ?>
@@ -110,6 +121,7 @@
             </tr>
             <?php } ?>
           </tbody>
+
           <tfoot>
             <?php foreach ($totals as $total) { ?>
             <tr>
@@ -124,6 +136,9 @@
           </tfoot>
         </table>
       </div>
+      
+
+
       <?php if ($comment) { ?>
       <table class="table table-bordered table-hover">
         <thead>

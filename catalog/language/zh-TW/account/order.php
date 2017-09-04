@@ -33,5 +33,8 @@ $_['column_date_added']     = '訂單日期';
 $_['column_status']         = '狀態';
 $_['column_comment']        = '備註';
 
+
+$_['button_return_info']    = '退換貨資料';
+
 // Error
 $_['error_reorder']         = '%s 目前不可被回購。';

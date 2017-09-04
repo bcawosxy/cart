@@ -32,15 +32,6 @@
             </div>
           </div>
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-lastname"><?php echo $entry_lastname; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="lastname" value="<?php echo $lastname; ?>" placeholder="<?php echo $entry_lastname; ?>" id="input-lastname" class="form-control" />
-              <?php if ($error_lastname) { ?>
-              <div class="text-danger"><?php echo $error_lastname; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
             <div class="col-sm-10">
               <input type="text" name="email" value="<?php echo $email; ?>" placeholder="<?php echo $entry_email; ?>" id="input-email" class="form-control" />
@@ -67,9 +58,6 @@
               <?php } ?>
             </div>
           </div> 
-
-
-
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-date-ordered"><?php echo $entry_date_ordered; ?></label>
             <div class="col-sm-3">

@@ -162,6 +162,7 @@ class ControllerAccountOrder extends Controller {
 			$data['text_history'] = $this->language->get('text_history');
 			$data['text_comment'] = $this->language->get('text_comment');
 			$data['text_no_results'] = $this->language->get('text_no_results');
+			$data['button_return_info'] = $this->language->get('button_return_info');
 
 			$data['column_name'] = $this->language->get('column_name');
 			$data['column_model'] = $this->language->get('column_model');
@@ -276,6 +277,7 @@ class ControllerAccountOrder extends Controller {
 
 			$this->load->model('catalog/product');
 			$this->load->model('tool/upload');
+			$this->load->model('account/return');
 
 			// Products
 			$data['products'] = array();
@@ -284,6 +286,7 @@ class ControllerAccountOrder extends Controller {
 
 			foreach ($products as $product) {
 				$option_data = array();
+				$return_info = null;
 
 				$options = $this->model_account_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
 
@@ -314,7 +317,16 @@ class ControllerAccountOrder extends Controller {
 					$reorder = '';
 				}
 
+				// 0904 - 避免已申請退換貨的商品重新申請, 從這邊判斷是否已經申請退換貨
+				
+				$isReturn = $this->model_account_return->isReturn($this->customer->getId(), $this->request->get['order_id'], $product['product_id']);
+
+				if($isReturn) {
+					$return_info = $this->url->link('account/return/info', 'return_id=' . $isReturn['return_id'], true);
+				}
+
 				$data['products'][] = array(
+					'product_id' => $product['product_id'],
 					'name'     => $product['name'],
 					'model'    => $product['model'],
 					'option'   => $option_data,
@@ -322,7 +334,8 @@ class ControllerAccountOrder extends Controller {
 					'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
 					'reorder'  => $reorder,
-					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true)
+					'return'   => $this->url->link('account/return/add', 'order_id=' . $order_info['order_id'] . '&product_id=' . $product['product_id'], true),
+					'return_info'=> $return_info,
 				);
 			}
 
