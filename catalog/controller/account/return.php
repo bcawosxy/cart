@@ -268,6 +268,7 @@ class ControllerAccountReturn extends Controller {
 		$this->load->model('account/return');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {			
+			$this->request->post['product_id'] = $this->request->get['product_id'];
 			$return_id = $this->model_account_return->addReturn($this->request->post);
 
 			// Add to activity log
@@ -394,9 +395,9 @@ class ControllerAccountReturn extends Controller {
 			$data['error_reason'] = $this->error['reason'];
 		} else {
 			$data['error_reason'] = '';
-		}
+		}	
 
-		$data['action'] = $this->url->link('account/return/add', '', true);
+		$data['action'] = $this->url->link('account/return/add', 'product_id=' . $this->request->get['product_id'], true);
 
 		$this->load->model('account/order');
 
