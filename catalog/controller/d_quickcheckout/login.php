@@ -3,6 +3,9 @@
     class ControllerDQuickcheckoutLogin extends Controller {
 
         public function index($config) {
+
+           
+            
             $this->load->model('module/d_quickcheckout');
             $this->model_module_d_quickcheckout->logWrite('Controller:: login/index');
 
@@ -22,7 +25,9 @@
             $data['button_login'] = $this->language->get('button_login');
             $data['text_forgotten'] = $this->language->get('text_forgotten');
             $data['step_option_guest_desciption'] = $this->language->get('step_option_guest_desciption');
-            
+           
+            $data['config_checkout_guest'] =  $this->config->get('config_checkout_guest');
+
             $this->load->model('module/d_quickcheckout');
             
             if ($this->model_module_d_quickcheckout->isInstalled('d_social_login') && $this->config->get('d_social_login_status') && $config['general']['social_login']) {

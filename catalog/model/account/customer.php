@@ -11,12 +11,19 @@ class ModelAccountCustomer extends Model {
 			$data['country_id'] = '206';
 		}
 		if (!isset($data['country_id']) || empty($data['country_id'])) $data['country_id'] = '206';
-				
+		
+		/**
+		 *  0905 - 新註冊會員的群組一律採用 settings.config_customer_group_id 欄位內的值, 不再訪客自選或原先 settings.config_customer_group_id 決定
+		 */
+		/*
 		if (isset($data['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($data['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 			$customer_group_id = $data['customer_group_id'];
 		} else {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}
+		*/
+
+		$customer_group_id = $this->config->get('config_customer_member_group_id');
 
 		$this->load->model('account/customer_group');
 
