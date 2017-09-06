@@ -738,36 +738,49 @@ $('#button-cart').on('click', function() {
 			$('.alert, .text-danger').remove();
 			$('.form-group').removeClass('has-error');
 
-			if (json['error']) {
-				if (json['error']['option']) {
-					for (i in json['error']['option']) {
-						var element = $('#input-option' + i.replace('_', '-'));
+      if(json['login']) {
+        box = new jBox('Modal', {
+          closeButton: 'title',
+          delayOpen: 300,
+          maxWidth: 600,
+          minWidth: 100,
+          onCloseComplete: function() {
+            location = json['redirect'];
+          },
+          title: '<span style="font-size:16px;color: #f15a23;"><i class="fa fa-info-circle"></i></span>',
+        }).setContent('<div style=" color: #757575;font-size: 16px; line-height: 30px; ">請先登入會員</div>').open();
+      } else {
+  			if (json['error']) {
+  				if (json['error']['option']) {
+  					for (i in json['error']['option']) {
+  						var element = $('#input-option' + i.replace('_', '-'));
 
-						if (element.parent().hasClass('input-group')) {
-							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
-						} else {
-							element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
-						}
-					}
-				}
+  						if (element.parent().hasClass('input-group')) {
+  							element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+  						} else {
+  							element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+  						}
+  					}
+  				}
 
-				if (json['error']['recurring']) {
-					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
-				}
+  				if (json['error']['recurring']) {
+  					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+  				}
 
-				// Highlight any found errors
-				$('.text-danger').parent().addClass('has-error');
-			}
+  				// Highlight any found errors
+  				$('.text-danger').parent().addClass('has-error');
+  			}
 
-			if (json['success']) {
-				$('.breadcrumb').after('<div class="alert alert-success">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+  			if (json['success']) {
+  				$('.breadcrumb').after('<div class="alert alert-success">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
-				$('#cart > button').html('<div class="pull-left flip"><h4></h4></div><span id="cart-total"> ' + json['total'] + '</span> <i class="fa fa-caret-down"></i>');
+  				$('#cart > button').html('<div class="pull-left flip"><h4></h4></div><span id="cart-total"> ' + json['total'] + '</span> <i class="fa fa-caret-down"></i>');
 
-				$('html, body').animate({ scrollTop: 0 }, 'slow');
+  				$('html, body').animate({ scrollTop: 0 }, 'slow');
 
-				$('#cart > ul').load('index.php?route=common/cart/info ul li');
-			}
+  				$('#cart > ul').load('index.php?route=common/cart/info ul li');
+  			}
+      }
 		},
         error: function(xhr, ajaxOptions, thrownError) {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

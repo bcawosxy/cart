@@ -4,7 +4,6 @@ admin/config.php
 system/storage/cache/
 admin/view/image/patterns/
 catalog/view/theme/bigshop/image/
-catalog/view/theme/bigshop/js/
 catalog/view/theme/bigshop/stylesheet/
 catalog/view/theme/bigshop/template/error/
 catalog/view/theme/bigshop/template/affiliate/

@@ -45,6 +45,8 @@
 <?php } ?>
 <script type="text/javascript" src="catalog/view/theme/bigshop/js/common.min.js"></script>
 <script type="text/javascript" src="catalog/view/theme/bigshop/js/custom.min.js"></script>
+<script src="catalog/view/javascript/jbox/jBox.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jbox/jBox.css" />
 <?php foreach ($scripts as $script) { ?>
 <script src="<?php echo $script; ?>" type="text/javascript"></script>
 <?php } ?>
