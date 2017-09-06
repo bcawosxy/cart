@@ -18,11 +18,13 @@
 	<div class="login-btn-group">
 		<div class="btn-group btn-group-justified">
 		<% if(parseInt(model.config.option.guest.display)){ %>
+			<?php if($config_checkout_guest == 1) { ?>
 			<div class="btn-group" role="group">
 				<label class="btn <%= model.account == 'guest' ? 'btn-primary active' : 'btn-default' %>">
 					<input class="hidden" type="radio" name="account" id="guest" value="guest" autocomplete="off" <%= model.account == 'guest' ? 'checked="checked"' : '' %>> <%= model.config.option.guest.title %>
 				</label>
 			</div>
+			<?php } ?>
 		<% } %>
 		<% if(parseInt(model.config.option.register.display)){ %>
 			<div class="btn-group" role="group">
@@ -119,13 +121,15 @@
 <% } %>
 </script>
 <script>
-$(function() {
+$(function() {	
 	qc.login = $.extend(true, {}, new qc.Login(<?php echo $json; ?>));
 	qc.loginView = $.extend(true, {}, new qc.LoginView({
 		el:$("#login_view"), 
 		model: qc.login, 
 		template: _.template($("#login_template").html())
 	}));
+	
+	<?php echo ($config_checkout_guest == 0) ? '$(\'input#register\').trigger(\'click\');' : null ?>
 });
 
 </script>
