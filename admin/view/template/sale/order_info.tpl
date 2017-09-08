@@ -264,6 +264,7 @@
             </fieldset>
             <div class="text-right">
               <button id="button-history" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> <?php echo $button_history_add; ?></button>
+              <div style="display: none;" name="loading_btn"><i class="fa fa-spinner" aria-hidden="true"></i>Loading...</div>
             </div>
           </div>
           <div class="tab-pane" id="tab-additional">
@@ -615,6 +616,10 @@ $('#button-history').on('click', function() {
 				$('#history').before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
 				$('textarea[name=\'comment\']').val('');
+
+        alert(json['success']);
+        location.href = '<?php echo $catalog; ?>admin/index.php?route=sale/order/info&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>';
+
 			}
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
@@ -657,4 +662,13 @@ $('select[name="order_status_id"]').change(function(){
 });
 //--></script> 
 </div>
+<script type="text/javascript">
+$(function(){
+  $('#button-history').on('click', function(){
+    $(this).hide();
+    $('div[name="loading_btn"]').show();
+    setTimeout(function(){ $('form#forgot').submit(); }, 1000);
+  })
+})
+</script>
 <?php echo $footer; ?> 

@@ -801,7 +801,7 @@
                         <?php } ?>
                       </select>
                       <span class="input-group-btn">
-                      <button type="button" id="button-shipping-method" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_apply; ?></button>
+                      <button type="button" id="button-shipping-method" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary">設定</button>
                       </span></div>
                   </div>
                 </div>
@@ -816,7 +816,7 @@
                         <?php } ?>
                       </select>
                       <span class="input-group-btn">
-                      <button type="button" id="button-payment-method" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_apply; ?></button>
+                      <button type="button" id="button-payment-method" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary">設定</button>
                       </span></div>
                   </div>
                 </div>
@@ -826,7 +826,7 @@
                     <div class="input-group">
                       <input type="text" name="coupon" value="<?php echo $coupon; ?>" id="input-coupon" class="form-control" />
                       <span class="input-group-btn">
-                      <button type="button" id="button-coupon" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_apply; ?></button>
+                      <button type="button" id="button-coupon" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary">設定</button>
                       </span></div>
                   </div>
                 </div>
@@ -838,7 +838,7 @@
                     <div class="input-group">
                       <input type="text" name="voucher" value="<?php echo $voucher; ?>" id="input-voucher" data-loading-text="<?php echo $text_loading; ?>" class="form-control" />
                       <span class="input-group-btn">
-                      <button type="button" id="button-voucher" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_apply; ?></button>
+                      <button type="button" id="button-voucher" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary">設定</button>
                       </span></div>
                   </div>
                 </div>
@@ -849,7 +849,7 @@
                     <div class="input-group">
                       <input type="text" name="reward" value="<?php echo $reward; ?>" id="input-reward" data-loading-text="<?php echo $text_loading; ?>" class="form-control" />
                       <span class="input-group-btn">
-                      <button type="button" id="button-reward" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_apply; ?></button>
+                      <button type="button" id="button-reward" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary">設定</button>
                       </span></div>
                   </div>
                 </div>
@@ -2306,6 +2306,10 @@ $('#button-save').on('click', function() {
 			if (json['order_id']) {
 				$('input[name=\'order_id\']').val(json['order_id']);
 			}
+
+      alert(json['success']);
+      location.href = '<?php echo $catalog; ?>admin/index.php?route=sale/order&token=<?php echo $token; ?>';
+
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

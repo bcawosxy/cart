@@ -41,7 +41,6 @@ class ControllerindexSettinginfo extends Controller {
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			
-			print_r($this->request->post);
 			$code = 'bigshop';
 			$store_id = 0;
 			foreach ($this->request->post as $key => $value) {

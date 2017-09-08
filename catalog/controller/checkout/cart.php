@@ -406,6 +406,9 @@ class ControllerCheckoutCart extends Controller {
 				}
 			}
 		} else {
+
+			$this->session->data['redirect'] = $this->url->link('product/product', 'product_id='.$product_id, true);
+
 			$json = [
 				'login' => true,
 				'redirect' => $this->url->link('account/login', '', true),
