@@ -33,15 +33,15 @@
 
 // Chinese ver
 
-$_['title_payment_address']  						= '1.付款資訊';
+$_['title_payment_address']  						= '付款資訊';
 $_['description_payment_address']  					= '';
-$_['title_shipping_address']  						= '2.交貨資訊';
+$_['title_shipping_address']  						= '交貨資訊';
 $_['description_shipping_address'] 					= '';
-$_['title_shipping_method']  						= '3.運送方式';
+$_['title_shipping_method']  						= '運送方式';
 $_['description_shipping_method'] 					= '';
-$_['title_payment_method'] 							= '4.付款方式';
+$_['title_payment_method'] 							= '付款方式';
 $_['description_payment_method'] 					= '';
-$_['title_shopping_cart'] 							= '5.購物車';
+$_['title_shopping_cart'] 							= '購物車';
 $_['description_shopping_сart'] 					= '';
 
 
