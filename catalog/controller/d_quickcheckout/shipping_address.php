@@ -22,6 +22,8 @@ class ControllerDQuickcheckoutShippingAddress extends Controller {
         $json['shipping_address'] = $this->session->data['shipping_address'];
         $json['show_shipping_address'] = $this->model_d_quickcheckout_address->showShippingAddress(); 
 
+        $data['add_address'] = $this->url->link('account/address/add', '', true);
+
         if($this->customer->isLogged()){
 
             $json['addresses'] = $this->model_d_quickcheckout_address->getAddresses();

@@ -11,6 +11,8 @@ $_['text_your_address']    = '地址資料';
 $_['text_newsletter']      = '訂閱電子報';
 $_['text_your_password']   = '帳號密碼';
 $_['text_agree']           = '我已經閱讀並同意 <a href="%s" class="agree"><b>%s</b></a>';
+$_['text_no_results_text'] = '找不到資料!';
+
 
 // Entry
 $_['entry_customer_group'] = '客戶群組';
@@ -47,7 +49,8 @@ $_['error_address_1']      = '地址長度必須是 3 到 128 個字之間！';
 $_['error_city']           = '縣市名稱必須是 2 到 128 個字之間！';
 $_['error_postcode']       = '郵遞區號必須在 2 到 10 個字之間！';
 $_['error_country']        = '請選擇一個國家！';
-$_['error_zone']           = '請選擇縣市/地區！';
+$_['error_zone']           = '請選擇縣市！';
+$_['error_city']           = '請選擇地區！';
 $_['error_custom_field']   = '%s 必須填寫！';
 $_['error_password']       = '密碼必須在 8 到 20 個字之間！';
 $_['error_confirm']        = '確認密碼與密碼不一致！';

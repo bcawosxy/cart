@@ -44,12 +44,17 @@
 			        <% }) %>
 			        <% } %>
 				<% } %>
+				<?php if(false) { ?>
 				<div class="radio-input">
 		            <input type="radio" name="shipping_address[address_id]" class="shipping-address" value="new" id="shipping_address_address_id_new" <%= model.shipping_address.address_id == 'new' ? 'checked="checked"' : '' %> data-refresh="2" autocomplete='off' />
 		            <label for="shipping_address_address_id_new">
 		                <?php echo $text_address_new; ?>
 		            </label>
 		        </div>
+		        <?php } ?>
+		      	<div class="form-group">
+		       		<a href="<?php echo $add_address; ?>">新增地址</a>
+		       </div>
 		        <form id="shipping_address_form" class="form-horizontal <%= model.shipping_address.address_id == 'new' ? '' : 'hidden' %>">
 				
 				</form>

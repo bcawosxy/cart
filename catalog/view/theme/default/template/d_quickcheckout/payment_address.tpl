@@ -45,12 +45,18 @@
 			            <% }) %>
 					<% } %>
 				<% } %>
+				<?php if(false) { ?>
 				<div class="radio-input">
 		            <input type="radio" name="payment_address[address_id]" class="payment-address" value="new" id="payment_address_exists_new" <%= model.payment_address.address_id == 'new' ? 'checked="checked"' : '' %> data-refresh="2" autocomplete='off' />
 		            <label for="payment_address_exists_new">
 		                <?php echo $text_address_new; ?>
 		            </label>
 		        </div>
+		       <?php } ?>
+		       <div class="form-group">
+		       		<a href="<?php echo $add_address; ?>">新增地址</a>
+		       </div>
+
 		        <form id="payment_address_form" class="form-horizontal <%= model.payment_address.address_id == 'new' ? '' : 'hidden' %>">
 				
 				</form>

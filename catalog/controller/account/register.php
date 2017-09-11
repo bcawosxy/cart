@@ -18,6 +18,9 @@ class ControllerAccountRegister extends Controller {
 		$this->load->model('account/customer');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			
+			$this->request->post['address_1'] = $this->request->post['city_name'].$this->request->post['address_1'];
+
 			$customer_id = $this->model_account_customer->addCustomer($this->request->post);
 			
 			//需進行信件驗證帳號流程, 此處填入驗證碼至資料表
@@ -74,6 +77,7 @@ class ControllerAccountRegister extends Controller {
 		$data['text_select'] = $this->language->get('text_select');
 		$data['text_none'] = $this->language->get('text_none');
 		$data['text_loading'] = $this->language->get('text_loading');
+		$data['text_no_results_text'] = $this->language->get('text_no_results_text');	
 
 		$data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$data['entry_firstname'] = $this->language->get('entry_firstname');
@@ -100,6 +104,8 @@ class ControllerAccountRegister extends Controller {
 
 		$data['button_continue'] = $this->language->get('button_continue');
 		$data['button_upload'] = $this->language->get('button_upload');
+
+		$data['fetchArea'] = $this->url->link('account/address/getareabyzone');
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -280,8 +286,8 @@ class ControllerAccountRegister extends Controller {
 		}
 
 		
-				$this->load->model('localisation/zone');
-				$data['zones'] = $this->model_localisation_zone->getZonesByCountryId(206);
+		$this->load->model('localisation/zone');
+		$data['zones'] = $this->model_localisation_zone->getZonesByCountryId(206);
 				
 
 		// Custom Fields
@@ -385,6 +391,10 @@ class ControllerAccountRegister extends Controller {
 
 		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '' || !is_numeric($this->request->post['zone_id'])) {
 			$this->error['zone'] = $this->language->get('error_zone');
+		}
+
+		if (!isset($this->request->post['city_id']) || $this->request->post['city_id'] == '' || !is_numeric($this->request->post['city_id'])) {
+			$this->error['city'] = $this->language->get('error_city');
 		}
 
 		// Customer Group

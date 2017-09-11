@@ -164,6 +164,15 @@ class ControllerAccountAddress extends Controller {
 		$this->getList();
 	}
 
+	public function getareabyzone(){
+		$zone_id = $_POST['data'];
+		//fetch area list
+		$this->load->model('localisation/area');
+		$areas = $this->model_localisation_area->getAreasByZoneId($zone_id);	
+		print_r(json_encode($areas));
+		die();
+	}
+
 	protected function getList() {
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

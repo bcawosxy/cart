@@ -33,9 +33,9 @@
 
 // Chinese ver
 
-$_['title_payment_address']  						= '付款資訊';
+$_['title_payment_address']  						= '付款人地址';
 $_['description_payment_address']  					= '';
-$_['title_shipping_address']  						= '交貨資訊';
+$_['title_shipping_address']  						= '收貨人地址';
 $_['description_shipping_address'] 					= '';
 $_['title_shipping_method']  						= '運送方式';
 $_['description_shipping_method'] 					= '';

@@ -24,6 +24,8 @@ class ControllerDQuickcheckoutPaymentAddress extends Controller {
         $json['payment_address'] = $this->session->data['payment_address'];
         $json['shipping_required'] = $this->model_d_quickcheckout_method->shippingRequired();
         
+        $data['add_address'] = $this->url->link('account/address/add', '', true);
+
         //logged
         if($this->customer->isLogged()){
 

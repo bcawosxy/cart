@@ -1,4 +1,6 @@
 <?php echo $header; ?>
+<script type="text/javascript" src="../catalog/view/javascript/chosen/chosen.jquery.min.js"></script>
+<link rel=stylesheet type="text/css" href="../catalog/view/javascript/chosen/chosen.min.css">
 <div class="container">
   <ul class="breadcrumb">
     <?php foreach ($breadcrumbs as $breadcrumb) { ?>
@@ -73,6 +75,39 @@
               <div class="text-muted"><?php echo $tips_telephone; ?></div>
             </div>
           </div>
+
+          <!-- selected -->
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
+            <div class="col-sm-10">
+              <select name="zone_id" id="input-zone" class="form-control">
+                <option value=""><?php echo $text_select; ?></option>
+                <?php foreach ($zones as $zone) { ?>
+                <?php if ($zone['zone_id'] == $zone_id) { ?>
+                <option value="<?php echo $zone['zone_id']; ?>" selected="selected"><?php echo $zone['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $zone['zone_id']; ?>"><?php echo $zone['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+              </select>
+              <?php if ($error_zone) { ?>
+              <div class="text-danger"><?php echo $error_zone; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-city"><?php echo $entry_city; ?></label>
+            <div class="col-sm-10">
+              <select name="city_id" id="input-city" class="form-control"></select>
+              <input type="hidden" id="city_name" name="city_name" value="">
+              <?php if ($error_city) { ?>
+              <div class="text-danger"><?php echo $error_city; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+
+          <!-- end selected -->
 
           <?php foreach ($custom_fields as $custom_field) { ?>
           <?php if ($custom_field['location'] == 'account') { ?>
@@ -231,30 +266,9 @@
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control" />
+              <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control"  readonly/>
               <?php if ($error_postcode) { ?>
               <div class="text-danger"><?php echo $error_postcode; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
-            <div class="col-sm-10">
-              <select name="zone_id" id="input-zone" class="form-control">
-
-                <option value=""><?php echo $text_select; ?></option>
-                <?php foreach ($zones as $zone) { ?>
-                <?php if ($zone['zone_id'] == $zone_id) { ?>
-                <option value="<?php echo $zone['zone_id']; ?>" selected="selected"><?php echo $zone['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $zone['zone_id']; ?>"><?php echo $zone['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-				
-              </select>
-              <?php if ($error_zone) { ?>
-              <div class="text-danger"><?php echo $error_zone; ?></div>
               <?php } ?>
             </div>
           </div>
@@ -626,4 +640,28 @@ $('.datetime').datetimepicker({
 <script type="text/javascript"><!--
 
 //--></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#input-zone').on('change', function(){
+    var v = $(this).val();
+    $.post("<?php echo $fetchArea ?>", {
+      data : v,
+    }, function(r) {
+      $('#input-city').empty();
+      var item = '<option vale=""><?php echo $text_select ?></option>';
+      r = $.parseJSON(r);
+      for (var i = r.length - 1; i >= 0; i--) {
+        item += '<option value="'+r[i].code+'">'+r[i].name+'</option>';
+      }
+      $('#input-city').append(item);
+    });
+  });
+
+  $('#input-city').on('change', function(){
+    $('#input-postcode').val($(this).val());
+    $('#city_name').val($(this).find('option:selected').text());
+  });
+});
+</script>
 <?php echo $footer; ?>

@@ -33,8 +33,8 @@ class ControllerInformationVersion extends Controller {
 
 		//fetch location list
 		$this->load->model('localisation/zone');
-		$data['zones'] = $this->model_localisation_zone->getZonesByCountryId(206);		
-
+		$data['zones'] = $this->model_localisation_zone->getZonesByCountryId(206);
+		
 		$data['fetchAreaUrl'] = $this->url->link('information/version/getareabyzone');
 		$data['fetchPrimaryUrl'] = $this->url->link('information/version/getprimarybyarea');
 		$data['fetchJuniorUrl'] = $this->url->link('information/version/getjuniorbyarea');
