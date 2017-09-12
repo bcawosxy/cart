@@ -15,6 +15,7 @@ class ControllerCommonFooter extends Controller {
 		$data['text_voucher'] = $this->language->get('text_voucher');
 		$data['text_affiliate'] = $this->language->get('text_affiliate');
 		$data['text_special'] = $this->language->get('text_special');
+		$data['text_compare'] = $this->language->get('text_compare');
 		$data['text_account'] = $this->language->get('text_account');
 		$data['text_order'] = $this->language->get('text_order');
 		$data['text_wishlist'] = $this->language->get('text_wishlist');
@@ -40,6 +41,7 @@ class ControllerCommonFooter extends Controller {
 		$data['voucher'] = $this->url->link('account/voucher', '', true);
 		$data['affiliate'] = $this->url->link('affiliate/account', '', true);
 		$data['special'] = $this->url->link('product/special');
+		$data['compare'] = $this->url->link('product/compare');
 		$data['account'] = $this->url->link('account/account', '', true);
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['wishlist'] = $this->url->link('account/wishlist', '', true);

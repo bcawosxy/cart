@@ -89,6 +89,7 @@ if((isset($bigshop_feature_box1_title[$lang]) && $bigshop_feature_box1_title[$la
             <!-- <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>-->
             <?php } ?>
             <li><a href="<?php echo $special; ?>"><?php echo $text_special; ?></a></li>
+            <li><a href="<?php echo $compare; ?>"><?php echo $text_compare; ?></a></li>
           </ul>
         </div>
         <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">

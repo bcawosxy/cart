@@ -10,6 +10,7 @@ $_['text_manufacturer'] = '品牌專區';
 $_['text_voucher']      = '購物禮券';
 $_['text_affiliate']    = '推薦計劃';
 $_['text_special']      = '特價商品';
+$_['text_compare']      = '商品比較';
 $_['text_account']      = '會員中心';
 $_['text_order']        = '歷史訂單';
 $_['text_wishlist']     = '收藏清單';
