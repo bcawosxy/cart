@@ -264,18 +264,14 @@
           <?php } ?>
 
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
-            <div class="col-sm-10">
+            <label class="col-sm-2 control-label" for="input-address-1"><?php echo $entry_address_1; ?></label>
+            <div class="col-sm-2">
               <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control"  readonly/>
               <?php if ($error_postcode) { ?>
               <div class="text-danger"><?php echo $error_postcode; ?></div>
               <?php } ?>
             </div>
-          </div>
-
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-address-1"><?php echo $entry_address_1; ?></label>
-            <div class="col-sm-10">
+            <div class="col-sm-8">
               <input type="text" name="address_1" value="<?php echo $address_1; ?>" placeholder="<?php echo $entry_address_1; ?>" id="input-address-1" class="form-control" />
               <?php if ($error_address_1) { ?>
               <div class="text-danger"><?php echo $error_address_1; ?></div>
@@ -640,7 +636,6 @@ $('.datetime').datetimepicker({
 <script type="text/javascript"><!--
 
 //--></script>
-
 <script type="text/javascript">
 $(document).ready(function(){
   $('#input-zone').on('change', function(){

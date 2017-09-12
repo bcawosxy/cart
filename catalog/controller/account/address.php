@@ -36,6 +36,8 @@ class ControllerAccountAddress extends Controller {
 		$this->load->model('account/address');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			$this->request->post['address_1'] = $this->request->post['city_name'].$this->request->post['address_1'];
+
 			$this->model_account_address->addAddress($this->request->post);
 			
 			$this->session->data['success'] = $this->language->get('text_add');
@@ -74,7 +76,7 @@ class ControllerAccountAddress extends Controller {
 		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
 		$this->load->model('account/address');
-		
+		$this->load->model('localisation/area');
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_account_address->editAddress($this->request->get['address_id'], $this->request->post);
 
@@ -320,11 +322,12 @@ class ControllerAccountAddress extends Controller {
 		$data['entry_country'] = $this->language->get('entry_country');
 		$data['entry_zone'] = $this->language->get('entry_zone');
 		$data['entry_default'] = $this->language->get('entry_default');
-
-		$data['button_continue'] = $this->language->get('button_continue');
+		
 		$data['button_back'] = $this->language->get('button_back');
 		$data['button_upload'] = $this->language->get('button_upload');
-
+		
+		$data['fetchArea'] = $this->url->link('account/address/getareabyzone');
+		
 		if (isset($this->error['firstname'])) {
 			$data['error_firstname'] = $this->error['firstname'];
 		} else {
@@ -383,6 +386,8 @@ class ControllerAccountAddress extends Controller {
 			$address_info = $this->model_account_address->getAddress($this->request->get['address_id']);
 		}
 
+		$data['button_continue'] = (!empty($address_info)) ? $this->language->get('button_update') : $this->language->get('button_address_add') ;
+
 		if (isset($this->request->post['firstname'])) {
 			$data['firstname'] = $this->request->post['firstname'];
 		} elseif (!empty($address_info)) {
@@ -431,13 +436,13 @@ class ControllerAccountAddress extends Controller {
 			$data['postcode'] = '';
 		}
 
-		if (isset($this->request->post['city'])) {
-			$data['city'] = $this->request->post['city'];
-		} elseif (!empty($address_info)) {
-			$data['city'] = $address_info['city'];
-		} else {
-			$data['city'] = '';
-		}
+		// if (isset($this->request->post['city'])) {
+		// 	$data['city'] = $this->request->post['city'];
+		// } elseif (!empty($address_info)) {
+		// 	$data['city'] = $address_info['city'];
+		// } else {
+		// 	$data['city'] = '';
+		// }
 
 		if (isset($this->request->post['country_id'])) {
 			$data['country_id'] = (int)$this->request->post['country_id'];
@@ -454,11 +459,17 @@ class ControllerAccountAddress extends Controller {
 		} else {
 			$data['zone_id'] = '';
 		}
+			
+		if (!empty($address_info)) {
+			$data['cities'] = $this->model_localisation_area->getAreasByZoneId($address_info['zone_id']);
+		} else {
+			$data['cities'] = '';
 
-		
-				$this->load->model('localisation/zone');
-				$data['zones'] = $this->model_localisation_zone->getZonesByCountryId(206);
-				
+		}		
+
+		$this->load->model('localisation/zone');
+		$data['zones'] = $this->model_localisation_zone->getZonesByCountryId(206);	
+		$data['city_name'] = '';
 
 		// Custom fields
 		$this->load->model('account/custom_field');

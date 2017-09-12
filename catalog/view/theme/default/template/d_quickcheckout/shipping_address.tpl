@@ -34,11 +34,12 @@
 			            	<input type="radio" name="shipping_address[address_id]" class="shipping-address" value="<%= address.address_id %>" id="shipping_address_address_id_<%= address.address_id %>" <%= address.address_id == model.shipping_address.address_id ? 'checked="checked"' : '' %> data-refresh="2" autocomplete='off' />
 			                <strong> <%= address.firstname %> 
 			                <%= address.lastname %> </strong> 
-			                <%= address.address_1 %> 
-			                <%= address.city %> 
+			                <%= address.country %>
 			                <%= address.zone %>
-			                <%= address.country %>,
-							<%= address.postcode %>
+			                (<%= address.postcode %>)
+			                <%= address.address_1 %>
+			                <%= address.address_2 %>
+			                <%= address.city %> 
 			            </label>
 			          </div>
 			        <% }) %>

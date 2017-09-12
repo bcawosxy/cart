@@ -27,25 +27,10 @@
             </div>
           </div>
 
-
-
-
-
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control" />
-              <?php if ($error_postcode) { ?>
-              <div class="text-danger"><?php echo $error_postcode; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
             <div class="col-sm-10">
               <select name="zone_id" id="input-zone" class="form-control">
-
                 <option value=""><?php echo $text_select; ?></option>
                 <?php foreach ($zones as $zone) { ?>
                 <?php if ($zone['zone_id'] == $zone_id) { ?>
@@ -54,7 +39,6 @@
                 <option value="<?php echo $zone['zone_id']; ?>"><?php echo $zone['name']; ?></option>
                 <?php } ?>
                 <?php } ?>
-				
               </select>
               <?php if ($error_zone) { ?>
               <div class="text-danger"><?php echo $error_zone; ?></div>
@@ -63,8 +47,36 @@
           </div>
 
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-address-1"><?php echo $entry_address_1; ?></label>
+            <label class="col-sm-2 control-label" for="input-city"><?php echo $entry_city; ?></label>
             <div class="col-sm-10">
+              <select name="city_id" id="input-city" class="form-control">
+                <?php foreach ($cities as $city) { ?>
+                <?php 
+                  if ($city['code'] == $postcode) { 
+                  $city_name = $city['name'];
+                ?>
+                <option value="<?php echo $city['code']; ?>" selected="selected"><?php echo $city['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $city['code']; ?>"><?php echo $city['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+              </select>
+              <input type="hidden" id="city_name" name="city_name" value="<?php echo $city_name; ?>">
+              <?php if ($error_city) { ?>
+              <div class="text-danger"><?php echo $error_city; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-address-1"><?php echo $entry_address_1; ?></label>
+            <div class="col-sm-2">
+              <input type="text" name="postcode" readonly value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control" />
+              <?php if ($error_postcode) { ?>
+              <div class="text-danger"><?php echo $error_postcode; ?></div>
+              <?php } ?>
+            </div>            
+            <div class="col-sm-8">
               <input type="text" name="address_1" value="<?php echo $address_1; ?>" placeholder="<?php echo $entry_address_1; ?>" id="input-address-1" class="form-control" />
               <?php if ($error_address_1) { ?>
               <div class="text-danger"><?php echo $error_address_1; ?></div>
@@ -346,4 +358,29 @@ $('.time').datetimepicker({
 <script type="text/javascript"><!--
 
 //--></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  
+  $('#input-zone').on('change', function(){
+    var v = $(this).val();
+    $.post("<?php echo $fetchArea ?>", {
+      data : v,
+    }, function(r) {
+      $('#input-city').empty();
+      var item = '<option vale=""><?php echo $text_select ?></option>';
+      r = $.parseJSON(r);
+      for (var i = r.length - 1; i >= 0; i--) {
+        item += '<option value="'+r[i].code+'">'+r[i].name+'</option>';
+      }
+      $('#input-city').append(item);
+    });
+  });
+
+  $('#input-city').on('change', function(){
+    $('#input-postcode').val($(this).val());
+    $('#city_name').val($(this).find('option:selected').text());
+  });
+
+});
+</script>
 <?php echo $footer; ?>
