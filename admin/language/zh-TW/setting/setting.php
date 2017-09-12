@@ -145,6 +145,7 @@ $_['entry_file_upload']					= '上傳檔案';
 $_['entry_flat_fee']					= '運費';
 $_['entry_flat_text']					= '說明標題';
 $_['entry_min_total']					= '免運費消費金額';
+$_['entry_checkout_tips']				= '結帳含稅提示';
 
 
 // Help
@@ -220,7 +221,7 @@ $_['help_flat_text']					= '當消費者觸發條件時的標題文字';
 $_['help_min_total']					= '免運費門檻';
 $_['help_meta_title']					= '網站頁面的標題, 網站標題可以增加SEO優化, 增加搜尋引擎中網站排名';
 $_['help_meta_description']			= '用於搜尋引擎動態取得描述標籤後，顯示在搜尋結果頁面，建議文字數量以不超過160個字符，也就是80個中文字以內。';
-
+$_['help_checkout_tips'] 				= '在結帳時提示使用者總價已包含稅金的文字說明';
 
 // Error
 $_['error_warning']						= '警告： 請檢查您輸入的資料！';

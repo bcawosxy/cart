@@ -174,11 +174,16 @@
 					<div class="col-sm-3 col-xs-6 form-control-static text-right"><%= total.text %></div>
 				</div>
 				<% }) %>
+
 			</div>
 			<% } %>
 			<div class="preloader row"><img class="icon" src="image/<%= config.general.loader %>" /></div>
-		
 		</div>
+		
+		<div style="float: right;font-size: 10px;color:#ff5722;">
+			<?php echo $checkout_tips; ?>
+		</div>
+
 	</div>
 
 </script>
@@ -190,7 +195,6 @@ $(function() {
 		model: qc.cart, 
 		template: _.template($("#cart_template").html())
 	}));
-
 });
 
 </script>

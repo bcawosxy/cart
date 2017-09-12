@@ -102,7 +102,8 @@ class ControllerDQuickcheckoutCart extends Controller {
         $json['error'] = $json['cart_error'];
  
         $data['json'] = json_encode($json);
-
+        $data['checkout_tips'] = $data['config_checkout_tips'] = $this->config->get('config_checkout_tips');
+        
 		if(VERSION >= '2.2.0.0'){
             $template = 'd_quickcheckout/cart';
         }elseif (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/d_quickcheckout/cart.tpl')) {

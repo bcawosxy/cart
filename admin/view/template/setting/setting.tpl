@@ -176,6 +176,14 @@
                   <textarea name="config_comment" rows="5" placeholder="<?php echo $entry_comment; ?>" id="input-comment" class="form-control"><?php echo $config_comment; ?></textarea>
                 </div>
               </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-checkout_tips"><span data-toggle="tooltip" data-container="#tab-general" title="<?php echo $help_checkout_tips; ?>"><?php echo $entry_checkout_tips; ?></span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_checkout_tips"  placeholder="<?php echo $entry_checkout_tips; ?>" id="input-checkout_tips" class="form-control" value="<?php echo $config_checkout_tips; ?>">
+                </div>
+              </div>
+
               <?php if ($locations) { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label"><span data-toggle="tooltip" data-container="#tab-general" title="<?php echo $help_location; ?>"><?php echo $entry_location; ?></span></label>

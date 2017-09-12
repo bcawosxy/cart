@@ -228,6 +228,7 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_flat_fee'] = $this->language->get('entry_flat_fee');
 		$data['entry_flat_text'] = $this->language->get('entry_flat_text');
 		$data['entry_min_total'] = $this->language->get('entry_min_total');
+		$data['entry_checkout_tips'] = $this->language->get('entry_checkout_tips');
 
 
 		$data['help_geocode'] = $this->language->get('help_geocode');
@@ -299,6 +300,7 @@ class ControllerSettingSetting extends Controller {
 		$data['help_min_total'] = $this->language->get('help_min_total');
 		$data['help_meta_title'] = $this->language->get('help_meta_title');
 		$data['help_meta_description'] = $this->language->get('help_meta_description');
+		$data['help_checkout_tips'] = $this->language->get('help_checkout_tips');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -616,9 +618,6 @@ class ControllerSettingSetting extends Controller {
 			$data['xfee_total1'] = $this->config->get('xfee_total1');
 		}
 
-
-
-
 		$this->load->model('tool/image');
 
 		if (isset($this->request->post['config_image']) && is_file(DIR_IMAGE . $this->request->post['config_image'])) {
@@ -641,6 +640,12 @@ class ControllerSettingSetting extends Controller {
 			$data['config_comment'] = $this->request->post['config_comment'];
 		} else {
 			$data['config_comment'] = $this->config->get('config_comment');
+		}
+
+		if (isset($this->request->post['config_checkout_tips'])) {
+			$data['config_checkout_tips'] = $this->request->post['config_checkout_tips'];
+		} else {
+			$data['config_checkout_tips'] = $this->config->get('config_checkout_tips');
 		}
 
 		$this->load->model('localisation/location');
