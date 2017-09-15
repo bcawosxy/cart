@@ -44,25 +44,20 @@ class ModelExtensionTotalXfee extends Model {
 		
 		$address = array();
 		if(isset($this->session->data['shipping_address'])) $address = $this->session->data['shipping_address'];
-		
-		
+
 		if ($this->cart->getSubTotal()) {
 			
-		 	
 		  for($i=1;$i<=12;$i++)
 			   {	
 			           $xfee_total=(float)$this->config->get('xfee_total'.$i);
 				       if(empty($xfee_total))$xfee_total=0;
 				       
 				       $xfee_total_max=(float)$this->config->get('xfee_total_max'.$i);
-				       
 					   
 					   if(!$this->config->get('xfee_name'.$i)) continue;
 					   if($xfee_total>$this->cart->getSubTotal()) continue;
 					   if($xfee_total_max && $xfee_total_max<$this->cart->getSubTotal()) continue;
-					   
-					   
-					   
+
 					   if($this->config->get('xfee_payment'.$i) && $this->config->get('xfee_payment'.$i)!=$payment_method) continue;
 					   if($this->config->get('xfee_shipping'.$i) && $this->config->get('xfee_shipping'.$i).'.'.$this->config->get('xfee_shipping'.$i)!=$shipping_method && $this->config->get('xfee_shipping'.$i)!=$shipping_method) continue;
 						
@@ -72,11 +67,7 @@ class ModelExtensionTotalXfee extends Model {
                            if ($query->num_rows==0) continue;
                                                
                         }
-			                
-				          
-								
-				           
-                                                       
+
 						$tax_vat=0;
 						if ($this->config->get('xfee_tax_class_id'.$i)) {
 							$tax_rates = $this->tax->getRates($this->config->get('xfee_cost'.$i), $this->config->get('xfee_tax_class_id'.$i));

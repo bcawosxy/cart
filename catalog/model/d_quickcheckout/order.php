@@ -260,7 +260,6 @@ class ModelDQuickcheckoutOrder extends Model {
         foreach ($results as $key => $value) {
             $sort_order[$key] = $this->config->get($value['code'] . '_sort_order');
         }
-
         array_multisort($sort_order, SORT_ASC, $results);
 
         foreach ($results as $result) {
@@ -280,10 +279,8 @@ class ModelDQuickcheckoutOrder extends Model {
             }
         }
 
-     
-
         $sort_order = array();
-
+        
         foreach ($total_data['totals'] as $key => $value) {
             $sort_order[$key] = $value['sort_order'];
         }
@@ -291,6 +288,7 @@ class ModelDQuickcheckoutOrder extends Model {
 
 
         $totals = array();
+        
         foreach ($total_data['totals'] as $total) {
             if(!empty($total['title'])){
                 $totals[] = array(

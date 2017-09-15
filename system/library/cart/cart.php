@@ -326,7 +326,6 @@ class Cart {
 
 	public function getSubTotal() {
 		$total = 0;
-
 		foreach ($this->getProducts() as $product) {
 			$total += $product['total'];
 		}

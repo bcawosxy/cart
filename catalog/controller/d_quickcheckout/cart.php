@@ -113,7 +113,6 @@ class ControllerDQuickcheckoutCart extends Controller {
 		}
 
         return $this->load->view($template, $data);
-
 	}
 
     public function prepare($json){
@@ -395,6 +394,7 @@ class ControllerDQuickcheckoutCart extends Controller {
                 'taxes'  => &$taxes,
                 'total'  => &$total
             );
+
             $json['totals'] = $this->session->data['totals'] = $this->model_d_quickcheckout_order->getTotals($total_data);
             $json['total'] = $this->model_d_quickcheckout_order->getCartTotal($total);
             $json['order_id'] = $this->session->data['order_id'] = $this->load->controller('d_quickcheckout/confirm/updateOrder');
