@@ -103,6 +103,18 @@
 
 			<div class="form-horizontal">
 				<div class=" form-group qc-coupon <%= parseInt(model.config.option.coupon.display) ? '' : 'hidden' %>">
+					<label class="col-sm-4 control-label" >
+						<?php echo $text_use_coupon; ?>
+					</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<input type="text" value="<%= model.coupon ? model.coupon : '' %>" name="coupon" id="coupon" <% if(Number(config.design.placeholder)) {  %>placeholder="<?php echo $text_use_coupon; ?>" <% } %>  class="form-control"/>
+							<span class="input-group-btn">
+								<button class="btn btn-primary" id="confirm_coupon" type="button"><i class="fa fa-check"></i></button>
+							</span>
+						</div>
+						<br>
+					</div>
 					<% if(model.errors.coupon){ %>
 						<div class="col-sm-12">
 							<div class="alert alert-danger">
@@ -116,18 +128,7 @@
 								<i class="fa fa-exclamation-circle"></i> <%= model.successes.coupon %>
 							</div>
 						</div>
-					<% } %>
-					<label class="col-sm-4 control-label" >
-						<?php echo $text_use_coupon; ?>
-					</label>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<input type="text" value="<%= model.coupon ? model.coupon : '' %>" name="coupon" id="coupon" <% if(Number(config.design.placeholder)) {  %>placeholder="<?php echo $text_use_coupon; ?>" <% } %>  class="form-control"/>
-							<span class="input-group-btn">
-								<button class="btn btn-primary" id="confirm_coupon" type="button"><i class="fa fa-check"></i></button>
-							</span>
-						</div>
-					</div>
+					<% } %>					
 					<% _.each(model.coupon, function(voucher) { %>
 			        
 			        <% }) %>
@@ -135,6 +136,19 @@
 
 				<?php if($reward_points) {?>
 				<div class=" form-group qc-reward <%= parseInt(model.config.option.reward.display) ? '' : 'hidden' %>">
+					<label class="col-sm-4 control-label" >
+						<?php echo $text_use_reward; ?>
+					</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+							<input type="text" value="<%= model.reward ? model.reward : '' %>" name="reward" id="reward" <% if(Number(config.design.placeholder)) {  %>placeholder="<?php echo $text_use_reward; ?>" <% } %> class="form-control"/>
+							<span class="input-group-btn">
+								<button class="btn btn-primary" id="confirm_reward" type="button"><i class="fa fa-check"></i></button>
+							</span>
+
+						</div>
+						<small><?php echo $entry_reward; ?></small>
+					</div>					
 					<% if(model.errors.reward){ %>
 						<div class="col-sm-12">
 							<div class="alert alert-danger">
@@ -149,20 +163,6 @@
 							</div>
 						</div>
 					<% } %>
-					<label class="col-sm-4 control-label" >
-						<?php echo $text_use_reward; ?>
-					</label>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<input type="text" value="<%= model.reward ? model.reward : '' %>" name="reward" id="reward" <% if(Number(config.design.placeholder)) {  %>placeholder="<?php echo $text_use_reward; ?>" <% } %> class="form-control"/>
-							<span class="input-group-btn">
-								<button class="btn btn-primary" id="confirm_reward" type="button"><i class="fa fa-check"></i></button>
-							</span>
-
-						</div>
-						<small><?php echo $entry_reward; ?></small>
-					</div>
-
 				</div>
 				<?php } ?>
 			</div>

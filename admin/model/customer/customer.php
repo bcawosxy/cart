@@ -516,7 +516,7 @@ class ModelCustomerCustomer extends Model {
 	}
 
 	public function getRewards($customer_id, $start = 0, $limit = 10) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$customer_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$customer_id . "' ORDER BY date_added ASC LIMIT " . (int)$start . "," . (int)$limit);
 
 		return $query->rows;
 	}

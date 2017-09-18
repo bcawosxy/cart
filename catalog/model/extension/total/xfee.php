@@ -52,6 +52,7 @@ class ModelExtensionTotalXfee extends Model {
 			           $xfee_total=(float)$this->config->get('xfee_total'.$i);
 				       if(empty($xfee_total))$xfee_total=0;
 				       
+				    	
 				       $xfee_total_max=(float)$this->config->get('xfee_total_max'.$i);
 					   
 					   if(!$this->config->get('xfee_name'.$i)) continue;
@@ -61,6 +62,9 @@ class ModelExtensionTotalXfee extends Model {
 					   if($this->config->get('xfee_payment'.$i) && $this->config->get('xfee_payment'.$i)!=$payment_method) continue;
 					   if($this->config->get('xfee_shipping'.$i) && $this->config->get('xfee_shipping'.$i).'.'.$this->config->get('xfee_shipping'.$i)!=$shipping_method && $this->config->get('xfee_shipping'.$i)!=$shipping_method) continue;
 						
+						//0918 - 計算價格 ($total['total']) 小於 $xfee的門檻時沒有免運優惠
+					   if($total['total'] < $xfee_total) continue;
+
                        if($this->config->get('xfee_geo_zone_id'.$i) && $address){
 					      
                            $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id='".(int)$this->config->get('xfee_geo_zone_id'.$i)."' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')"); 
