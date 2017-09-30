@@ -49,9 +49,15 @@ class ControllerDQuickcheckoutCart extends Controller {
         }
         $data['text_use_voucher'] = $this->language->get('heading_title');
             
-
-        //reward
+        /** 
+         *  reward         
+         *  170929 - 計算方式調整為全部 reward 扣掉 正在處理中訂單中使用的 reward, 才是目前使用者可以輸入並拿來做扣抵的點數總額
+         */
         $points = $this->customer->getRewardPoints();
+        $ProcessingPoints = $this->customer->getRewardProcessingPoints();
+
+        $availablePoints = $points-$ProcessingPoints;
+
         $points_total = 0;
         foreach ($this->cart->getProducts() as $product) {
             if ($product['points']) {
@@ -59,7 +65,7 @@ class ControllerDQuickcheckoutCart extends Controller {
             }
         }
 
-        if ($points && $points_total && $this->config->get('reward_status')) {
+        if ($availablePoints && $points_total && $this->config->get('reward_status')) {
             $data['reward_points'] = true;
            
             if(VERSION >= '2.3.0.0'){
@@ -69,7 +75,7 @@ class ControllerDQuickcheckoutCart extends Controller {
             }else{
                 $this->load->language('checkout/reward');
             }
-            $data['text_use_reward'] = sprintf($this->language->get('heading_title'), $points);
+            $data['text_use_reward'] = sprintf($this->language->get('heading_title'), $availablePoints);
             $data['entry_reward'] = sprintf($this->language->get('entry_reward'), $points_total);
         }else{
             $data['reward_points'] = false;
@@ -347,6 +353,8 @@ class ControllerDQuickcheckoutCart extends Controller {
         $json = array();
 
         $points = $this->customer->getRewardPoints();
+        $ProcessingPoints = $this->customer->getRewardProcessingPoints();
+        $availablePoints = $points-$ProcessingPoints;
 
         $points_total = 0;
 
@@ -373,7 +381,7 @@ class ControllerDQuickcheckoutCart extends Controller {
         //     $json = $this->load->controller('d_quickcheckout/payment/prepare', $json);
         // }
 
-        if ($this->request->post['reward'] > $points) {
+        if ($this->request->post['reward'] > $availablePoints) {
             $json['cart_errors']['reward'] = sprintf($this->language->get('error_points'), $this->request->post['reward']);
         }
 

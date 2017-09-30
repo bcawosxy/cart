@@ -174,6 +174,7 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_order_status'] = $this->language->get('entry_order_status');
 		$data['entry_processing_status'] = $this->language->get('entry_processing_status');
 		$data['entry_complete_status'] = $this->language->get('entry_complete_status');
+		$data['entry_fail_status'] = $this->language->get('entry_fail_status');
 		$data['entry_fraud_status'] = $this->language->get('entry_fraud_status');
 		$data['entry_api'] = $this->language->get('entry_api');
 		$data['entry_stock_display'] = $this->language->get('entry_stock_display');
@@ -260,6 +261,7 @@ class ControllerSettingSetting extends Controller {
 		$data['help_order_status'] = $this->language->get('help_order_status');
 		$data['help_processing_status'] = $this->language->get('help_processing_status');
 		$data['help_complete_status'] = $this->language->get('help_complete_status');
+		$data['help_fail_status'] = $this->language->get('help_fail_status');
 		$data['help_fraud_status'] = $this->language->get('help_fraud_status');
 		$data['help_api'] = $this->language->get('help_api');
 		$data['help_stock_display'] = $this->language->get('help_stock_display');
@@ -415,6 +417,12 @@ class ControllerSettingSetting extends Controller {
 			$data['error_complete_status'] = $this->error['complete_status'];
 		} else {
 			$data['error_complete_status'] = '';
+		}
+		
+		if (isset($this->error['fail_status'])) {
+			$data['error_fail_status'] = $this->error['fail_status'];
+		} else {
+			$data['error_fail_status'] = '';
 		}
 
 		if (isset($this->error['ftp_hostname'])) {
@@ -896,6 +904,14 @@ class ControllerSettingSetting extends Controller {
 			$data['config_complete_status'] = array();
 		}
 
+		if (isset($this->request->post['config_fail_status'])) {
+			$data['config_fail_status'] = $this->request->post['config_fail_status'];
+		} elseif ($this->config->get('config_fail_status')) {
+			$data['config_fail_status'] = $this->config->get('config_fail_status');
+		} else {
+			$data['config_fail_status'] = array();
+		}
+
 		if (isset($this->request->post['config_fraud_status_id'])) {
 			$data['config_fraud_status_id'] = $this->request->post['config_fraud_status_id'];
 		} else {
@@ -904,7 +920,16 @@ class ControllerSettingSetting extends Controller {
 
 		$this->load->model('localisation/order_status');
 
-		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
+		$order_all_statuses = $this->model_localisation_order_status->getOrderStatuses();
+		$order_escape_statuses = $this->model_localisation_order_status->getOrderEscapeStatuses();
+		
+		foreach ($order_all_statuses as $k0 => $v0) {
+			if( !in_array($v0['order_status_id'], $order_escape_statuses) ) {
+				$order_statuses[] = $order_all_statuses[$k0];
+			}
+		}
+
+		$data['order_statuses'] = $order_statuses;		
 
 		if (isset($this->request->post['config_api_id'])) {
 			$data['config_api_id'] = $this->request->post['config_api_id'];
@@ -1360,6 +1385,10 @@ class ControllerSettingSetting extends Controller {
 
 		if (!isset($this->request->post['config_complete_status'])) {
 			$this->error['complete_status'] = $this->language->get('error_complete_status');
+		}
+
+		if (!isset($this->request->post['config_fail_status'])) {
+			$this->error['fail_status'] = $this->language->get('error_fail_status');
 		}
 
 		if ($this->request->post['config_ftp_status']) {

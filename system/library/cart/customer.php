@@ -137,4 +137,40 @@ class Customer {
 
 		return $query->row['total'];
 	}
+
+	/**
+	 * 170929 - 自訂義的 function, 用以取出使用者的訂單中, 處理中且含有紅利點數(reward)的訂單
+	 *          避免訂單在處理狀態中, 使用者仍可以繼續使用相同數量的點數下訂單
+	 */
+	public function getRewardProcessingPoints() {
+		/**
+		 * 取得並合併 
+		 *  1.銀行匯款或轉帳(bank_transfer_order_status_id')預設的狀態ID
+		 *  2.貨到付款(cod_order_status_id) 預設的狀態ID
+		 *  3.其他位於處理中狀態的訂單
+ 		 */
+
+		$a_staus_id = array_merge([$this->config->get('bank_transfer_order_status_id'), $this->config->get('cod_order_status_id')], $this->config->get('config_processing_status'));
+
+		// 當訂單狀態處於以上情況時, 必須先將使用的紅利點數總和取出, 並交於結帳畫面中扣除 => catalog\controller\d_quickcheckout\cart.php : 61行左右
+		$query = "SELECT `" . DB_PREFIX . "order_total`.`title` FROM `" . DB_PREFIX . "order` LEFT JOIN `" . DB_PREFIX . "order_total` USING (`order_id`) WHERE `" . DB_PREFIX . "order`.`customer_id` = '" . (int)$this->customer_id . "' AND `" . DB_PREFIX . "order`.`order_status_id` IN(".implode(',',$a_staus_id).") AND `" . DB_PREFIX . "order_total`.`code` = 'reward';";
+
+		$result = $this->db->query($query);
+
+		$processPoint = 0;
+
+		/**
+		 * 所有處理中訂單使用紅利點數總結
+		 */
+		foreach ($result->rows as $k0 => $v0) {
+			$start = strpos($v0['title'], '(') + 1;
+			$end = strrpos($v0['title'], ')');
+
+			if ($start && $end) {
+				$processPoint += substr($v0['title'], $start, $end - $start);
+			}
+		}
+
+		return $processPoint;
+	}
 }

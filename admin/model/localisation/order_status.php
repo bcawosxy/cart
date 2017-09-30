@@ -97,4 +97,20 @@ class ModelLocalisationOrderStatus extends Model {
 
 		return $query->row['total'];
 	}
+
+	/**
+	 * 170930 - 取得被付款方式指定的 order_status_id, 避免在後台>系統設定>選項中被其他訂單狀態設定 (像是 訂單成功、處理中、失敗 )
+	 */
+	public function getOrderEscapeStatuses() {
+		$order_escape_statuses = [];
+
+		//選擇銀行匯款或轉帳時的 order_status_id
+		$order_escape_statuses[] = $this->config->get('bank_transfer_order_status_id');
+
+		//選擇貨到付款的 order_status_id
+		$order_escape_statuses[] = $this->config->get('cod_order_status_id');
+
+		return $order_escape_statuses;
+
+	}
 }

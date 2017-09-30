@@ -274,7 +274,12 @@ class ModelCheckoutOrder extends Model {
 			}
 
 			// If current order status is not processing or complete but new status is processing or complete then commence completing the order
+			/**
+			 * 0922 - 	第一個條件 : 目前訂單的狀態不在 config_processing_status/config_complete_status 陣列內
+			 * 			第二個條件 : 新的訂單的狀態需要在 config_processing_status/config_complete_status 陣列內
+			 */
 			if (!in_array($order_info['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status'))) && in_array($order_status_id, array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) {
+
 				// Redeem coupon, vouchers and reward points
 				$order_total_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_total` WHERE order_id = '" . (int)$order_id . "' ORDER BY sort_order ASC");
 
@@ -320,6 +325,7 @@ class ModelCheckoutOrder extends Model {
 
 			// If old order status is the processing or complete status but new status is not then commence restock, and remove coupon, voucher and reward history
 			if (in_array($order_info['order_status_id'], array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status'))) && !in_array($order_status_id, array_merge($this->config->get('config_processing_status'), $this->config->get('config_complete_status')))) {
+
 				// Restock
 				$product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
 
