@@ -543,6 +543,19 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
+			/**
+			 *  171013 - Mars 客製
+			 *  運費管理
+			 */
+
+			if ($this->user->hasPermission('access', 'localisation/shipping')) {
+				$localisation[] = array(
+					'name'	   => $this->language->get('text_shipping'),
+					'href'     => $this->url->link('localisation/shipping', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);
+			}
+			
 			// Returns
 			$return = array();
 			
