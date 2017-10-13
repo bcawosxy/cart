@@ -1072,14 +1072,6 @@
             <div class="tab-pane" id="tab-fee">
               <fieldset>
                 <legend><?php echo $text_flat; ?></legend>
-               
-                <div class="form-group required">
-                  <label class="col-sm-2 control-label" for="input-flat-fee"><span data-toggle="tooltip" title="<?php echo $help_flat_fee; ?>"><?php echo $entry_flat_fee; ?></span></label>
-                  <div class="col-sm-10">
-                    <input type="text" name="flat_cost" value="<?php echo $flat_cost; ?>" placeholder="<?php echo $entry_flat_fee; ?>" id="input-flat-fee" class="form-control" />
-                  </div>
-                </div>
-
                 <div class="form-group required">
                   <label class="col-sm-2 control-label" for="input-flat-text"><span data-toggle="tooltip" title="<?php echo $help_flat_text; ?>"><?php echo $entry_flat_text; ?></span></label>
                   <div class="col-sm-10">

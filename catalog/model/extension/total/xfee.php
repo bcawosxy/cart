@@ -61,9 +61,16 @@ class ModelExtensionTotalXfee extends Model {
 
 					   if($this->config->get('xfee_payment'.$i) && $this->config->get('xfee_payment'.$i)!=$payment_method) continue;
 					   if($this->config->get('xfee_shipping'.$i) && $this->config->get('xfee_shipping'.$i).'.'.$this->config->get('xfee_shipping'.$i)!=$shipping_method && $this->config->get('xfee_shipping'.$i)!=$shipping_method) continue;
-						
+
 						//0918 - 計算價格 ($total['total']) 小於 $xfee的門檻時沒有免運優惠
-					   if($total['total'] < $xfee_total) continue;
+					    //
+					   /**
+					    * 0918 - 計算價格 ($total['total']) 小於 $xfee的門檻時沒有免運優惠
+					    * 1013 - 發現 ($total['total']) 會包含運費金額, 故需扣除運費金額後再來進行比對
+					    *  ex: 價格 : 1000  運費 : 150 免運門檻 : 600  折抵 : 500  ==> (1000-500=500) 應該要運費, 但加上150運費後(650) 又會判斷成免運, 故需此判斷
+					    */
+
+					   if( ($total['total']-$this->session->data['shipping_method']['cost']) <= $xfee_total) continue;
 
                        if($this->config->get('xfee_geo_zone_id'.$i) && $address){
 					      
@@ -87,14 +94,20 @@ class ModelExtensionTotalXfee extends Model {
 							}
 						}
 						
+						/**
+						 *  1013 - 配合 x-shipping 套件, 折抵的運費由 x-shipping的運費決定而非 x-fee 設置的固定折抵金額
+						           $disCount = $this->session->data['shipping_method']['cost']
+						 */
+						$disCount = -$this->session->data['shipping_method']['cost'];
+
 						$total['totals'][] = array( 
 							'code'       => 'xfee'.$i,
 							'title'      => $this->config->get('xfee_name'.$i),
-							'value'      => $this->config->get('xfee_cost'.$i),
+							'value'      => $disCount,
 							'sort_order' => $this->config->get('xfee_sort_order'.$i)
 						);
 						
-						$total['total'] += $this->config->get('xfee_cost'.$i);
+						$total['total'] += $disCount;
 		  
 		      }
 		
