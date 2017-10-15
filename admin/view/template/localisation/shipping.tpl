@@ -1,6 +1,6 @@
 <?php echo $header; ?><?php echo $column_left; ?>
 <div id="content">
- <div class="page-header">
+ <div class="page-header"> 
     <div class="container-fluid">
       <div class="pull-right">
         <button type="submit" form="form-auspost" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
@@ -13,6 +13,11 @@
       </ul>
     </div>
  </div>
+     <?php if ($success) { ?>
+    <div class="alert alert-success"><i class="fa fa-check-circle"></i> <?php echo $success; ?>
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <?php } ?> 
 <div class="container-fluid">
     <?php if ($error_warning) { ?>
     <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> <?php echo $error_warning; ?>
@@ -29,18 +34,15 @@
              <div class="row">
                     <div class="col-sm-2">
                       <ul id="method-list" class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
-                        <?php
-						  for($i=1;$i<=12;$i++){
-						?>
-                        <li><a href="#tab-setting<?php echo $i;?>" data-toggle="tab"><?php echo $tab_rate.' '.$i; ?></a></li>
-					   <?php }?>
+                        <?php for($i=1;$i<=12;$i++){ ?>
+                         <li <?php if($i==1) echo 'class="active"' ?> ><a href="#tab-setting<?php echo $i;?>" data-toggle="tab"><?php echo $tab_rate.' - '.$i; ?></a></li>
+					              <?php }?>
                       </ul>
                     </div>
 	                
                   <div class="col-sm-10">
                     <div id="shipping-container" class="tab-content">
-                     <div class="tab-pane active" id="tab-general"> 
+                     <div class="tab-pane" id="tab-general"> 
                              <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-status"><?php echo $tab_general; ?></label>
                             <div class="col-sm-10">
@@ -62,11 +64,9 @@
                             </div>
                           </div>  
                             
-                       </div> <!--end of tab general-->
-                       <?php
-				for($i=1;$i<=12;$i++){
-		     ?>
-	   <div id="tab-setting<?php echo $i;?>" class="tab-pane">
+                       </div>
+                       <?php for($i=1;$i<=12;$i++){ ?>
+	   <div id="tab-setting<?php echo $i;?>" class="tab-pane <?php if($i==1) echo 'active'; ?>">
          
 		 <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_name; ?></label>
@@ -77,36 +77,7 @@
             <label class="col-sm-2 control-label"><?php echo $entry_cost; ?></label>
             <div class="col-sm-10"><input class="form-control" type="text" name="xshipping_cost<?php echo $i;?>" value="<?php echo ${'xshipping_cost'.$i}; ?>" /></div>
           </div>
-         <div class="form-group">
-            <label class="col-sm-2 control-label"><?php echo $entry_tax; ?></label>
-            <div class="col-sm-10"><select class="form-control" name="xshipping_tax_class_id<?php echo $i;?>">
-                <option value="0"><?php echo $text_none; ?></option>
-                <?php foreach ($tax_classes as $tax_class) { ?>
-                <?php if ($tax_class['tax_class_id'] == ${'xshipping_tax_class_id'.$i}) { ?>
-                <option value="<?php echo $tax_class['tax_class_id']; ?>" selected="selected"><?php echo $tax_class['title']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $tax_class['tax_class_id']; ?>"><?php echo $tax_class['title']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select></div>
-          </div>
-         <div class="form-group">
-            <label class="col-sm-2 control-label"><?php echo $entry_geo_zone; ?></label>
-            <div class="col-sm-10"><select class="form-control" name="xshipping_geo_zone_id<?php echo $i;?>">
-                <option value="0"><?php echo $text_all_zones; ?></option>
-                <?php foreach ($geo_zones as $geo_zone) { ?>
-                <?php if ($geo_zone['geo_zone_id'] == ${'xshipping_geo_zone_id'.$i}) { ?>
-                <option value="<?php echo $geo_zone['geo_zone_id']; ?>" selected="selected"><?php echo $geo_zone['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $geo_zone['geo_zone_id']; ?>"><?php echo $geo_zone['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-              </select></div>
-          </div>
-		  <div class="form-group">
-            <label class="col-sm-2 control-label"><?php echo $entry_free; ?></label>
-            <div class="col-sm-10"><input class="form-control" type="text" name="xshipping_free<?php echo $i;?>" value="<?php echo ${'xshipping_free'.$i}; ?>" /></div>
-          </div>
+
           <div class="form-group">
             <label class="col-sm-2 control-label"><?php echo $entry_sort_order; ?></label>
             <div class="col-sm-10"><input class="form-control" type="text" name="xshipping_sort_order<?php echo $i;?>" value="<?php echo ${'xshipping_sort_order'.$i}; ?>" size="1" /></div>

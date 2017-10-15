@@ -62,8 +62,6 @@ class ModelExtensionTotalXfee extends Model {
 					   if($this->config->get('xfee_payment'.$i) && $this->config->get('xfee_payment'.$i)!=$payment_method) continue;
 					   if($this->config->get('xfee_shipping'.$i) && $this->config->get('xfee_shipping'.$i).'.'.$this->config->get('xfee_shipping'.$i)!=$shipping_method && $this->config->get('xfee_shipping'.$i)!=$shipping_method) continue;
 
-						//0918 - 計算價格 ($total['total']) 小於 $xfee的門檻時沒有免運優惠
-					    //
 					   /**
 					    * 0918 - 計算價格 ($total['total']) 小於 $xfee的門檻時沒有免運優惠
 					    * 1013 - 發現 ($total['total']) 會包含運費金額, 故需扣除運費金額後再來進行比對

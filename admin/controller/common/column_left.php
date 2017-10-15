@@ -547,15 +547,32 @@ class ControllerCommonColumnLeft extends Controller {
 			 *  171013 - Mars 客製
 			 *  運費管理
 			 */
+			$shipping = array();
 
 			if ($this->user->hasPermission('access', 'localisation/shipping')) {
-				$localisation[] = array(
-					'name'	   => $this->language->get('text_shipping'),
+				$shipping[] = array(
+					'name'	   => $this->language->get('text_rate'),
 					'href'     => $this->url->link('localisation/shipping', 'token=' . $this->session->data['token'], true),
 					'children' => array()		
 				);
 			}
+
+			if ($this->user->hasPermission('access', 'localisation/payment2shipping')) {
+				$shipping[] = array(
+					'name'	   => $this->language->get('text_payment2shipping'),
+					'href'     => $this->url->link('localisation/payment2shipping', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);
+			}
 			
+			if ($shipping) {	
+				$localisation[] = array(
+					'name'	   => $this->language->get('text_shipping'),
+					'href'     => '',
+					'children' => $shipping		
+				);
+			}
+
 			// Returns
 			$return = array();
 			
