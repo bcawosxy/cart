@@ -1,7 +1,7 @@
 <?php
 // Heading
 $_['heading_title']		 = '銀行匯款或轉帳';
-
+$_['text_title']		 = '銀行匯款或轉帳';
 // Text
 $_['text_extension']	 = '擴充功能';
 $_['text_success']		 = '成功：您已修改的銀行匯款或轉帳模組！';

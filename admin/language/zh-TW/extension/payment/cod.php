@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']					= '貨到付款';
+$_['text_title']					= '貨到付款';
 
 // Text
 $_['text_extension']				= '擴充功能';

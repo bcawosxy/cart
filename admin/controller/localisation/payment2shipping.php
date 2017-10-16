@@ -8,12 +8,10 @@ class ControllerlocalisationPayment2shipping extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
-
-		//way1 : $this->session->data['payment_methods']
 		
 		$this->load->model('extension/extension');
 		$results = $this->model_extension_extension->getExtensions('payment');
-		
+		$recurring = $this->cart->hasRecurringProducts();
 		foreach ($results as $result) {
 			if ($this->config->get($result['code'] . '_status')) {
 
@@ -24,7 +22,7 @@ class ControllerlocalisationPayment2shipping extends Controller {
    				}else{
    					$this->load->model('extension/payment/' . $result['code']);
 
-					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($payment_address, $total);
+					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod();
    				}
 
 				if ($method) {
