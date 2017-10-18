@@ -9,49 +9,11 @@ class ControllerlocalisationPayment2shipping extends Controller {
 
 		$this->load->model('setting/setting');
 		
-		$this->load->model('extension/extension');
-		$results = $this->model_extension_extension->getExtensions('payment');
-		$recurring = $this->cart->hasRecurringProducts();
-		foreach ($results as $result) {
-			if ($this->config->get($result['code'] . '_status')) {
+		//取得支付方式
+		$payment_method = $this->getPaymentMethods();
+		$shipping_method = $this->getShippingMethods();
 
-				if(VERSION < '2.3.0.0'){
-   					$this->load->model('payment/' . $result['code']);
-
-					$method = $this->{'model_payment_' . $result['code']}->getMethod($payment_address, $total);
-   				}else{
-   					$this->load->model('extension/payment/' . $result['code']);
-
-					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod();
-   				}
-
-				if ($method) {
-					if ($recurring) {
-						if(VERSION < '2.3.0.0'){
-							if (method_exists($this->{'model_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_payment_' . $result['code']}->recurringPayments()) {
-								$method_data[$result['code']] = $method;
-							}
-						}else{
-							if (property_exists($this->{'model_extension_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_extension_payment_' . $result['code']}->recurringPayments()) {
-								$method_data[$result['code']] = $method;
-							}
-						}
-					} else {
-						$method_data[$result['code']] = $method;
-					}					
-				}
-			}
-		}
-
-		$sort_order = array();
-
-		foreach ($method_data as $key => $value) {
-			$sort_order[$key] = $value['sort_order'];
-		}
-
-		array_multisort($sort_order, SORT_ASC, $method_data);
-
-		print_r($method_data);
+		print_r($shipping_method);
 
 		exit;
 		$config_data = [
@@ -189,6 +151,94 @@ class ControllerlocalisationPayment2shipping extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('localisation/payment2shipping', $data));
+	}
+
+	protected function getPaymentMethods() {
+		$this->load->model('extension/extension');
+		$results = $this->model_extension_extension->getExtensions('payment');
+		$recurring = $this->cart->hasRecurringProducts();
+		$method_data = array();
+		foreach ($results as $result) {
+			if ($this->config->get($result['code'] . '_status')) {
+
+				if(VERSION < '2.3.0.0'){
+   					$this->load->model('payment/' . $result['code']);
+
+					$method = $this->{'model_payment_' . $result['code']}->getMethod($payment_address, $total);
+   				}else{
+   					$this->load->model('extension/payment/' . $result['code']);
+
+					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod();
+   				}
+
+				if ($method) {
+					if ($recurring) {
+						if(VERSION < '2.3.0.0'){
+							if (method_exists($this->{'model_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_payment_' . $result['code']}->recurringPayments()) {
+								$method_data[$result['code']] = $method;
+							}
+						}else{
+							if (property_exists($this->{'model_extension_payment_' . $result['code']}, 'recurringPayments') && $this->{'model_extension_payment_' . $result['code']}->recurringPayments()) {
+								$method_data[$result['code']] = $method;
+							}
+						}
+					} else {
+						$method_data[$result['code']] = $method;
+					}					
+				}
+			}
+		}
+
+		$sort_order = array();
+
+		foreach ($method_data as $key => $value) {
+			$sort_order[$key] = $value['sort_order'];
+		}
+
+		array_multisort($sort_order, SORT_ASC, $method_data);
+
+		return $method_data;
+	}
+
+	protected function getShippingMethods() {
+		$method_data = array();
+
+		$this->load->model('extension/extension');
+
+		$results = $this->model_extension_extension->getExtensions('shipping');
+
+		foreach ($results as $result) {
+
+			if ($this->config->get($result['code'] . '_status')) {
+   				
+   				if(VERSION < '2.3.0.0'){
+   					$this->load->model('shipping/' . $result['code']);
+
+					$quote = $this->{'model_shipping_' . $result['code']}->getQuote($shipping_address);
+   				}else{
+   					$this->load->model('extension/shipping/' . $result['code']);
+
+					$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote();
+   				}
+				
+				if ($quote) {
+					$method_data[$result['code']] = array(
+						'quote'      => $quote['quote'],
+						'sort_order' => $quote['sort_order'],
+					);
+				}
+			}
+		}
+
+		$sort_order = array();
+
+		foreach ($method_data as $key => $value) {
+			$sort_order[$key] = $value['sort_order'];
+		}
+
+		array_multisort($sort_order, SORT_ASC, $method_data);
+
+		return $method_data;
 	}
 
 	protected function validate() {
