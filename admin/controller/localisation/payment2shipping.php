@@ -8,76 +8,31 @@ class ControllerlocalisationPayment2shipping extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
-		
-		//取得支付方式
-		$payment_method = $this->getPaymentMethods();
-		$shipping_method = $this->getShippingMethods();
 
-		print_r($shipping_method);
-
-		exit;
-		$config_data = [
-			'bigshop_top_bar_contact_status',
-			'bigshop_top_bar_contact',
-			'bigshop_top_bar_email_status',
-			'bigshop_top_bar_email',
-			'bigshop_address_status',
-			'bigshop_mobile_status',
-			'bigshop_email_status',
-			'bigshop_address',
-			'bigshop_mobile',
-			'bigshop_email',
-			'bigshop_feature_box1_status',
-			'bigshop_feature_box2_status',
-			'bigshop_feature_box3_status',
-			'bigshop_feature_box1_title',
-			'bigshop_feature_box2_title',
-			'bigshop_feature_box3_title',
-			'bigshop_feature_box1_subtitle',
-			'bigshop_feature_box2_subtitle',
-			'bigshop_feature_box3_subtitle',
-		];
-
-        foreach ($config_data as $conf) {
-            if (isset($this->request->post[$conf])) {
-                $data[$conf] = $this->request->post[$conf];
-            } else {
-                $data[$conf] = $this->config->get($conf);
-            }
-        }
-		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			
-			$code = 'bigshop';
-			$store_id = 0;
-			foreach ($this->request->post as $key => $value) {
-				if (substr($key, 0, strlen($code)) == $code) {
-					if (!is_array($value)) {
-						$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape($value) . "'");
-					} else {
-						$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape(json_encode($value, true)) . "', serialized = '1'");
-					}
-				}
-			}
+			print_r($this->request->post);
+			exit;
+			// $code = 'bigshop';
+			// $store_id = 0;
+			// foreach ($this->request->post as $key => $value) {
+			// 	if (substr($key, 0, strlen($code)) == $code) {
+			// 		if (!is_array($value)) {
+			// 			$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape($value) . "'");
+			// 		} else {
+			// 			$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape(json_encode($value, true)) . "', serialized = '1'");
+			// 		}
+			// 	}
+			// }
 
-			$this->response->redirect($this->url->link('indexsetting/info', 'token=' . $this->session->data['token'], true));
+			$this->response->redirect($this->url->link('localisation/payment2shipping', 'token=' . $this->session->data['token'], true));
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-
+		
 		$data['text_edit'] = $this->language->get('text_edit');
-		$data['text_enabled'] = $this->language->get('text_enabled');
-		$data['text_disabled'] = $this->language->get('text_disabled');
 		$data['text_header'] = $this->language->get('text_header');
-		$data['text_feature'] = $this->language->get('text_feature');
 		$data['text_footer'] = $this->language->get('text_footer');
-		$data['text_telphone'] = $this->language->get('text_telphone');
-		$data['text_email'] = $this->language->get('text_email');
-
-		$data['entry_name'] = $this->language->get('entry_name');
-		$data['entry_title'] = $this->language->get('entry_title');
-		$data['entry_description'] = $this->language->get('entry_description');
-		$data['entry_status'] = $this->language->get('entry_status');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -111,39 +66,34 @@ class ControllerlocalisationPayment2shipping extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('indexsetting/info', 'token=' . $this->session->data['token'], true)
+			'href' => $this->url->link('localisation/payment2shipping', 'token=' . $this->session->data['token'], true)
 		);
 
-		$data['action'] = $this->url->link('indexsetting/info', 'token=' . $this->session->data['token'], true);
+		$data['action'] = $this->url->link('localisation/payment2shipping', 'token=' . $this->session->data['token'], true);
 
 		$data['cancel'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true);
 
-		if (isset($this->request->post['name'])) {
-			$data['name'] = $this->request->post['name'];
-		} elseif (!empty($module_info)) {
-			$data['name'] = $module_info['name'];
+
+		//取得支付方式
+		$payment_method = $this->getPaymentMethods();
+		$shipping_method = $this->getShippingMethods();
+
+		if (isset($this->request->post['payment_method'])) {
+			$data['payment_method'] = $this->request->post['payment_method'];
 		} else {
-			$data['name'] = '';
+			$data['payment_method'] = $payment_method;
 		}
 
-		if (isset($this->request->post['module_description'])) {
-			$data['module_description'] = $this->request->post['module_description'];
-		} elseif (!empty($module_info)) {
-			$data['module_description'] = $module_info['module_description'];
+		if (isset($this->request->post['shipping_method'])) {
+			$data['shipping_method'] = $this->request->post['shipping_method'];
 		} else {
-			$data['module_description'] = array();
+			$data['shipping_method'] = $shipping_method['xshipping'];
 		}
 
-		$this->load->model('localisation/language');
-
-		$data['languages'] = $this->model_localisation_language->getLanguages();
-
-		if (isset($this->request->post['status'])) {
-			$data['status'] = $this->request->post['status'];
-		} elseif (!empty($module_info)) {
-			$data['status'] = $module_info['status'];
+		if (isset($this->error['name'])) {
+			$data['error_fail_status'] = $this->error['name'];
 		} else {
-			$data['status'] = '';
+			$data['error_fail_status'] = '';
 		}
 
 		$data['header'] = $this->load->controller('common/header');

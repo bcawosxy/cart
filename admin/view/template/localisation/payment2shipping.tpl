@@ -35,22 +35,26 @@
           <div class="tab-pane">
     
             <div class="tab-content">
-                             
+              
+              <?php foreach($payment_method as $k0 => $v0) { ?>               
               <fieldset>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-fail-status"><span data-toggle="tooltip" title="<?php echo $help_fail_status; ?>"><?php echo $entry_fail_status; ?></span></label>
+                  <label class="col-sm-2 control-label"><?php echo $v0['title']; ?> :</label>
                   <div class="col-sm-10">
                     <div class="well well-sm" style="height: 150px; overflow: auto;">
-                      <?php foreach ($order_statuses as $order_status) { ?>
+                      <?php foreach ($shipping_method['quote'] as $k1 => $v1) { ?>
                       <div class="checkbox">
-                        <label>
-                          <?php if (in_array($order_status['order_status_id'], $config_fail_status)) { ?>
-                          <input type="checkbox" name="config_fail_status[]" value="<?php echo $order_status['order_status_id']; ?>" checked="checked" />
-                          <?php echo $order_status['name']; ?>
+                        <label class="col-sm-4">
+                          <?php if (in_array($v1['code'], [])) { ?>
+                          <input id="<?php echo $k0.'_'.$k1 ;?>" type="checkbox" name="<?php echo $v0['code']; ?>[]" value="<?php echo $v1['code']; ?>" checked="checked" />
+                          <?php echo $v1['title']; ?>
                           <?php } else { ?>
-                          <input type="checkbox" name="config_fail_status[]" value="<?php echo $order_status['order_status_id']; ?>" />
-                          <?php echo $order_status['name']; ?>
+                          <input id="<?php echo $k0.'_'.$k1 ;?>" type="checkbox" name="<?php echo $v0['code']; ?>[]" value="<?php echo $v1['code']; ?>" />
+                          <?php echo $v1['title']; ?>
                           <?php } ?>
+                        </label>
+                        <label class="col-sm-4" for="<?php echo $k0.'_'.$k1 ; ?>">
+                          ( 費用 : <?php echo $v1['cost'] ?> )
                         </label>
                       </div>
                       <?php } ?>
@@ -61,10 +65,11 @@
                   </div>
                 </div>
               </fieldset>
+              <?php } ?>
+
 
             </div>
           </div>
-
         </form>
 
 
