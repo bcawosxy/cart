@@ -3,36 +3,30 @@ class ControllerlocalisationPayment2shipping extends Controller {
 	private $error = array();
 
 	public function index() {
+		//取得支付方式
+		$payment_method = $this->getPaymentMethods();
+		$shipping_method = $this->getShippingMethods();
+
 		$this->load->language('localisation/payment2shipping');
-
 		$this->document->setTitle($this->language->get('heading_title'));
-
 		$this->load->model('setting/setting');
+		$this->load->model('localisation/payment2shipping');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			
-			print_r($this->request->post);
-			exit;
-			// $code = 'bigshop';
-			// $store_id = 0;
-			// foreach ($this->request->post as $key => $value) {
-			// 	if (substr($key, 0, strlen($code)) == $code) {
-			// 		if (!is_array($value)) {
-			// 			$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape($value) . "'");
-			// 		} else {
-			// 			$this->db->query("INSERT INTO " . DB_PREFIX . "setting SET store_id = '" . (int)$store_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape(json_encode($value, true)) . "', serialized = '1'");
-			// 		}
-			// 	}
-			// }
 
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate($payment_method)) {
+			$this->model_localisation_payment2shipping->editPayment2shipping($this->request->post, $shipping_method['xshipping']['quote']);
+
+			$this->session->data['success'] = $this->language->get('text_success');
 			$this->response->redirect($this->url->link('localisation/payment2shipping', 'token=' . $this->session->data['token'], true));
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_header'] = $this->language->get('text_header');
 		$data['text_footer'] = $this->language->get('text_footer');
+		$data['text_payment'] = $this->language->get('text_payment');
+		$data['text_shipping'] = $this->language->get('text_shipping');
 
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -43,18 +37,20 @@ class ControllerlocalisationPayment2shipping extends Controller {
 			$data['error_warning'] = '';
 		}
 
+		foreach ($payment_method as $k0 => $v0) {
+			if (isset($this->error['error_'.$k0])) {
+				$data['error_'.$k0] = $this->error['error_'.$k0];
+			} else {
+				$data['error_'.$k0] = '';
+			}	
+		}
+
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
 
 			unset($this->session->data['success']);
 		} else {
 			$data['success'] = '';
-		}
-
-		if (isset($this->error['name'])) {
-			$data['error_name'] = $this->error['name'];
-		} else {
-			$data['error_name'] = '';
 		}
 
 		$data['breadcrumbs'] = array();
@@ -74,10 +70,6 @@ class ControllerlocalisationPayment2shipping extends Controller {
 		$data['cancel'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true);
 
 
-		//取得支付方式
-		$payment_method = $this->getPaymentMethods();
-		$shipping_method = $this->getShippingMethods();
-
 		if (isset($this->request->post['payment_method'])) {
 			$data['payment_method'] = $this->request->post['payment_method'];
 		} else {
@@ -90,11 +82,12 @@ class ControllerlocalisationPayment2shipping extends Controller {
 			$data['shipping_method'] = $shipping_method['xshipping'];
 		}
 
-		if (isset($this->error['name'])) {
-			$data['error_fail_status'] = $this->error['name'];
-		} else {
-			$data['error_fail_status'] = '';
+		$allPayment2shippings = $this->model_localisation_payment2shipping->getPayment2Shippings();
+		foreach ($payment_method as $k0 => $v0) {
+			$payment2shippings[$k0] = (array_key_exists($k0, $allPayment2shippings)) ? array_column($allPayment2shippings[$k0], 'shipping_code') : [] ;
 		}
+
+		$data['payment2shippings'] = $payment2shippings;
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -191,7 +184,12 @@ class ControllerlocalisationPayment2shipping extends Controller {
 		return $method_data;
 	}
 
-	protected function validate() {
+	protected function validate($payment_method) {
+
+		foreach ($payment_method as $k0 => $v0) {			
+			if(!array_key_exists($k0, $this->request->post)) $this->error['error_'.$k0] = $this->language->get('error_payment2shipping');
+		}
+
 		return !$this->error;
 	}
 }

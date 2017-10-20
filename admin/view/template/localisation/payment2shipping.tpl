@@ -29,13 +29,13 @@
         <h3 class="panel-title"><i class="fa fa-pencil"></i> <?php echo $text_edit; ?></h3>
       </div>
       <div class="panel-body">
-        
-
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-html" class="form-horizontal">      
           <div class="tab-pane">
-    
             <div class="tab-content">
-              
+              <fieldset>
+               <legend class="col-sm-2"><?php echo $text_payment; ?></legend>
+               <legend class="col-sm-10"><?php echo $text_shipping; ?></legend>
+              </fieldset>
               <?php foreach($payment_method as $k0 => $v0) { ?>               
               <fieldset>
                 <div class="form-group">
@@ -45,7 +45,7 @@
                       <?php foreach ($shipping_method['quote'] as $k1 => $v1) { ?>
                       <div class="checkbox">
                         <label class="col-sm-4">
-                          <?php if (in_array($v1['code'], [])) { ?>
+                          <?php if ( in_array($v1['code'], $payment2shippings[$v0['code']]) &&  !${'error_'.$v0['code']}) { ?>
                           <input id="<?php echo $k0.'_'.$k1 ;?>" type="checkbox" name="<?php echo $v0['code']; ?>[]" value="<?php echo $v1['code']; ?>" checked="checked" />
                           <?php echo $v1['title']; ?>
                           <?php } else { ?>
@@ -59,20 +59,16 @@
                       </div>
                       <?php } ?>
                     </div>
-                    <?php if ($error_fail_status) { ?>
-                    <div class="text-danger"><?php echo $error_fail_status; ?></div>
+                    <?php if (${'error_'.$v0['code']}) { ?>
+                    <div class="text-danger"><?php echo ${'error_'.$v0['code']}; ?></div>
                     <?php } ?>
                   </div>
                 </div>
               </fieldset>
               <?php } ?>
-
-
             </div>
           </div>
         </form>
-
-
       </div>
     </div>
   </div>
