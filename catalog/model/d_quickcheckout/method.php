@@ -4,14 +4,9 @@
  */
 
 class ModelDQuickcheckoutMethod extends Model {
-
-
-
-	
 	/*
 	*	Shipping method
 	*/
-
 	public function shippingRequired(){
     	if($this->cart->hasShipping()){
         	return true;
@@ -43,8 +38,6 @@ class ModelDQuickcheckoutMethod extends Model {
 
 		return $this->getFirstShippingMethod();
 	}
-
-	
 
 	public function getShippingMethods($shipping_address){
 		$method_data = array();
@@ -86,13 +79,15 @@ class ModelDQuickcheckoutMethod extends Model {
 
 		array_multisort($sort_order, SORT_ASC, $method_data);
 
+
 		return $method_data;
 	}
+
+	
 
 	/*
 	*	Payment method
 	*/
-
 	public function getFirstPaymentMethod(){
 
 		if(isset($this->session->data['payment_methods']) && is_array($this->session->data['payment_methods'])){
@@ -112,8 +107,6 @@ class ModelDQuickcheckoutMethod extends Model {
 		}
 		return $this->getFirstPaymentMethod();
 	}
-
-	
 
 	public function getPaymentMethods($payment_address, $total){
 		$method_data = array();

@@ -51,6 +51,11 @@ body > #d_quickcheckout{
 	</div>
 </div>
 <script>
+
+function reBuildShippingList(payment_method) {
+
+}
+
 $(function() {
 	
 	$('.qc-step').each(function(){
@@ -65,5 +70,14 @@ $(function() {
 <?php if(!$config['design']['breadcrumb']) { ?>
 	$('.qc-breadcrumb').hide();
 <?php } ?>
+
+
+reBuildShippingList($('input[name=payment_method]:checked').val());
+
 })
+
+$(document).on('change', 'input[name="payment_method"]', function(){
+	reBuildShippingList($(this).val() );
+})
+
 </script>

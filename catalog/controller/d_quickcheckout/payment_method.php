@@ -11,7 +11,11 @@
                 $this->document->addScript('catalog/view/javascript/d_quickcheckout/view/payment_method.js');
             }
 
-            $data['col'] = $config['account']['guest']['payment_method']['column'];
+            /**
+             * 171023 - 這邊的column會改變前台結帳頁面的框格順序, 由於為lite版本所以無法自訂, 在這邊取為2 (與shipping_method互換)
+             */
+            // $data['col'] = $config['account']['guest']['payment_method']['column'];
+            $data['col'] = 2;
             $data['row'] = $config['account']['guest']['payment_method']['row'];
 
             $json['account'] = $this->session->data['account'];
@@ -76,8 +80,7 @@
             $this->load->model('module/d_quickcheckout');
             $this->load->model('d_quickcheckout/method');
             $this->load->model('d_quickcheckout/address');
-             $this->load->model('d_quickcheckout/order');
-
+            $this->load->model('d_quickcheckout/order');
             $this->session->data['payment_methods'] = $this->model_d_quickcheckout_method->getPaymentMethods($this->session->data['payment_address'], $this->session->data['total']);
 
             if (isset($this->request->post['payment_method'])) {
