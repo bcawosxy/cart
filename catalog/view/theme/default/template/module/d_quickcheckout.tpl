@@ -52,32 +52,50 @@ body > #d_quickcheckout{
 </div>
 <script>
 
-function reBuildShippingList(payment_method) {
+function clearShippingList() {
+	$('#shipping_method_list').find('div').remove();
+}
 
+function reBuildShippingList(payment_method) {
+	$.post('<?php echo $payment2shippingUrl ;?>', {
+		payment_method: payment_method,
+	}, function(r) {
+		for(var i in r[payment_method]) {
+			var html = `<div class="radio-input radio">
+					    <label for="${r[payment_method][i]['code']}">
+					      <input type="radio" name="shipping_method" value="${r[payment_method][i]['code']}" id="${r[payment_method][i]['code']}" data-refresh="5" class="styled"> 
+					    <span class="text">${r[payment_method][i]['title']}</span><span class="price">${r[payment_method][i]['text']}</span></label>
+					</div>`;
+
+			$('#shipping_method_list').append(html);
+		}
+
+		$('#shipping_method_list input[name="shipping_method"]:first').prop('checked', true).trigger('change');
+	});
 }
 
 $(function() {
-	
 	$('.qc-step').each(function(){
 		$(this).appendTo('.qc-col-' + $(this).attr('data-col'));	
 	})
 	$('.qc-step').tsort({attr:'data-row'});
-<?php if($config['design']['only_quickcheckout']){ ?>
-	$('body').prepend($('#d_quickcheckout'));
-	$('#d_quickcheckout').addClass('container')
-	$('#d_quickcheckout #d_logo ').prepend($('header #logo').html())
-<?php } ?>
-<?php if(!$config['design']['breadcrumb']) { ?>
-	$('.qc-breadcrumb').hide();
-<?php } ?>
+	<?php if($config['design']['only_quickcheckout']){ ?>
+		$('body').prepend($('#d_quickcheckout'));
+		$('#d_quickcheckout').addClass('container')
+		$('#d_quickcheckout #d_logo ').prepend($('header #logo').html())
+	<?php } ?>
+	<?php if(!$config['design']['breadcrumb']) { ?>
+		$('.qc-breadcrumb').hide();
+	<?php } ?>
 
-
-reBuildShippingList($('input[name=payment_method]:checked').val());
+	clearShippingList();
+	reBuildShippingList($('input[name=payment_method]:checked').val());
 
 })
 
 $(document).on('change', 'input[name="payment_method"]', function(){
-	reBuildShippingList($(this).val() );
+	clearShippingList();
+	reBuildShippingList($(this).val());
 })
 
 </script>

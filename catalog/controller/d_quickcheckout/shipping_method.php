@@ -90,6 +90,7 @@
             $this->load->model('d_quickcheckout/method');
             $this->load->model('d_quickcheckout/address');
             $this->load->model('d_quickcheckout/order');
+            $this->load->model('localisation/payment2shipping');
             $this->session->data['shipping_methods'] = $this->model_d_quickcheckout_method->getShippingMethods($this->model_d_quickcheckout_address->paymentOrShippingAddress());
 
             if (isset($this->request->post['shipping_method'])) {
@@ -116,9 +117,21 @@
 
 
             $json['show_shipping_method'] = $this->model_d_quickcheckout_method->shippingRequired();
+            
+            /**
+             * 171024 - 在結帳頁面改變運送方式時會觸發, 直接調整可用 shipping_methods, 但此處有點危險需特別注意
+             */
+            if(isset($this->session->data['payment_method'])) {
+                $shippingMethodsCode = array_column($this->session->data['shipping_methods']['xshipping']['quote'], 'code');
+                $getPayment2Shippings = $this->model_localisation_payment2shipping->getPayment2Shippings($this->session->data['payment_method']['code'], $shippingMethodsCode);
+                if(!empty($getPayment2Shippings)) {                
+                    $this->session->data['shipping_methods']['xshipping']['quote'] = $getPayment2Shippings[$this->session->data['payment_method']['code']];
+                }                
+            }
+
             $json['shipping_methods'] = $this->session->data['shipping_methods'];
             if (empty($this->session->data['shipping_methods'])) {
-                 $this->load->language('checkout/checkout');
+                $this->load->language('checkout/checkout');
                 $json['shipping_error'] = sprintf($this->language->get('error_no_shipping'), $this->url->link('information/contact'));
             } else {
                 $json['shipping_error'] = '';
@@ -131,5 +144,26 @@
             return $json;
         }
 
+        /**
+         * 171024 - 為了取得payment 對應的 shipping 的function
+         * 在結帳頁面改變付款方式時執行
+         */
+        public function payment2shipping() {
+            if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+                $paymentMethodCode = (!empty($this->request->post['payment_method'])) ? $this->request->post['payment_method'] : null ;
+                
+                $this->load->model('d_quickcheckout/method');
+                $this->load->model('d_quickcheckout/address');
+                $this->load->model('localisation/payment2shipping');
+
+                //all ShippingMethods
+                $shippingMethods = $this->model_d_quickcheckout_method->getShippingMethods($this->model_d_quickcheckout_address->paymentOrShippingAddress())['xshipping']['quote'];
+                $shippingMethodsCode = array_column($shippingMethods, 'code');
+                $result = $this->model_localisation_payment2shipping->getPayment2Shippings($paymentMethodCode, $shippingMethodsCode);
+
+                $this->response->addHeader('Content-Type: application/json');
+                $this->response->setOutput(json_encode($result));
+            }
+        }
     }
     

@@ -82,6 +82,7 @@ class ControllerModuleDQuickcheckout extends Controller {
         $data['cart'] = $this->load->controller('d_quickcheckout/cart', $this->setting);
         $data['payment'] = $this->load->controller('d_quickcheckout/payment', $this->setting);
         $data['confirm'] = $this->load->controller('d_quickcheckout/confirm', $this->setting);
+        $data['payment2shippingUrl'] = $this->url->link('d_quickcheckout/shipping_method/payment2shipping');
 
         if(VERSION >= '2.2.0.0'){
             $template = 'module/d_quickcheckout';

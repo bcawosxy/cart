@@ -54,7 +54,7 @@
 
 								<% if (!shipping_method.error) { %>
 									<% _.each(shipping_method.quote, function(quote) { %>
-									  <div class="radio-input radio" data-shipping_code="<%= quote.code %>">
+									  <div class="radio-input radio">
 									    <label for="<%= quote.code %>">
 									    <% if (quote.code == model.shipping_method.code) { %>
 									      <input type="radio" name="shipping_method" value="<%= quote.code %>" id="<%= quote.code %>" checked="checked" data-refresh="5" class="styled"/> 
