@@ -158,7 +158,10 @@
 
                 //all ShippingMethods
                 $shippingMethods = $this->model_d_quickcheckout_method->getShippingMethods($this->model_d_quickcheckout_address->paymentOrShippingAddress())['xshipping']['quote'];
-                $shippingMethodsCode = array_column($shippingMethods, 'code');
+                foreach ($shippingMethods as $k0 => $v0) {
+                    $shippingMethodsCode[] = $v0['code'];
+                }
+
                 $result = $this->model_localisation_payment2shipping->getPayment2Shippings($paymentMethodCode, $shippingMethodsCode);
 
                 $this->response->addHeader('Content-Type: application/json');
