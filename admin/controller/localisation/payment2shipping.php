@@ -84,7 +84,13 @@ class ControllerlocalisationPayment2shipping extends Controller {
 
 		$allPayment2shippings = $this->model_localisation_payment2shipping->getPayment2Shippings();
 		foreach ($payment_method as $k0 => $v0) {
-			$payment2shippings[$k0] = (array_key_exists($k0, $allPayment2shippings)) ? array_column($allPayment2shippings[$k0], 'shipping_code') : [] ;
+			if(array_key_exists($k0, $allPayment2shippings)) {
+				foreach ($allPayment2shippings[$k0] as $k1 => $v1) {
+					$payment2shippings[$k0][] = $v1['shipping_code'];
+				}
+			} else {
+				$payment2shippings[$k0][] = [];
+			}
 		}
 
 		$data['payment2shippings'] = $payment2shippings;
