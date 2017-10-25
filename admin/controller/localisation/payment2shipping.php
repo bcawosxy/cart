@@ -14,7 +14,7 @@ class ControllerlocalisationPayment2shipping extends Controller {
 
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate($payment_method)) {
-			$this->model_localisation_payment2shipping->editPayment2shipping($this->request->post, $shipping_method['xshipping']['quote']);
+			$this->model_localisation_payment2shipping->editPayment2shippings($this->request->post, $shipping_method['xshipping']['quote']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 			$this->response->redirect($this->url->link('localisation/payment2shipping', 'token=' . $this->session->data['token'], true));

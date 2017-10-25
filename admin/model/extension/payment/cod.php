@@ -5,9 +5,7 @@ class ModelExtensionPaymentCOD extends Model {
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('cod_geo_zone_id') . "'");
 
-		if (!$this->cart->hasShipping()) {
-			$status = false;
-		} elseif (!$this->config->get('cod_geo_zone_id')) {
+		if (!$this->config->get('cod_geo_zone_id')) {
 			$status = true;
 		} elseif ($query->num_rows) {
 			$status = true;

@@ -1,7 +1,7 @@
 <?php
 class ModelLocalisationPayment2shipping extends Model {
 
-	public function editPayment2shipping($data, $shipping_method) {
+	public function editPayment2shippings($data, $shipping_method) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "payment2shipping`");
 
 		foreach ($data as $k0 => $v0) {
@@ -14,15 +14,27 @@ class ModelLocalisationPayment2shipping extends Model {
 
 	public function getPayment2Shippings() {
 		$return = [];
-
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "payment2shipping");
-
 		foreach ($query->rows as $result => $values) {
 			$return[$values['payment_code']][] = $query->rows[$result];
 		}
-
 		return $return;
 	}
 
+	public function editShippingsByShippingSetting($data) {
+		for($i=1;$i<=12;$i++) {
+			$shipping_code = 'xshipping.xshipping'.$i;	
+			if($data['xshipping_status'.$i] && !empty($data['xshipping_name'.$i])) {
+				
+				$edit = "UPDATE `" . DB_PREFIX . "payment2shipping` SET `shipping_title` = '" . $this->db->escape($data['xshipping_name'.$i]) . "', `shipping_cost` = '" .(int)$this->db->escape($data['xshipping_cost'.$i]) . "', `shipping_text` = '" . $this->db->escape('$ '.$data['xshipping_cost'.$i] ). "' WHERE `shipping_code` = '". $shipping_code ."'";				
+
+				$this->db->query($edit);
+
+			} else {
+				$delete = "DELETE FROM `" .  DB_PREFIX. "payment2shipping` WHERE `shipping_code` = '". $shipping_code ."'";
+				$this->db->query($delete);
+			}
+		}
+	}
 }
 ?>

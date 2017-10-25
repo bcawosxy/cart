@@ -8,11 +8,13 @@ class ControllerLocalisationShipping extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		
 		$this->load->model('setting/setting');
+		$this->load->model('localisation/payment2shipping');
 				
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			
-			$this->model_setting_setting->editSetting('xshipping', $this->request->post);		
-					
+
+			$this->model_setting_setting->editSetting('xshipping', $this->request->post);
+			$this->model_localisation_payment2shipping->editShippingsByShippingSetting($this->request->post);
+
 			$this->session->data['success'] = $this->language->get('text_success');
 			
 			$this->session->data['success'] = $this->language->get('text_success');	
@@ -69,8 +71,7 @@ class ControllerLocalisationShipping extends Controller {
 		$data['action'] = $this->url->link('localisation/shipping', 'token=' . $this->session->data['token'], true);
 		$data['cancel'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true);
 		
-		for($i=1;$i<=12;$i++)
-		 {
+		for($i=1;$i<=12;$i++) {
 				if (isset($this->request->post['xshipping_cost'.$i])) {
 					$data['xshipping_cost'.$i] = $this->request->post['xshipping_cost'.$i];
 				} else {
@@ -112,18 +113,19 @@ class ControllerLocalisationShipping extends Controller {
 				} else {
 					$data['xshipping_sort_order'.$i] = $this->config->get('xshipping_sort_order'.$i);
 				}
-		 }	
+		}	
 		 
-		 if (isset($this->request->post['xshipping_status'])) {
-					$data['xshipping_status'] = $this->request->post['xshipping_status'];
-				} else {
-					$data['xshipping_status'] = $this->config->get('xshipping_status');
-				}
+		if (isset($this->request->post['xshipping_status'])) {
+			$data['xshipping_status'] = $this->request->post['xshipping_status'];
+		} else {
+			$data['xshipping_status'] = $this->config->get('xshipping_status');
+		}
+
 		if (isset($this->request->post['xshipping_sort_order'])) {
-					$data['xshipping_sort_order'] = $this->request->post['xshipping_sort_order'];
-				} else {
-					$data['xshipping_sort_order'] = $this->config->get('xshipping_sort_order');
-				}						
+			$data['xshipping_sort_order'] = $this->request->post['xshipping_sort_order'];
+		} else {
+			$data['xshipping_sort_order'] = $this->config->get('xshipping_sort_order');
+		}						
 
 		$this->load->model('localisation/tax_class');
 		
