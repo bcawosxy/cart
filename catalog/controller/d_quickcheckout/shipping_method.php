@@ -122,7 +122,11 @@
              * 171024 - 在結帳頁面改變運送方式時會觸發, 直接調整可用 shipping_methods, 但此處有點危險需特別注意
              */
             if(isset($this->session->data['payment_method'])) {
-                $shippingMethodsCode = array_column($this->session->data['shipping_methods']['xshipping']['quote'], 'code');
+                
+                foreach ($this->session->data['shipping_methods']['xshipping']['quote'] as $k0 => $v0) {
+                    $shippingMethodsCode[] = $v0['code'];
+                }
+                
                 $getPayment2Shippings = $this->model_localisation_payment2shipping->getPayment2Shippings($this->session->data['payment_method']['code'], $shippingMethodsCode);
                 if(!empty($getPayment2Shippings)) {                
                     $this->session->data['shipping_methods']['xshipping']['quote'] = $getPayment2Shippings[$this->session->data['payment_method']['code']];
