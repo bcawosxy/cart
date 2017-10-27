@@ -68,7 +68,9 @@ class ModelExtensionTotalXfee extends Model {
 					    *  ex: 價格 : 1000  運費 : 150 免運門檻 : 600  折抵 : 500  ==> (1000-500=500) 應該要運費, 但加上150運費後(650) 又會判斷成免運, 故需此判斷
 					    */
 
-					   if( ($total['total']-$this->session->data['shipping_method']['cost']) <= $xfee_total) continue;
+					   if(isset($this->session->data['shipping_method'])) {
+					   	if( ($total['total']-$this->session->data['shipping_method']['cost']) <= $xfee_total) continue;
+					   }
 
                        if($this->config->get('xfee_geo_zone_id'.$i) && $address){
 					      
@@ -96,7 +98,7 @@ class ModelExtensionTotalXfee extends Model {
 						 *  1013 - 配合 x-shipping 套件, 折抵的運費由 x-shipping的運費決定而非 x-fee 設置的固定折抵金額
 						           $disCount = $this->session->data['shipping_method']['cost']
 						 */
-						$disCount = -$this->session->data['shipping_method']['cost'];
+						$disCount = (isset($this->session->data['shipping_method'])) ? -$this->session->data['shipping_method']['cost'] : 0 ;
 
 						$total['totals'][] = array( 
 							'code'       => 'xfee'.$i,
