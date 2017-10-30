@@ -20,9 +20,13 @@ class ControllerCatalogInformation extends Controller {
 		$this->load->model('catalog/information');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_information->addInformation($this->request->post);
+			$information_id = $this->model_catalog_information->addInformation($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'information', $information_id, $this->request->server, $this->request->post, $this->request->get);
 
 			$url = '';
 
@@ -56,6 +60,10 @@ class ControllerCatalogInformation extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'information', $this->request->get['information_id'], $this->request->server, $this->request->post, $this->request->get);
+			
 			$url = '';
 
 			if (isset($this->request->get['sort'])) {
@@ -86,6 +94,10 @@ class ControllerCatalogInformation extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $information_id) {
 				$this->model_catalog_information->deleteInformation($information_id);
+
+				//record log
+				$this->load->model('log/log');
+				$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'information', $information_id, $this->request->server, $this->request->post, $this->request->get);				
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');

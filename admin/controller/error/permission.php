@@ -25,6 +25,10 @@ class ControllerErrorPermission extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
+		//record log
+		$this->load->model('log/log');
+		$this->model_log_log->setLog($this->user->getId(), 'no_permission', '', '', $this->request->server, $this->request->post, $this->request->get);
+
 		$this->response->setOutput($this->load->view('error/permission', $data));
 	}
 }

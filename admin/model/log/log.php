@@ -1,130 +1,75 @@
 <?php
 class ModelLogLog extends Model {
 	
-	public function __construct() {
-		$today = date('Ymd');
+	/**
+	 * 171030 - Mars 針對特定事件紀錄log
+	 * String 	$menber 	: user / customer : user = 後台管理者, customer = 前台客戶 (這邊固定user)
+	 * Int 		$member_id 	: 對應ID
+	 * String 	$act 		: add,no_permission,delete,edit,login,upload 對應不同動作紀錄log
+	 * String 	$target 	: 執行目標 (product...)
+	 * Int 		$target_id 	: 執行目標ID
+	 * Text 	$server 	: $_SERVER
+	 * Text 	$post 		: $_POST
+	 * Text 	$get 		: $_GET
+	 */
+
+	public function setLog($member_id, $act, $target = null, $target_id = null, $server, $post, $get) {
+		$dbName = $this->createTable();
+
+		$device = $this->db->escape($this->getDevice());
+		$server = $this->db->escape(json_encode($server));
+		$post = $this->db->escape(json_encode($post));
+		$get = $this->db->escape(json_encode($get));
+		$ip = $this->db->escape($this->request->server['REMOTE_ADDR']);
+
+		$query = 'INSERT INTO `bookstore_log`.`'.$dbName.'` (`member`, `member_id`, `act`, `target`, `target_id`, `device`, `server`, `post`, `get`, `ip`, `inserttime`) VALUES ("user", "'.$member_id.'", "'.$act.'",  "'.$target.'",  "'.$target_id.'", "'.$device.'", "'.$server.'", "'.$post.'", "'.$get.'", "'.$ip.'", NOW());';
+
+		$result = $this->db->query($query);
+	}
+
+	public function createTable() {
+		$dbName = date('Ymd');
 
 		//create table
-		// $query = $this->db->query('CREATE TABLE IF NOT EXISTS  `bookstore_log`.`'.$today.'` (
-		//   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-		//   `member` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-		//   `member_id` int(10) unsigned NOT NULL,
-		//   `act` enum("add","edit","delete","login","upload","access _fail") COLLATE utf8_unicode_ci DEFAULT NULL,
-		//   `post` text COLLATE utf8_unicode_ci NOT NULL,
-		//   `inserttime` datetime DEFAULT NULL, PRIMARY KEY (`id`)
-		// ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;');
-		
+		$query = $this->db->query('CREATE TABLE IF NOT EXISTS `bookstore_log`.`'.$dbName.'` (
+			`member` enum("customer","user") COLLATE utf8_unicode_ci NOT NULL,
+			`member_id` int(10) unsigned NOT NULL,
+			`act` enum("add","no_permission","delete","edit","login","upload") COLLATE utf8_unicode_ci NOT NULL,
+			`target` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
+			`target_id` int(10) unsigned DEFAULT NULL,			
+			`device` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+			`server` text COLLATE utf8_unicode_ci,
+			`post` text COLLATE utf8_unicode_ci,
+			`get` text COLLATE utf8_unicode_ci,
+			`ip` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+			`inserttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;');
 
-		// echo $today;
+		return $dbName;
 	}
 
-	public function setLog($member, $id) {
-		$query = $this->db->query('SELECT * FROM `bookstore_log`.`20171028`');
-		print_r($query);		
-		return true;
-	}
-
-	public function createTable($years ,$schoolType) {
-		$new_db = $years.'_'.$schoolType;
+	public function getDevice() {
+		$return = null;
+		require_once(DIR_UPLOAD.'Mobile-Detect-2.8.26/Mobile_Detect.php');
+		$detect = new Mobile_Detect;
 		
-		//create table
-		$query = $this->db->query('CREATE TABLE IF NOT EXISTS `book2school`.`'.$new_db.'` (
-		  `id` int(11) unsigned NOT NULL,
-		  `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-		  `sub_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-		  `zone_id` int(11) unsigned NOT NULL,
-		  `zone` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-		  `grades` text COLLATE utf8_unicode_ci NOT NULL
-		) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;');
-
-		//Truncate Table
-		$query = $this->db->query('TRUNCATE TABLE `book2school`.`'.$new_db.'`');
-		
-		//set table index
-		$query = $this->db->query('ALTER TABLE `book2school`.`'.$new_db.'`
-			ADD PRIMARY KEY (`id`),
-			ADD KEY `name` (`name`),
-		  	ADD KEY `sub_name` (`sub_name`),
-		  	ADD KEY `zone_id` (`zone_id`);');
-
-		//set AutoIncrement
-		$query = $this->db->query('ALTER TABLE `book2school`.`'.$new_db.'` MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;');
-
-		return $new_db;
-	}
-
-	public function insertdata($dbname, $data) {
-		$return = 1;
-		foreach ($data as $k0 => $v0) {
-			//取得對應縣市id (zone)
-			$zone = str_replace('台', '臺', $v0['zone']);
-			$fetchZoneQuery = $this->db->query('SELECT `zone_id`,`name` AS `zone_name` FROM `'.DB_PREFIX.'zone` WHERE `name` = "'.$zone.'";');
-			if( ($fetchZoneQuery->num_rows) === 1 ) {
-				$str = '';
-				$str = 'INSERT INTO `book2school`.`'.$dbname.'` (`id`, `name`, `sub_name`, `zone_id`, `zone`, `grades`) VALUES (NULL, "'.$v0['name'].'", "", "'.$fetchZoneQuery->row['zone_id'].'", "'.$fetchZoneQuery->row['zone_name'].'", \''.str_replace('\\', '\\\\', json_encode($v0['class'])).'\');';
-				$insertBook2SchoolQuery = $this->db->query($str);
-			}			
+		if( $detect->isMobile() ) {
+ 			if( $detect->isiOS() ) {
+ 				$return = 'iOS - [iPhone: '. $detect->version('iPhone').']'. '[iPad: '.$detect->version('iPad').']' ;
+ 			} elseif ( $detect->isAndroidOS() ) {
+ 				$return = 'Android - '. $detect->version('Android');
+ 			}
+		} else {
+			if( !empty($detect->version('Chrome')) ) {				
+				$return = 'Chrome - ' . $detect->version('Chrome');
+			} elseif( !empty($detect->version('Firefox')) ){
+				$return = 'FireFox - ' . $detect->version('Firefox');
+			} elseif ( !empty($detect->version('Windows NT')) ) {
+				$return = 'IE - ' . $detect->version('Windows NT');
+			}
 		}
+
 		return $return;
-	}
-
-	public function setdata($schoolType=null, $years=null, $path=null) {
-		$return = 0;
-		if($schoolType != null && $years != null && $path != null) {
-			$DBName = $this->createTable($years, $schoolType);
-			require_once(DIR_UPLOAD.'Classes/PHPExcel.php');
-			require_once(DIR_UPLOAD.'Classes/PHPExcel/IOFactory.php'); 
-			$objPHPExcel = new PHPExcel();
-
-			//從excel中取出資料列
-			$file = $path;
-			try {
-			    $objPHPExcel = PHPExcel_IOFactory::load($file);
-			} catch(Exception $e) {
-			    die('Error loading file "'.pathinfo($file,PATHINFO_BASENAME).'": '.$e->getMessage());
-			}
-			    
-			$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-			foreach ($sheetData[1] as $k0 => $v0) {
-				if($v0 =='縣市') $fileCountyNameCel = $k0;
-				if($v0 =='學校') $fileSchoolNameCel = $k0;
-			}
-			
-			$data = []; $a_tmpName =[]; $school =[];
-			foreach ($sheetData as $k0 => $v0) {
-			    if($k0 > 1) {
-			        $books=[];
-			        if(!in_array($v0[$fileSchoolNameCel], $a_tmpName)) {
-			            if(count($school) > 0) $data[] = $school;
-			            //紀錄下一個學校
-			            $a_tmpName[] = $v0[$fileSchoolNameCel];
-
-			            foreach ($sheetData[1] as $k1 => $v1) {
-			            	if( in_array($k1, ['A','B','C']) ) continue;
-			            	$a_grade[$sheetData[1][$k1]] = $v0[$k1];
-			            }
-
-			            $books[1] = $a_grade;
-			            $school = [
-			                'name' => $v0[$fileSchoolNameCel],
-			                'zone' => $v0[$fileCountyNameCel],
-			                'class' => $books,
-			            ]; 
-			        } else {
-			            foreach ($sheetData[1] as $k1 => $v1) {
-			            	if( in_array($k1, ['A','B','C']) ) continue;
-			            	$a_grade[$sheetData[1][$k1]] = $v0[$k1];
-			            }
-			            $school['class'][$v0['C']] = $a_grade;
-			        }
-			    } 
-			}
-			$data[] = $school;
-			$return = $this->insertdata($DBName, $data);
-			$objPHPExcel->disconnectWorksheets();
-			unset($objPHPExcel);
-		}
-		return ['result' => $return];
 	}
 
 }

@@ -20,9 +20,13 @@ class ControllerCatalogAttributeGroup extends Controller {
 		$this->load->model('catalog/attribute_group');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_attribute_group->addAttributeGroup($this->request->post);
+			$attribute_group_id = $this->model_catalog_attribute_group->addAttributeGroup($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'attribute_group', $attribute_group_id, $this->request->server, $this->request->post, $this->request->get);
 
 			$url = '';
 
@@ -56,6 +60,10 @@ class ControllerCatalogAttributeGroup extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'attribute_group', $this->request->get['attribute_group_id'], $this->request->server, $this->request->post, $this->request->get);
+			
 			$url = '';
 
 			if (isset($this->request->get['sort'])) {
@@ -86,6 +94,10 @@ class ControllerCatalogAttributeGroup extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $attribute_group_id) {
 				$this->model_catalog_attribute_group->deleteAttributeGroup($attribute_group_id);
+
+				//record log
+				$this->load->model('log/log');
+				$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'attribute_group', $attribute_group_id, $this->request->server, $this->request->post, $this->request->get);				
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');

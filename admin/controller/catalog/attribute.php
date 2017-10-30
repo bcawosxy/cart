@@ -20,9 +20,13 @@ class ControllerCatalogAttribute extends Controller {
 		$this->load->model('catalog/attribute');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_attribute->addAttribute($this->request->post);
+			$attribute_id = $this->model_catalog_attribute->addAttribute($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'attribute', $attribute_id, $this->request->server, $this->request->post, $this->request->get);
 
 			$url = '';
 
@@ -56,6 +60,10 @@ class ControllerCatalogAttribute extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'attribute', $this->request->get['attribute_id'], $this->request->server, $this->request->post, $this->request->get);
+
 			$url = '';
 
 			if (isset($this->request->get['sort'])) {
@@ -86,6 +94,10 @@ class ControllerCatalogAttribute extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $attribute_id) {
 				$this->model_catalog_attribute->deleteAttribute($attribute_id);
+
+				//record log
+				$this->load->model('log/log');
+				$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'attribute', $attribute_id, $this->request->server, $this->request->post, $this->request->get);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');

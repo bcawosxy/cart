@@ -20,9 +20,13 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_catalog_product->addProduct($this->request->post);
+			$product_id = $this->model_catalog_product->addProduct($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'product', $product_id, $this->request->server, $this->request->post, $this->request->get);
 
 			$url = '';
 
@@ -76,6 +80,10 @@ class ControllerCatalogProduct extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'product', $this->request->get['product_id'], $this->request->server, $this->request->post, $this->request->get);
+
 			$url = '';
 
 			if (isset($this->request->get['filter_name'])) {
@@ -126,9 +134,15 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $product_id) {
 				$this->model_catalog_product->deleteProduct($product_id);
+
+
+				//record log
+				$this->load->model('log/log');
+				$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'product', $product_id, $this->request->server, $this->request->post, $this->request->get);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
+
 
 			$url = '';
 
