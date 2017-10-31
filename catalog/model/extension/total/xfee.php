@@ -66,10 +66,11 @@ class ModelExtensionTotalXfee extends Model {
 					    * 0918 - 計算價格 ($total['total']) 小於 $xfee的門檻時沒有免運優惠
 					    * 1013 - 發現 ($total['total']) 會包含運費金額, 故需扣除運費金額後再來進行比對
 					    *  ex: 價格 : 1000  運費 : 150 免運門檻 : 600  折抵 : 500  ==> (1000-500=500) 應該要運費, 但加上150運費後(650) 又會判斷成免運, 故需此判斷
+					    * 1031 - 條件從 "<="" 變成 "<"
 					    */
 
 					   if(isset($this->session->data['shipping_method'])) {
-					   	if( ($total['total']-$this->session->data['shipping_method']['cost']) <= $xfee_total) continue;
+					   	if( ($total['total']-$this->session->data['shipping_method']['cost']) < $xfee_total) continue;
 					   }
 
                        if($this->config->get('xfee_geo_zone_id'.$i) && $address){
