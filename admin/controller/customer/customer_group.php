@@ -20,7 +20,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$this->load->model('customer/customer_group');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_customer_customer_group->addCustomerGroup($this->request->post);
+			$customer_group_id = $this->model_customer_customer_group->addCustomerGroup($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -37,6 +37,10 @@ class ControllerCustomerCustomerGroup extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'customer_group', $customer_group_id, $this->request->server, $this->request->post, $this->request->get);
 
 			$this->response->redirect($this->url->link('customer/customer_group', 'token=' . $this->session->data['token'] . $url, true));
 		}
@@ -70,6 +74,10 @@ class ControllerCustomerCustomerGroup extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'customer_group', $this->request->get['customer_group_id'], $this->request->server, $this->request->post, $this->request->get);
+			
 			$this->response->redirect($this->url->link('customer/customer_group', 'token=' . $this->session->data['token'] . $url, true));
 		}
 
@@ -86,6 +94,10 @@ class ControllerCustomerCustomerGroup extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $customer_group_id) {
 				$this->model_customer_customer_group->deleteCustomerGroup($customer_group_id);
+
+				//record log
+				$this->load->model('log/log');
+				$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'customer_group', $customer_group_id, $this->request->server, $this->request->post, $this->request->get);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');

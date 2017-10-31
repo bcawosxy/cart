@@ -20,7 +20,7 @@ class ControllerCustomerCustomer extends Controller {
 		$this->load->model('customer/customer');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_customer_customer->addCustomer($this->request->post);
+			$customer_id = $this->model_customer_customer->addCustomer($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -65,6 +65,10 @@ class ControllerCustomerCustomer extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'customer', $customer_id, $this->request->server, $this->request->post, $this->request->get);
 
 			$this->response->redirect($this->url->link('customer/customer', 'token=' . $this->session->data['token'] . $url, true));
 		}
@@ -126,6 +130,10 @@ class ControllerCustomerCustomer extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'customer', $this->request->get['customer_id'], $this->request->server, $this->request->post, $this->request->get);
+
 			$this->response->redirect($this->url->link('customer/customer', 'token=' . $this->session->data['token'] . $url, true));
 		}
 
@@ -142,6 +150,10 @@ class ControllerCustomerCustomer extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $customer_id) {
 				$this->model_customer_customer->deleteCustomer($customer_id);
+
+				//record log
+				$this->load->model('log/log');
+				$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'customer', $customer_id, $this->request->server, $this->request->post, $this->request->get);
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -255,6 +267,10 @@ class ControllerCustomerCustomer extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), 'edit', 'customer/approve', $this->request->get['customer_id'], $this->request->server, $this->request->post, $this->request->get);
 
 			$this->response->redirect($this->url->link('customer/customer', 'token=' . $this->session->data['token'] . $url, true));
 		}
@@ -1280,6 +1296,10 @@ class ControllerCustomerCustomer extends Controller {
 			$this->model_customer_customer->addHistory($this->request->get['customer_id'], $this->request->post['comment']);
 
 			$json['success'] = $this->language->get('text_success');
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), 'add', 'customer/addHistory', $this->request->get['customer_id'], $this->request->server, $this->request->post, $this->request->get);			
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -1412,6 +1432,10 @@ class ControllerCustomerCustomer extends Controller {
 			$this->model_customer_customer->addReward($this->request->get['customer_id'], $this->request->post['description'], $this->request->post['points']);
 
 			$json['success'] = $this->language->get('text_success');
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), 'add', 'customer/addReward', $this->request->get['customer_id'], $this->request->server, $this->request->post, $this->request->get);			
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
