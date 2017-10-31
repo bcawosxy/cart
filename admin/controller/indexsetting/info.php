@@ -53,6 +53,10 @@ class ControllerindexSettinginfo extends Controller {
 				}
 			}
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), 'edit', 'indexsetting/info', '', $this->request->server, $this->request->post, $this->request->get);
+
 			$this->response->redirect($this->url->link('indexsetting/info', 'token=' . $this->session->data['token'], true));
 		}
 

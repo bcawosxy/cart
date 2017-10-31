@@ -20,7 +20,7 @@ class ControllerMarketingCoupon extends Controller {
 		$this->load->model('marketing/coupon');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_marketing_coupon->addCoupon($this->request->post);
+			$coupon_id = $this->model_marketing_coupon->addCoupon($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -37,6 +37,10 @@ class ControllerMarketingCoupon extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'marketing/coupon', $coupon_id, $this->request->server, $this->request->post, $this->request->get);
 
 			$this->response->redirect($this->url->link('marketing/coupon', 'token=' . $this->session->data['token'] . $url, true));
 		}
@@ -70,6 +74,10 @@ class ControllerMarketingCoupon extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'marketing/coupon', $this->request->get['coupon_id'], $this->request->server, $this->request->post, $this->request->get);			
+
 			$this->response->redirect($this->url->link('marketing/coupon', 'token=' . $this->session->data['token'] . $url, true));
 		}
 
@@ -86,6 +94,10 @@ class ControllerMarketingCoupon extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $coupon_id) {
 				$this->model_marketing_coupon->deleteCoupon($coupon_id);
+
+				//record log
+				$this->load->model('log/log');
+				$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'marketing/coupon', $coupon_id, $this->request->server, $this->request->post, $this->request->get);				
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');

@@ -80,6 +80,10 @@ class ControllerSettingSetting extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), 'edit', 'setting', 1, $this->request->server, $this->request->post, $this->request->get);
+
 			$this->response->redirect($this->url->link('setting/store', 'token=' . $this->session->data['token'], true));
 
 		}

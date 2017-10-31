@@ -1371,7 +1371,6 @@ class ControllerCustomerCustomer extends Controller {
 			$this->load->model('log/log');
 			$this->model_log_log->setLog($this->user->getId(), 'add', 'customer/addTransaction', $this->request->get['customer_id'], $this->request->server, $this->request->post, $this->request->get);
 
-			
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

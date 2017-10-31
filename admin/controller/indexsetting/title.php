@@ -24,6 +24,10 @@ class ControllerindexSettingtitle extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), 'edit', 'indexsetting/title', '', $this->request->server, $this->request->post, $this->request->get);
+
 			$this->response->redirect($this->url->link('indexsetting/title', 'token=' . $this->session->data['token'], true));
 		}
 

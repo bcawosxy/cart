@@ -18,6 +18,11 @@ class ControllerLocalisationShipping extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 			
 			$this->session->data['success'] = $this->language->get('text_success');	
+			
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), 'edit', 'shipping', '', $this->request->server, $this->request->post, $this->request->get);
+
 			$this->response->redirect($this->url->link('localisation/shipping', 'token=' . $this->session->data['token'] . '&type=shipping', true));
 		}
 				
