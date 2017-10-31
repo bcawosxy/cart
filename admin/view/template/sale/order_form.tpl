@@ -1585,7 +1585,7 @@ $('#tab-product input[name=\'product\']').autocomplete({
 });
 
 $('#button-product-add').on('click', function() {
-	$.ajax({
+  $.ajax({
 		url: '<?php echo $catalog; ?>index.php?route=api/cart/add&token=' + token + '&store_id=' + $('select[name=\'store_id\'] option:selected').val(),
 		type: 'post',
 		data: $('#tab-product input[name=\'product_id\'], #tab-product input[name=\'quantity\'], #tab-product input[name^=\'option\'][type=\'text\'], #tab-product input[name^=\'option\'][type=\'hidden\'], #tab-product input[name^=\'option\'][type=\'radio\']:checked, #tab-product input[name^=\'option\'][type=\'checkbox\']:checked, #tab-product select[name^=\'option\'], #tab-product textarea[name^=\'option\']'),
@@ -2272,12 +2272,19 @@ $('input[name=\'affiliate\']').autocomplete({
 // Checkout
 $('#button-save').on('click', function() {
 	if ($('input[name=\'order_id\']').val() == 0) {
-		var url = '<?php echo $catalog; ?>index.php?route=api/order/add&token=' + token + '&store_id=' + $('select[name=\'store_id\'] option:selected').val();
+		var url = '<?php echo $catalog; ?>index.php?route=api/order/add&token=' + token + '&store_id=' + $('select[name=\'store_id\'] option:selected').val(),
+      act = 'add',
+      target = 'order/add',
+      target_id = 0;
+
 	} else {
-		var url = '<?php echo $catalog; ?>index.php?route=api/order/edit&token=' + token + '&store_id=' + $('select[name=\'store_id\'] option:selected').val() + '&order_id=' + $('input[name=\'order_id\']').val();
+		var url = '<?php echo $catalog; ?>index.php?route=api/order/edit&token=' + token + '&store_id=' + $('select[name=\'store_id\'] option:selected').val() + '&order_id=' + $('input[name=\'order_id\']').val(),
+      act = 'edit',
+      target = 'order/edit',
+      target_id = $('input[name=\'order_id\']').val();
 	}
 
-	$.ajax({
+  $.ajax({
 		url: url,
 		type: 'post',
 		data: $('select[name=\'payment_method\'] option:selected,  select[name=\'shipping_method\'] option:selected,  #tab-total select[name=\'order_status_id\'], #tab-total select, #tab-total textarea[name=\'comment\'], #tab-total input[name=\'affiliate_id\']'),
@@ -2306,6 +2313,8 @@ $('#button-save').on('click', function() {
 			if (json['order_id']) {
 				$('input[name=\'order_id\']').val(json['order_id']);
 			}
+
+      setLog(act, target, target_id);
 
       alert(json['success']);
       location.href = '<?php echo $catalog; ?>admin/index.php?route=sale/order&token=<?php echo $token; ?>';

@@ -20,7 +20,7 @@ class ControllerSaleReturn extends Controller {
 		$this->load->model('sale/return');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$this->model_sale_return->addReturn($this->request->post);
+			$return_id = $this->model_sale_return->addReturn($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -69,6 +69,10 @@ class ControllerSaleReturn extends Controller {
 			if (isset($this->request->get['page'])) {
 				$url .= '&page=' . $this->request->get['page'];
 			}
+
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'return', $return_id, $this->request->server, $this->request->post, $this->request->get);
 
 			$this->response->redirect($this->url->link('sale/return', 'token=' . $this->session->data['token'] . $url, true));
 		}
@@ -134,6 +138,10 @@ class ControllerSaleReturn extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
+			//record log
+			$this->load->model('log/log');
+			$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'return', $this->request->get['return_id'], $this->request->server, $this->request->post, $this->request->get);
+
 			$this->response->redirect($this->url->link('sale/return', 'token=' . $this->session->data['token'] . $url, true));
 		}
 
@@ -150,6 +158,10 @@ class ControllerSaleReturn extends Controller {
 		if (isset($this->request->post['selected']) && $this->validateDelete()) {
 			foreach ($this->request->post['selected'] as $return_id) {
 				$this->model_sale_return->deleteReturn($return_id);
+				
+				//record log
+				$this->load->model('log/log');
+				$this->model_log_log->setLog($this->user->getId(), __FUNCTION__, 'return', $return_id, $this->request->server, $this->request->post, $this->request->get);				
 			}
 
 			$this->session->data['success'] = $this->language->get('text_success');

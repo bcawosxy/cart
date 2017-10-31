@@ -617,6 +617,8 @@ $('#button-history').on('click', function() {
 
 				$('textarea[name=\'comment\']').val('');
 
+        setLog('edit', 'order/history', <?php echo $order_id; ?>);
+
         alert(json['success']);
         location.href = '<?php echo $catalog; ?>admin/index.php?route=sale/order/info&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>';
 

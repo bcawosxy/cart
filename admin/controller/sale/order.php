@@ -22,7 +22,8 @@ class ControllerSaleOrder extends Controller {
 		$this->getForm();
 	}
 
-	public function edit() {
+	public function edit() {		
+
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
