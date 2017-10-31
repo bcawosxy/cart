@@ -23,29 +23,29 @@ class ModelLogLog extends Model {
 	}
 
 
-	public function getDevice() {
-		$return = null;
-		require_once(DIR_UPLOAD.'Mobile-Detect-2.8.26/Mobile_Detect.php');
-		$detect = new Mobile_Detect;
+	// public function getDevice() {
+	// 	$return = null;
+	// 	require_once(DIR_UPLOAD.'Mobile-Detect-2.8.26/Mobile_Detect.php');
+	// 	$detect = new Mobile_Detect;
 		
-		if( $detect->isMobile() ) {
- 			if( $detect->isiOS() ) {
- 				$return = 'iOS - [iPhone: '. $detect->version('iPhone').']'. '[iPad: '.$detect->version('iPad').']' ;
- 			} elseif ( $detect->isAndroidOS() ) {
- 				$return = 'Android - '. $detect->version('Android');
- 			}
-		} else {
-			if( !empty($detect->version('Chrome')) ) {				
-				$return = 'Chrome - ' . $detect->version('Chrome');
-			} elseif( !empty($detect->version('Firefox')) ){
-				$return = 'FireFox - ' . $detect->version('Firefox');
-			} elseif ( !empty($detect->version('Windows NT')) ) {
-				$return = 'IE - ' . $detect->version('Windows NT');
-			}
-		}
+	// 	if( $detect->isMobile() ) {
+ // 			if( $detect->isiOS() ) {
+ // 				$return = 'iOS - [iPhone: '. $detect->version('iPhone').']'. '[iPad: '.$detect->version('iPad').']' ;
+ // 			} elseif ( $detect->isAndroidOS() ) {
+ // 				$return = 'Android - '. $detect->version('Android');
+ // 			}
+	// 	} else {
+	// 		if( !empty($detect->version('Chrome')) ) {				
+	// 			$return = 'Chrome - ' . $detect->version('Chrome');
+	// 		} elseif( !empty($detect->version('Firefox')) ){
+	// 			$return = 'FireFox - ' . $detect->version('Firefox');
+	// 		} elseif ( !empty($detect->version('Windows NT')) ) {
+	// 			$return = 'IE - ' . $detect->version('Windows NT');
+	// 		}
+	// 	}
 
-		return $return;
-	}	
+	// 	return $return;
+	// }	
 
 	/**
 	 * 171030 - Mars 針對特定事件紀錄log
@@ -62,7 +62,8 @@ class ModelLogLog extends Model {
 	public function setLog($member_id, $act, $target = null, $target_id = null, $server, $post, $get) {
 		$dbName = $this->createTable();
 
-		$device = $this->db->escape($this->getDevice());
+		// $device = $this->db->escape($this->getDevice());
+		$device = '';
 		$server = $this->db->escape(json_encode($server));
 		$post = $this->db->escape(json_encode($post));
 		$get = $this->db->escape(json_encode($get));
