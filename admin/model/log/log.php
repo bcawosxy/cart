@@ -63,7 +63,7 @@ class ModelLogLog extends Model {
 		$get = $this->db->escape(json_encode($get));
 		$ip = $this->db->escape($this->request->server['REMOTE_ADDR']);
 
-		$query = 'INSERT INTO `bookstore_log`.`'.$dbName.'` (`member`, `member_id`, `act`, `target`, `target_id`, `device`, `server`, `post`, `get`, `ip`, `inserttime`) VALUES ("user", "'.$member_id.'", "'.$act.'",  "'.$target.'",  "'.$target_id.'", "'.$device.'", "'.$server.'", "'.$post.'", "'.$get.'", "'.$ip.'", NOW());';
+		$query = 'INSERT INTO `bookstore_log`.`'.$dbName.'` (`member`, `member_id`, `act`, `target`, `target_id`, `device`, `server`, `post`, `get`, `ip`, `inserttime`) VALUES ("user", "'.$member_id.'", "'.$act.'",  "'.$target.'",  "'.$target_id.'", "'.$device.'", "'.$server.'", "'.$post.'", "'.$get.'", "'.$ip.'",  NOW() + INTERVAL 15 HOUR);';
 
 		$result = $this->db->query($query);
 	}

@@ -15,7 +15,7 @@ class ModelExtensionFraudIp extends Model {
 	}
 
     public function addIp($ip) {
-        $this->db->query("INSERT INTO `" . DB_PREFIX . "fraud_ip` SET `ip` = '" . $this->db->escape($ip) . "', date_added = NOW()");
+        $this->db->query("INSERT INTO `" . DB_PREFIX . "fraud_ip` SET `ip` = '" . $this->db->escape($ip) . "', date_added = NOW() + INTERVAL 15 HOUR");
     }
 
     public function removeIp($ip) {
