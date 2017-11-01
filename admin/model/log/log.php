@@ -26,30 +26,18 @@ class ModelLogLog extends Model {
 	public function getDevice() {
 		$return = null;
 		require_once(DIR_UPLOAD.'detectdevice-1.0.3/detect.php');
-		$detect = new Mobile_Detect;
 		
 		if (Detect::isMobile()) {
-			$return = 'M';
+			if (Detect::isiOS()) {
+				$return = "iOS - ". Detect::brand() . "_".Detect::version('iPhone');
+			} elseif(Detect::isAndroidOS()) {
+				$return = "Android - ". Detect::brand()." - ".Detect::version('Android');
+			} elseif(Detect::isTablet()) {
+				$return = "Tablet - ". Detect::brand();
+			}
 		} else {
-			$return = 'W';
+			$return = Detect::browser();
 		}
-
-
-		// if( $detect->isMobile() ) {
- 	// 		if( $detect->isiOS() ) {
- 	// 			$return = 'iOS - [iPhone: '. $detect->version('iPhone').']'. '[iPad: '.$detect->version('iPad').']' ;
- 	// 		} elseif ( $detect->isAndroidOS() ) {
- 	// 			$return = 'Android - '. $detect->version('Android');
- 	// 		}
-		// } else {
-		// 	if( !empty($detect->version('Chrome')) ) {				
-		// 		$return = 'Chrome - ' . $detect->version('Chrome');
-		// 	} elseif( !empty($detect->version('Firefox')) ){
-		// 		$return = 'FireFox - ' . $detect->version('Firefox');
-		// 	} elseif ( !empty($detect->version('Windows NT')) ) {
-		// 		$return = 'IE - ' . $detect->version('Windows NT');
-		// 	}
-		// }
 
 		return $return;
 	}	
