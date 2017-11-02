@@ -51,6 +51,14 @@ class ControllerUserUser extends Controller {
 
 		$this->load->model('user/user');
 
+		//171102 - 若非root帳號登入且嘗試訪問編輯root頁面則導出
+		parse_str($_SERVER['QUERY_STRING'], $queryString);
+		$editTargetID = $queryString['user_id'];
+		
+		if($editTargetID == 1 && $this->user->getId() != 1) {
+			$this->response->redirect($this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true));
+		}
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_user_user->editUser($this->request->get['user_id'], $this->request->post);
 
