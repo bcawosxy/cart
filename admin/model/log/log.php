@@ -16,7 +16,7 @@ class ModelLogLog extends Model {
 			`post` text COLLATE utf8_unicode_ci,
 			`get` text COLLATE utf8_unicode_ci,
 			`ip` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-			`inserttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+			`inserttime` datetime NOT NULL
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;');
 
 		return $dbName;
@@ -63,7 +63,7 @@ class ModelLogLog extends Model {
 		$get = $this->db->escape(json_encode($get));
 		$ip = $this->db->escape($this->request->server['REMOTE_ADDR']);
 
-		$query = 'INSERT INTO `bookstore_log`.`'.$dbName.'` (`member`, `member_id`, `act`, `target`, `target_id`, `device`, `server`, `post`, `get`, `ip`, `inserttime`) VALUES ("user", "'.$member_id.'", "'.$act.'",  "'.$target.'",  "'.$target_id.'", "'.$device.'", "'.$server.'", "'.$post.'", "'.$get.'", "'.$ip.'",  NOW() + INTERVAL 15 HOUR);';
+		$query = 'INSERT INTO `bookstore_log`.`'.$dbName.'` (`member`, `member_id`, `act`, `target`, `target_id`, `device`, `server`, `post`, `get`, `ip`, `inserttime`) VALUES ("user", "'.$member_id.'", "'.$act.'",  "'.$target.'",  "'.$target_id.'", "'.$device.'", "'.$server.'", "'.$post.'", "'.$get.'", "'.$ip.'",  "'.INSERTTIME.'");';
 
 		$result = $this->db->query($query);
 	}

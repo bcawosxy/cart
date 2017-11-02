@@ -10,7 +10,7 @@ class ModelReportCustomer extends Model {
 			);
 		}
 
-		$query = $this->db->query("SELECT COUNT(*) AS total, HOUR(date_added) AS hour FROM `" . DB_PREFIX . "customer` WHERE DATE(date_added) = DATE(NOW() + INTERVAL 15 HOUR) GROUP BY HOUR(date_added) ORDER BY date_added ASC");
+		$query = $this->db->query("SELECT COUNT(*) AS total, HOUR(date_added) AS hour FROM `" . DB_PREFIX . "customer` WHERE DATE(date_added) = DATE('".INSERTTIME."') GROUP BY HOUR(date_added) ORDER BY date_added ASC");
 
 		foreach ($query->rows as $result) {
 			$customer_data[$result['hour']] = array(
@@ -82,7 +82,7 @@ class ModelReportCustomer extends Model {
 			);
 		}
 
-		$query = $this->db->query("SELECT COUNT(*) AS total, date_added FROM `" . DB_PREFIX . "customer` WHERE YEAR(date_added) = YEAR(NOW() + INTERVAL 15 HOUR) GROUP BY MONTH(date_added)");
+		$query = $this->db->query("SELECT COUNT(*) AS total, date_added FROM `" . DB_PREFIX . "customer` WHERE YEAR(date_added) = YEAR('".INSERTTIME."') GROUP BY MONTH(date_added)");
 
 		foreach ($query->rows as $result) {
 			$customer_data[date('n', strtotime($result['date_added']))] = array(
