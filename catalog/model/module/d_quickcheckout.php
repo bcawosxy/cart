@@ -546,8 +546,8 @@ public function array_merge_r_d() {
 				customer_id = '" . (int)$this->customer->getId() . "',
 				data = '" . $this->db->escape(json_encode($this->session->data['statistic'])) . "', 
 				rating = 0,
-				date_added = NOW(),
-				date_modified = NOW()");
+				date_added = '".INSERTTIME."',
+				date_modified = '".INSERTTIME."'");
 
     	$this->session->data['statistic_id'] = $this->db->getLastId();
 		return $this->session->data['statistic_id'];
@@ -559,7 +559,7 @@ public function array_merge_r_d() {
     	$this->db->query("UPDATE " . DB_PREFIX . "dqc_statistic 
     		SET customer_id = '" . (int)$this->customer->getId(). "', 
 	    		data = '" . $this->db->escape(json_encode($this->session->data['statistic'])) . "',
-	    		date_modified = NOW() 
+	    		date_modified = '".INSERTTIME."' 
     		WHERE statistic_id = '" . (int)$statistic_id . "'");
     }
 

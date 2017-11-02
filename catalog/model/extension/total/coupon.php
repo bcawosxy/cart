@@ -3,7 +3,7 @@ class ModelExtensionTotalCoupon extends Model {
 	public function getCoupon($code) {
 		$status = true;
 
-		$coupon_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "coupon` WHERE code = '" . $this->db->escape($code) . "' AND ((date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())) AND status = '1'");
+		$coupon_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "coupon` WHERE code = '" . $this->db->escape($code) . "' AND ((date_start = '0000-00-00' OR date_start < '".INSERTTIME."') AND (date_end = '0000-00-00' OR date_end > '".INSERTTIME."')) AND status = '1'");
 
 		if ($coupon_query->num_rows) {
 			if ($coupon_query->row['total'] > $this->cart->getSubTotal()) {
@@ -197,7 +197,7 @@ class ModelExtensionTotalCoupon extends Model {
 			$coupon_info = $this->getCoupon($code);
 
 			if ($coupon_info) {
-				$this->db->query("INSERT INTO `" . DB_PREFIX . "coupon_history` SET coupon_id = '" . (int)$coupon_info['coupon_id'] . "', order_id = '" . (int)$order_info['order_id'] . "', customer_id = '" . (int)$order_info['customer_id'] . "', amount = '" . (float)$order_total['value'] . "', date_added = NOW()");
+				$this->db->query("INSERT INTO `" . DB_PREFIX . "coupon_history` SET coupon_id = '" . (int)$coupon_info['coupon_id'] . "', order_id = '" . (int)$order_info['order_id'] . "', customer_id = '" . (int)$order_info['customer_id'] . "', amount = '" . (float)$order_total['value'] . "', date_added = '".INSERTTIME."'");
 			} else {
 				/**
 				 * 更新訂單狀態的時候, 如果含有免運費的coupon, 這邊會回傳詐欺訂單id = 10 (失敗的)
