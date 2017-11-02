@@ -11,7 +11,7 @@ class ModelExtensionDOpencartPatchEvent extends Model {
 
     public function addEvent($code, $trigger, $action, $status = 1) {
         $this->installDatabase();
-        $this->db->query("INSERT INTO `" . DB_PREFIX . "event` SET `code` = '" . $this->db->escape($code) . "', `trigger` = '" . $this->db->escape($trigger) . "', `action` = '" . $this->db->escape($action) . "', `status` = '" . (int)$status . "', `date_added` = NOW() + INTERVAL 15 HOUR");
+        $this->db->query("INSERT INTO `" . DB_PREFIX . "event` SET `code` = '" . $this->db->escape($code) . "', `trigger` = '" . $this->db->escape($trigger) . "', `action` = '" . $this->db->escape($action) . "', `status` = '" . (int)$status . "', `date_added` = '".INSERTTIME."'");
     
         return $this->db->getLastId();
     }
