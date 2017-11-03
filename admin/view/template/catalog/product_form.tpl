@@ -1,4 +1,4 @@
-<?php echo $header; ?><?php echo $column_left; ?>
+  <?php echo $header; ?><?php echo $column_left; ?>
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
@@ -91,9 +91,11 @@
                   <div class="form-group">
                     <label class="col-sm-2 control-label" for="input-tag<?php echo $language['language_id']; ?>"><span data-toggle="tooltip" title="<?php echo $help_tag; ?>"><?php echo $entry_tag; ?></span></label>
                     <div class="col-sm-10">                      
-                      <input type="text" name="product_description[<?php echo $language['language_id']; ?>][tag]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['tag'] : ''; ?>" placeholder="<?php echo $entry_tag; ?>" id="input-tag<?php echo $language['language_id']; ?>" class="form-control" />
-                      <div id="hottags">
-                        常用標籤 : 
+                      
+                      <input id="tagText" type="text" name="product_description[<?php echo $language['language_id']; ?>][tag]" value="<?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['tag'] : ''; ?>" placeholder="<?php echo $entry_tag; ?>" id="input-tag<?php echo $language['language_id']; ?>" class="form-control" />
+                      
+                      <select id="tagsSelect" data-placeholder="選擇常用標籤">
+                        <option selected="selected" disabled="disabled">選擇常用標籤</option>
                         <?php
                           $n = 0;
                           foreach($hotTags as $k0 => $v0) {
@@ -101,11 +103,12 @@
                             if($n > 30) {
                               break;
                             } else {
-                              echo '<a onclick="addtags(this);" data-tags="'.$k0.'" href="javascript:void(0)">['.$k0.']</a>&nbsp;';
-                            }                            
+                              echo '<option data-tags="'.$k0.'" value="'.$k0.'">['.$k0.']</option>&nbsp;';
+                            }
                           }
                         ?>
-                      </div>
+                      </select>
+
                     </div>
                   </div>
                 </div>
@@ -1458,5 +1461,13 @@ $(document).on('click', '#add_adjust', function(){
       _value  = $(this).prev('span').html();
       $('#'+_target).val(_value);
 })
+
+$('#tagsSelect').chosen({
+  no_results_text: '找不到搜尋結果。',
+  search_contains :true,
+  width:'100%',
+}).on('change', function(evt, params) {
+  $('#tagText').val($('#tagText').val()+params.selected+',');
+});
 //--></script></div>
 <?php echo $footer; ?>
