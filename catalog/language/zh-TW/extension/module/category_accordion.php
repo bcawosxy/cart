@@ -1,3 +1,3 @@
 <?php
 // Heading
-$_['heading_title'] = '昊洋文創';
+$_['heading_title'] = '好漾市集';
