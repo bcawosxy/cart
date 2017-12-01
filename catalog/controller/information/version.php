@@ -234,14 +234,13 @@ class ControllerInformationVersion extends Controller {
 			foreach ($fetchVersion->row as $k0 => $v0) { $data[$k0] = ($k0 == 'grades') ? json_decode($v0 , true) : $v0; }
 			foreach ($data['grades'] as $k0 => $v0) {
 				foreach ($v0 as $k1 => $v1) {
-					
 					if( strpos($v1 ,'(' ) ) $data['grades'][$k0][$k1] = $v1 = substr($v1, 0, strpos($v1 ,'(' ));
 					if (is_null($v1)) $data['grades'][$k0][$k1] = '';
 					
 					$data['grades'][$k0][$k1] = '<span style="color:#8a6d3b">'.$v1.'</span>';
 					foreach ($manufacturer as $k2 => $v2) {
 						if( strpos($v2['name'], $v1) !== false) {
-							$data['grades'][$k0][$k1] = '<a target="_blank" href="'.$v2['href'].'">'.$v1.'</a>';
+							$data['grades'][$k0][$k1] = '<a target="_blank" href="'.$v2['href'].'&keyword='.$k1.'&grade='.$k0.'">'.$v1.'</a>';
 						} 
 					}
 				}

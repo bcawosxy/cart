@@ -100,6 +100,18 @@ class ControllerProductManufacturer extends Controller {
 			$limit = (int)$this->config->get($this->config->get('config_theme') . '_product_limit');
 		}
 
+		if (isset($this->request->get['keyword'])) {
+			$keyword = $this->request->get['keyword'];
+		} else {
+			$keyword = '';
+		}
+
+		if (isset($this->request->get['grade'])) {
+			$grade = (int)$this->request->get['grade'];
+		} else {
+			$grade = '';
+		}
+
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -133,6 +145,14 @@ class ControllerProductManufacturer extends Controller {
 
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
+			}
+
+			if (isset($this->request->get['keyword'])) {
+				$url .= '&keyword=' . $this->request->get['keyword'];
+			}
+
+			if (isset($this->request->get['grade'])) {
+				$url .= '&grade=' . $this->request->get['grade'];
 			}
 
 			$data['breadcrumbs'][] = array(
@@ -169,7 +189,9 @@ class ControllerProductManufacturer extends Controller {
 				'sort'                   => $sort,
 				'order'                  => $order,
 				'start'                  => ($page - 1) * $limit,
-				'limit'                  => $limit
+				'limit'                  => $limit,
+				'keyword'				 => $keyword,
+				'grade'					 => $grade,
 			);
 
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
