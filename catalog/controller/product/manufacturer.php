@@ -100,12 +100,21 @@ class ControllerProductManufacturer extends Controller {
 			$limit = (int)$this->config->get($this->config->get('config_theme') . '_product_limit');
 		}
 
+		//171201 - type用於版本查詢頁面連結至此的國小.國中.高中判定
+		if (isset($this->request->get['type'])) {
+			$type = $this->request->get['type'];
+		} else {
+			$type = '';
+		}
+
+        //171201 - keyword用於版本查詢頁面連結至此的科目別判定
 		if (isset($this->request->get['keyword'])) {
 			$keyword = $this->request->get['keyword'];
 		} else {
 			$keyword = '';
 		}
 
+        //171201 - keyword用於版本查詢頁面連結至此的年級判定
 		if (isset($this->request->get['grade'])) {
 			$grade = (int)$this->request->get['grade'];
 		} else {
@@ -145,6 +154,10 @@ class ControllerProductManufacturer extends Controller {
 
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
+			}
+
+			if (isset($this->request->get['type'])) {
+				$url .= '&type=' . $this->request->get['type'];
 			}
 
 			if (isset($this->request->get['keyword'])) {
@@ -190,6 +203,7 @@ class ControllerProductManufacturer extends Controller {
 				'order'                  => $order,
 				'start'                  => ($page - 1) * $limit,
 				'limit'                  => $limit,
+				'type'				     => $type,
 				'keyword'				 => $keyword,
 				'grade'					 => $grade,
 			);

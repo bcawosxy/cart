@@ -153,6 +153,10 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
 
+		if (!empty($data['type'])) {
+			$sql .= " AND pd.name LIKE '%" . $data['type'] . "%'";
+		}
+
 		if (!empty($data['keyword'])) {
 			$sql .= " AND pd.name LIKE '%" . $data['keyword'] . "%'";
 		}

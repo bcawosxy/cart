@@ -240,7 +240,7 @@ class ControllerInformationVersion extends Controller {
 					$data['grades'][$k0][$k1] = '<span style="color:#8a6d3b">'.$v1.'</span>';
 					foreach ($manufacturer as $k2 => $v2) {
 						if( strpos($v2['name'], $v1) !== false) {
-							$data['grades'][$k0][$k1] = '<a target="_blank" href="'.$v2['href'].'&keyword='.$k1.'&grade='.$k0.'">'.$v1.'</a>';
+							$data['grades'][$k0][$k1] = '<a target="_blank" href="'.$v2['href'].'&type='.$type.'&keyword='.$k1.'&grade='.$k0.'">'.$v1.'</a>';
 						} 
 					}
 				}
