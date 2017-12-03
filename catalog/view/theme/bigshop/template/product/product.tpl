@@ -124,7 +124,7 @@ $("#zoom_01").bind("click", function(e) {
             <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="real" itemprop="price"><?php echo $price; ?></span><span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span><span itemprop="availability" content="<?php echo $stock; ?>"></span></li>
             <li></li>
             <?php } else { ?>
-            <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="price-old"><?php echo $price; ?></span><span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span><span class="real" itemprop="price"><?php echo $special; ?><span itemprop="availability" content="<?php echo $stock; ?>"></span></span><span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span></li>
+            <li class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="saving" style="position: static;">-<?php echo $saving; ?>%</span><span class="price-old"><?php echo $price; ?></span><span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span><span class="real" itemprop="price"><?php echo $special; ?><span itemprop="availability" content="<?php echo $stock; ?>"></span></span><span style="font-size: 12px; font-weight: normal;"> <?php echo $text_dollar; ?></span></li>
             <li></li>
             <?php } ?>
             <?php if ($tax) { ?>
