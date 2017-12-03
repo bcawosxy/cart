@@ -153,10 +153,6 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
 
-		if (!empty($data['type'])) {
-			$sql .= " AND pd.name LIKE '%" . $data['type'] . "%'";
-		}
-
 		if (!empty($data['keyword'])) {
 			$sql .= " AND pd.name LIKE '%" . $data['keyword'] . "%'";
 		}
@@ -210,6 +206,17 @@ class ModelCatalogProduct extends Model {
 		$product_data = array();
 
 		$query = $this->db->query($sql);
+
+		//加入查詢國小、國中、高中的條件
+		if (!empty($data['type'])) {
+		    $type = [
+		        'primary'   => '國小',
+                'junior'    => '國中',
+                'senior'    => '高中',
+            ];
+		    $product_id = array_column($query->rows, 'product_id') ;
+            $query = $this->getProductsByCategory($type[$data['type']], implode(',', $product_id));
+        }
 
 		foreach ($query->rows as $result) {
 			$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
@@ -267,6 +274,12 @@ class ModelCatalogProduct extends Model {
 
 		return $product_data;
 	}
+
+	public function getProductsByCategory($data, $product_id) {
+	    $sql = "SELECT * FROM " . DB_PREFIX . "product_to_category LEFT JOIN " . DB_PREFIX . "category_description AS p2d USING(`category_id`) WHERE product_id in (" . $product_id . ") AND p2d.name LIKE '%".$data."%'";
+	    $query = $this->db->query($sql);
+	    return $query;
+    }
 
 	public function getLatestProducts($limit) {
 		$product_data = $this->cache->get('product.latest.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . $this->config->get('config_customer_group_id') . '.' . (int)$limit);
