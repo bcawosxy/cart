@@ -337,9 +337,15 @@
                         </div>
                       </div>
 
-
-
-
+                      <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-telephone<?php echo $address_row; ?>"><?php echo $entry_telephone; ?></label>
+                        <div class="col-sm-10">
+                          <input type="text" name="address[<?php echo $address_row; ?>][telephone]" value="<?php echo $address['telephone']; ?>" placeholder="<?php echo $entry_telephone; ?>" id="input-telephone<?php echo $address_row; ?>" class="form-control" />
+                          <?php if (isset($error_address[$address_row]['telephone'])) { ?>
+                          <div class="text-danger"><?php echo $error_address[$address_row]['telephone']; ?></div>
+                          <?php } ?>
+                        </div>
+                      </div>
 
                       <div class="form-group required">
                         <label class="col-sm-2 control-label" for="input-postcode<?php echo $address_row; ?>"><?php echo $entry_postcode; ?></label>
@@ -654,7 +660,12 @@ function addAddress() {
   html += '    <label class="col-sm-2 control-label" for="input-firstname' + address_row + '"><?php echo $entry_firstname; ?></label>';
   html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][firstname]" value="" placeholder="<?php echo $entry_firstname; ?>" id="input-firstname' + address_row + '" class="form-control" /></div>';
   html += '  </div>';
- 
+
+  html += '  <div class="form-group required">';
+  html += '    <label class="col-sm-2 control-label" for="input-telephone' + address_row + '"><?php echo $entry_telephone; ?></label>';
+  html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][telephone]" value="" placeholder="<?php echo $entry_telephone; ?>" id="input-telephone' + address_row + '" class="form-control" /></div>';
+  html += '  </div>';
+
  	html += '  <div class="form-group required">';
 	html += '    <label class="col-sm-2 control-label" for="input-postcode' + address_row + '"><?php echo $entry_postcode; ?></label>';
 	html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][postcode]" value="" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode' + address_row + '" class="form-control" /></div>';
