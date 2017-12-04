@@ -18,6 +18,7 @@ class ControllerApiShipping extends Controller {
 				$keys = array(
 					'firstname',
 					'lastname',
+					'telephone',
 					'company',
 					'address_1',
 					'address_2',
@@ -101,6 +102,7 @@ class ControllerApiShipping extends Controller {
 					$this->session->data['shipping_address'] = array(
 						'firstname'      => $this->request->post['firstname'],
 						'lastname'       => $this->request->post['lastname'],
+						'telephone'       => $this->request->post['telephone'],
 						'company'        => $this->request->post['company'],
 						'address_1'      => $this->request->post['address_1'],
 						'address_2'      => $this->request->post['address_2'],

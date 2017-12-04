@@ -495,6 +495,7 @@ class ControllerApiOrder extends Controller {
 					// Payment Details
 					$order_data['payment_firstname'] = $this->session->data['payment_address']['firstname'];
 					$order_data['payment_lastname'] = $this->session->data['payment_address']['lastname'];
+					$order_data['payment_telephone'] = $this->session->data['payment_address']['telephone'];
 					$order_data['payment_company'] = $this->session->data['payment_address']['company'];
 					$order_data['payment_address_1'] = $this->session->data['payment_address']['address_1'];
 					$order_data['payment_address_2'] = $this->session->data['payment_address']['address_2'];
@@ -521,8 +522,10 @@ class ControllerApiOrder extends Controller {
 
 					// Shipping Details
 					if ($this->cart->hasShipping()) {
+
 						$order_data['shipping_firstname'] = $this->session->data['shipping_address']['firstname'];
 						$order_data['shipping_lastname'] = $this->session->data['shipping_address']['lastname'];
+						$order_data['shipping_telephone'] = $this->session->data['shipping_address']['telephone'];
 						$order_data['shipping_company'] = $this->session->data['shipping_address']['company'];
 						$order_data['shipping_address_1'] = $this->session->data['shipping_address']['address_1'];
 						$order_data['shipping_address_2'] = $this->session->data['shipping_address']['address_2'];
@@ -549,6 +552,7 @@ class ControllerApiOrder extends Controller {
 					} else {
 						$order_data['shipping_firstname'] = '';
 						$order_data['shipping_lastname'] = '';
+						$order_data['shipping_telephone'] = '';
 						$order_data['shipping_company'] = '';
 						$order_data['shipping_address_1'] = '';
 						$order_data['shipping_address_2'] = '';

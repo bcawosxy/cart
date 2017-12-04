@@ -445,6 +445,7 @@ class ControllerSaleOrder extends Controller {
 		$data['entry_customer_group'] = $this->language->get('entry_customer_group');
 		$data['entry_firstname'] = $this->language->get('entry_firstname');
 		$data['entry_lastname'] = $this->language->get('entry_lastname');
+		$data['entry_telephone'] = $this->language->get('entry_telephone');
 		$data['entry_email'] = $this->language->get('entry_email');
 		$data['entry_telephone'] = $this->language->get('entry_telephone');
 		$data['entry_fax'] = $this->language->get('entry_fax');
@@ -583,6 +584,7 @@ class ControllerSaleOrder extends Controller {
 
 			$data['payment_firstname'] = $order_info['payment_firstname'];
 			$data['payment_lastname'] = $order_info['payment_lastname'];
+			$data['payment_telephone'] = $order_info['payment_telephone'];
 			$data['payment_company'] = $order_info['payment_company'];
 			$data['payment_address_1'] = $order_info['payment_address_1'];
 			$data['payment_address_2'] = $order_info['payment_address_2'];
@@ -596,6 +598,7 @@ class ControllerSaleOrder extends Controller {
 
 			$data['shipping_firstname'] = $order_info['shipping_firstname'];
 			$data['shipping_lastname'] = $order_info['shipping_lastname'];
+			$data['shipping_telephone'] = $order_info['shipping_telephone'];
 			$data['shipping_company'] = $order_info['shipping_company'];
 			$data['shipping_address_1'] = $order_info['shipping_address_1'];
 			$data['shipping_address_2'] = $order_info['shipping_address_2'];

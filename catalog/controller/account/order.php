@@ -223,7 +223,7 @@ class ControllerAccountOrder extends Controller {
 			);
 
 			$replace = array(
-				'firstname' => $order_info['payment_firstname'],
+				'firstname' => $order_info['payment_firstname'].'<br>'.$order_info['payment_telephone'],
 				'lastname'  => $order_info['payment_lastname'],
 				'company'   => $order_info['payment_company'],
 				'address_1' => $order_info['payment_address_1'],
@@ -236,7 +236,7 @@ class ControllerAccountOrder extends Controller {
 			);
 
 			$data['payment_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
-
+            
 			$data['payment_method'] = $order_info['payment_method'];
 
 			if ($order_info['shipping_address_format']) {
@@ -259,7 +259,7 @@ class ControllerAccountOrder extends Controller {
 			);
 
 			$replace = array(
-				'firstname' => $order_info['shipping_firstname'],
+				'firstname' => $order_info['shipping_firstname'].'<br>'.$order_info['shipping_telephone'],
 				'lastname'  => $order_info['shipping_lastname'],
 				'company'   => $order_info['shipping_company'],
 				'address_1' => $order_info['shipping_address_1'],

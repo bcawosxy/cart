@@ -65,7 +65,7 @@
           </tr>
         </tbody>
       </table>
-      
+
 
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -136,7 +136,7 @@
           </tfoot>
         </table>
       </div>
-      
+
 
 
       <?php if ($comment) { ?>

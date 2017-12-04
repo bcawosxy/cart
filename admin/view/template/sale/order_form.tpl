@@ -407,18 +407,12 @@
                   <input type="text" name="firstname" value="<?php echo $payment_firstname; ?>" id="input-payment-firstname" class="form-control" />
                 </div>
               </div>
-
               <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-payment-firstname"><?php echo $entry_firstname; ?></label>
+                <label class="col-sm-2 control-label" for="input-payment-telephone"><?php echo $entry_telephone; ?></label>
                 <div class="col-sm-10">
-                  <input type="text" name="firstname" value="<?php echo $payment_firstname; ?>" id="input-payment-firstname" class="form-control" />
+                  <input type="text" name="telephone" value="<?php echo $payment_telephone; ?>" id="input-payment-telephone" class="form-control" />
                 </div>
               </div>
-
-
-
-
-
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-payment-postcode"><?php echo $entry_postcode; ?></label>
                 <div class="col-sm-10">
@@ -605,9 +599,12 @@
                 </div>
               </div>
 
-
-
-
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-shipping-telephone"><?php echo $entry_telephone; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="telephone" value="<?php echo $shipping_telephone; ?>" id="input-shipping-telephone" class="form-control" />
+                </div>
+              </div>
 
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-shipping-postcode"><?php echo $entry_postcode; ?></label>
@@ -1786,6 +1783,7 @@ $('select[name=\'payment_address\']').on('change', function() {
 
 			$('#tab-payment input[name=\'firstname\']').val(json['firstname']);
 			$('#tab-payment input[name=\'lastname\']').val(json['lastname']);
+			$('#tab-payment input[name=\'telephone\']').val(json['telephone']);
 			$('#tab-payment input[name=\'company\']').val(json['company']);
 			$('#tab-payment input[name=\'address_1\']').val(json['address_1']);
 			$('#tab-payment input[name=\'address_2\']').val(json['address_2']);
@@ -1930,6 +1928,7 @@ $('select[name=\'shipping_address\']').on('change', function() {
 
 			$('#tab-shipping input[name=\'firstname\']').val(json['firstname']);
 			$('#tab-shipping input[name=\'lastname\']').val(json['lastname']);
+			$('#tab-shipping input[name=\'telephone\']').val(json['telephone']);
 			$('#tab-shipping input[name=\'company\']').val(json['company']);
 			$('#tab-shipping input[name=\'address_1\']').val(json['address_1']);
 			$('#tab-shipping input[name=\'address_2\']').val(json['address_2']);
