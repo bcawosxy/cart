@@ -34,13 +34,16 @@
 				            	<input type="radio" name="payment_address[address_id]" class="payment-address" value="<%= address.address_id %>" id="payment_address_exists_<%= address.address_id %>" <%= address.address_id == model.payment_address.address_id ? 'checked="checked"' : '' %> data-refresh="2" autocomplete='off' /> 
 				                <strong> <%= address.firstname %> 
 				                <%= address.lastname %></strong>
+								(<%= address.telephone %>)
+								<br>
 				                <%= address.country %>
 				                <%= address.zone %>
 				                (<%= address.postcode %>)
 				                <%= address.address_1 %>
 				                <%= address.address_2 %>
-				                <%= address.city %> 
-				            </label>
+				                <%= address.city %>
+
+							</label>
 			            </div>
 			            <% }) %>
 					<% } %>

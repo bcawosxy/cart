@@ -229,6 +229,7 @@ class ControllerAccountAddress extends Controller {
 			$find = array(
 				'{firstname}',
 				'{lastname}',
+				'{telephone}',
 				'{company}',
 				'{address_1}',
 				'{address_2}',
@@ -242,6 +243,7 @@ class ControllerAccountAddress extends Controller {
 			$replace = array(
 				'firstname' => $result['firstname'],
 				'lastname'  => $result['lastname'],
+				'telephone'  => $result['telephone'],
 				'company'   => $result['company'],
 				'address_1' => $result['address_1'],
 				'address_2' => $result['address_2'],
@@ -314,6 +316,7 @@ class ControllerAccountAddress extends Controller {
 
 		$data['entry_firstname'] = $this->language->get('entry_firstname');
 		$data['entry_lastname'] = $this->language->get('entry_lastname');
+		$data['entry_telephone'] = $this->language->get('entry_telephone');
 		$data['entry_company'] = $this->language->get('entry_company');
 		$data['entry_address_1'] = $this->language->get('entry_address_1');
 		$data['entry_address_2'] = $this->language->get('entry_address_2');
@@ -338,6 +341,11 @@ class ControllerAccountAddress extends Controller {
 			$data['error_lastname'] = $this->error['lastname'];
 		} else {
 			$data['error_lastname'] = '';
+		}
+		if (isset($this->error['telephone'])) {
+			$data['error_telephone'] = $this->error['telephone'];
+		} else {
+			$data['error_telephone'] = '';
 		}
 
 		if (isset($this->error['address_1'])) {
@@ -402,6 +410,14 @@ class ControllerAccountAddress extends Controller {
 			$data['lastname'] = $address_info['lastname'];
 		} else {
 			$data['lastname'] = '';
+		}
+
+		if (isset($this->request->post['telephone'])) {
+			$data['telephone'] = $this->request->post['telephone'];
+		} elseif (!empty($address_info)) {
+			$data['telephone'] = $address_info['telephone'];
+		} else {
+			$data['telephone'] = '';
 		}
 
 		if (isset($this->request->post['company'])) {
@@ -510,15 +526,13 @@ class ControllerAccountAddress extends Controller {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
 
-		
+		if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
+			$this->error['telephone'] = $this->language->get('error_telephone');
+		}
 
 		if ((utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {
 			$this->error['address_1'] = $this->language->get('error_address_1');
 		}
-
-		
-
-		
 
 		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '' || !is_numeric($this->request->post['zone_id'])) {
 			$this->error['zone'] = $this->language->get('error_zone');

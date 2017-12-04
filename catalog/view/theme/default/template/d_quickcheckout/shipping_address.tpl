@@ -33,7 +33,9 @@
 			          	<label for="shipping_address_address_id_<%= address.address_id %>">
 			            	<input type="radio" name="shipping_address[address_id]" class="shipping-address" value="<%= address.address_id %>" id="shipping_address_address_id_<%= address.address_id %>" <%= address.address_id == model.shipping_address.address_id ? 'checked="checked"' : '' %> data-refresh="2" autocomplete='off' />
 			                <strong> <%= address.firstname %> 
-			                <%= address.lastname %> </strong> 
+			                <%= address.lastname %> </strong>
+							(<%= address.telephone %>)
+							<br>
 			                <%= address.country %>
 			                <%= address.zone %>
 			                (<%= address.postcode %>)

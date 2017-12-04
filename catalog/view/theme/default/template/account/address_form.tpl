@@ -28,6 +28,16 @@
           </div>
 
           <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-telephone"><?php echo $entry_telephone; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="telephone" value="<?php echo $telephone; ?>" placeholder="<?php echo $entry_telephone; ?>" id="input-telephone" class="form-control" />
+              <?php if ($error_telephone) { ?>
+              <div class="text-danger"><?php echo $error_telephone; ?></div>
+              <?php } ?>
+            </div>
+          </div>
+
+          <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-zone"><?php echo $entry_zone; ?></label>
             <div class="col-sm-10">
               <select name="zone_id" id="input-zone" class="form-control">
@@ -51,8 +61,8 @@
             <div class="col-sm-10">
               <select name="city_id" id="input-city" class="form-control">
                 <?php foreach ($cities as $city) { ?>
-                <?php 
-                  if ($city['code'] == $postcode) { 
+                <?php
+                  if ($city['code'] == $postcode) {
                   $city_name = $city['name'];
                 ?>
                 <option value="<?php echo $city['code']; ?>" selected="selected"><?php echo $city['name']; ?></option>
@@ -75,7 +85,7 @@
               <?php if ($error_postcode) { ?>
               <div class="text-danger"><?php echo $error_postcode; ?></div>
               <?php } ?>
-            </div>            
+            </div>
             <div class="col-sm-8">
               <input type="text" name="address_1" value="<?php echo $address_1; ?>" placeholder="<?php echo $entry_address_1; ?>" id="input-address-1" class="form-control" />
               <?php if ($error_address_1) { ?>
@@ -83,7 +93,7 @@
               <?php } ?>
             </div>
           </div>
-				
+
           <?php foreach ($custom_fields as $custom_field) { ?>
           <?php if ($custom_field['location'] == 'address') { ?>
           <?php if ($custom_field['type'] == 'select') { ?>
@@ -360,7 +370,7 @@ $('.time').datetimepicker({
 //--></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  
+
   $('#input-zone').on('change', function(){
     var v = $(this).val();
     $.post("<?php echo $fetchArea ?>", {

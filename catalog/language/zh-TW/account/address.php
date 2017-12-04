@@ -14,6 +14,7 @@ $_['text_empty']           = '您的帳號中沒有地址資料 !';
 // Entry
 $_['entry_firstname']      = '姓名';
 $_['entry_lastname']       = '姓氏';
+$_['entry_telephone']      = '電話';
 $_['entry_company']        = '公司名稱';
 $_['entry_address_1']      = '地址';
 $_['entry_address_2']      = '地址(補充)';
@@ -28,6 +29,7 @@ $_['error_delete']         = '警告： 您必須至少有一組地址！';
 $_['error_default']        = '警告： 您不能刪除預設地址！';
 $_['error_firstname']      = '名字必須在 1 到 32 字之間！';
 $_['error_lastname']       = '姓氏必須在 1 到 32 字之間！';
+$_['error_telephone']      = '電話長度至少要1到32個字!';
 $_['error_vat']            = '無效的交易明細單號增值碼！';
 $_['error_address_1']      = '地址必須在 3 到 128 字之間！';
 $_['error_postcode']       = '郵遞區號必須在 2 到 10 字之間！';
