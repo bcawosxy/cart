@@ -408,6 +408,13 @@
                 </div>
               </div>
 
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-payment-firstname"><?php echo $entry_firstname; ?></label>
+                <div class="col-sm-10">
+                  <input type="text" name="firstname" value="<?php echo $payment_firstname; ?>" id="input-payment-firstname" class="form-control" />
+                </div>
+              </div>
+
 
 
 
@@ -432,7 +439,7 @@
                 <option value="<?php echo $zone['zone_id']; ?>"><?php echo $zone['name']; ?></option>
                 <?php } ?>
                 <?php } ?>
-				
+
                   </select>
                 </div>
               </div>
@@ -443,7 +450,7 @@
                   <input type="text" name="address_1" value="<?php echo $payment_address_1; ?>" id="input-payment-address-1" class="form-control" />
                 </div>
               </div>
-				
+
               <?php foreach ($custom_fields as $custom_field) { ?>
               <?php if ($custom_field['location'] == 'address') { ?>
               <?php if ($custom_field['type'] == 'select') { ?>
@@ -622,7 +629,7 @@
                 <option value="<?php echo $zone['zone_id']; ?>"><?php echo $zone['name']; ?></option>
                 <?php } ?>
                 <?php } ?>
-				
+
                   </select>
                 </div>
               </div>
@@ -633,7 +640,7 @@
                   <input type="text" name="address_1" value="<?php echo $shipping_address_1; ?>" id="input-shipping-address-1" class="form-control" />
                 </div>
               </div>
-				
+
               <?php foreach ($custom_fields as $custom_field) { ?>
               <?php if ($custom_field['location'] == 'address') { ?>
               <?php if ($custom_field['type'] == 'select') { ?>
@@ -842,7 +849,7 @@
                       </span></div>
                   </div>
                 </div>
-                
+
                 <div class="form-group">
                   <label class="col-sm-2 control-label" for="input-reward"><?php echo $entry_reward; ?></label>
                   <div class="col-sm-10">
@@ -2392,7 +2399,7 @@ $('.datetime').datetimepicker({
 $('.time').datetimepicker({
 	pickDate: false
 });
-//--></script> 
+//--></script>
   <script type="text/javascript">
 // Sort the custom fields
 $('#tab-customer .form-group[data-sort]').detach().each(function() {
@@ -2438,4 +2445,4 @@ $('#tab-shipping .form-group[data-sort]').detach().each(function() {
 	}
 });
 </script></div>
-<?php echo $footer; ?> 
+<?php echo $footer; ?>

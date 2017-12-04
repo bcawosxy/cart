@@ -36,13 +36,10 @@
 				                <%= address.lastname %></strong>
 								(<%= address.telephone %>)
 								<br>
-				                <%= address.country %>
 				                <%= address.zone %>
-				                (<%= address.postcode %>)
 				                <%= address.address_1 %>
 				                <%= address.address_2 %>
 				                <%= address.city %>
-
 							</label>
 			            </div>
 			            <% }) %>

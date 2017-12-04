@@ -68,7 +68,7 @@ class ControllerDQuickcheckoutConfirm extends Controller {
     }
 
     public function update(){
-		$json = array();
+    		$json = array();
 
         $this->load->model('account/address');
         $this->load->model('module/d_quickcheckout');
