@@ -136,6 +136,7 @@ class ModelDQuickcheckoutOrder extends Model {
         }
         $query .= "payment_firstname = '" . $this->db->escape($data['payment_firstname']) . "', 
             payment_lastname = '" . $this->db->escape($data['payment_lastname']) . "', 
+            payment_telephone = '" . $this->db->escape($data['payment_telephone']) . "', 
             payment_company = '" . $this->db->escape($data['payment_company']) . "', 
             payment_address_1 = '" . $this->db->escape($data['payment_address_1']) . "', 
             payment_address_2 = '" . $this->db->escape($data['payment_address_2']) . "', 
@@ -155,6 +156,7 @@ class ModelDQuickcheckoutOrder extends Model {
             payment_code = '" . $this->db->escape($data['payment_code']) . "', 
             shipping_firstname = '" . $this->db->escape($data['shipping_firstname']) . "', 
             shipping_lastname = '" . $this->db->escape($data['shipping_lastname']) . "', 
+            shipping_telephone = '" . $this->db->escape($data['shipping_telephone']) . "', 
             shipping_company = '" . $this->db->escape($data['shipping_company']) . "', 
             shipping_address_1 = '" . $this->db->escape($data['shipping_address_1']) . "', 
             shipping_address_2 = '" . $this->db->escape($data['shipping_address_2']) . "', 
