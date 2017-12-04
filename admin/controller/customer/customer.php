@@ -1126,6 +1126,10 @@ class ControllerCustomerCustomer extends Controller {
 					
 				}
 
+				if ((utf8_strlen($value['telephone']) < 3) || (utf8_strlen($value['telephone']) > 32)) {
+					$this->error['address'][$key]['telephone'] = $this->language->get('error_telephone');
+				}
+
 				if ((utf8_strlen($value['address_1']) < 3) || (utf8_strlen($value['address_1']) > 128)) {
 					$this->error['address'][$key]['address_1'] = $this->language->get('error_address_1');
 				}
