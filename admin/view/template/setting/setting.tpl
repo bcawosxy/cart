@@ -42,6 +42,7 @@
             <li><a href="#tab-mail" data-toggle="tab"><?php echo $tab_mail; ?></a></li>
             <li><a href="#tab-server" data-toggle="tab"><?php echo $tab_server; ?></a></li>
             <li ><a href="#tab-version" data-toggle="tab"><?php echo $tab_version; ?></a></li>
+            <li><a href="#tab-bank_transfer" data-toggle="tab"><?php echo $tab_bank_transfer; ?></a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -1550,14 +1551,29 @@
             </div>         
             <!--End Version Tab -->
 
+            <!-- bank_transfer Tab -->
+            <div class="tab-pane " id="tab-bank_transfer">
+              <fieldset>
+                <legend><?php echo $text_bank_transfer; ?></legend>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-version_year"><?php echo $entry_bank_transfer; ?></label>
+                  <div class="col-sm-10">
+                    <textarea name="bank_transfer_bank<?php echo $language['language_id'] ?>" placeholder="<?php echo $entry_bank_transfer; ?>" id="bank_transfer_bank<?php echo $language['language_id'] ?>" class="form-control summernote"><?php echo ${'bank_transfer_bank'.$language['language_id']} ?></textarea>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <!--End bank_transfer Tab -->
           </div>
         </form>
-   
-
       </div>
     </div>
   </div>
-<script type="text/javascript">
+  <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+  <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+  <script type="text/javascript" src="view/javascript/summernote/lang/summernote-zh-TW.js"></script>
+  <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+  <script type="text/javascript">
   function  jbox(r) {
     var img = (r.result === 1) ? '<img src="./view/image/check.png" style="width:15px;">' : '<img src="./view/image/error.png" style="width:15px;">',
         modal = new jBox('Modal', {

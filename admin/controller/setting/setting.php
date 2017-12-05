@@ -122,6 +122,7 @@ class ControllerSettingSetting extends Controller {
 		$data['text_upload'] = $this->language->get('text_upload');
 		$data['text_error'] = $this->language->get('text_error');
 		$data['text_version_upload'] = $this->language->get('text_version_upload');
+		$data['text_bank_transfer'] = $this->language->get('text_bank_transfer');
 		$data['text_primary'] = $this->language->get('text_primary');
 		$data['text_junior'] = $this->language->get('text_junior');
 		$data['text_senior'] = $this->language->get('text_senior');
@@ -234,6 +235,7 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_flat_text'] = $this->language->get('entry_flat_text');
 		$data['entry_min_total'] = $this->language->get('entry_min_total');
 		$data['entry_checkout_tips'] = $this->language->get('entry_checkout_tips');
+		$data['entry_bank_transfer'] = $this->language->get('entry_bank_transfer');
 
 
 		$data['help_geocode'] = $this->language->get('help_geocode');
@@ -321,6 +323,7 @@ class ControllerSettingSetting extends Controller {
 		$data['tab_server'] = $this->language->get('tab_server');
 		$data['tab_version'] = '參考書版本';
 		$data['tab_fee'] = '免運費設定';
+		$data['tab_bank_transfer'] = '銀行匯款或轉帳說明';
 
 		$data['error_yearsGrade'] = $this->language->get('error_yearsGrade');
 		$data['error_schoolType'] = $this->language->get('error_schoolType');
@@ -1308,6 +1311,24 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$data['config_error_filename'] = $this->config->get('config_error_filename');
 		}
+
+		//
+        $languages = $data['languages'];
+        foreach ($languages as $language) {
+            if (isset($this->error['bank' . $language['language_id']])) {
+                $data['error_bank' . $language['language_id']] = $this->error['bank' . $language['language_id']];
+            } else {
+                $data['error_bank' . $language['language_id']] = '';
+            }
+        }
+
+        foreach ($languages as $language) {
+            if (isset($this->request->post['bank_transfer_bank' . $language['language_id']])) {
+                $data['bank_transfer_bank' . $language['language_id']] = $this->request->post['bank_transfer_bank' . $language['language_id']];
+            } else {
+                $data['bank_transfer_bank' . $language['language_id']] = $this->config->get('bank_transfer_bank' . $language['language_id']);
+            }
+        }
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
