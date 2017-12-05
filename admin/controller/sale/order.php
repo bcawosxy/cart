@@ -1710,7 +1710,7 @@ class ControllerSaleOrder extends Controller {
 				);
 
 				$replace = array(
-					'firstname' => $order_info['payment_firstname'],
+					'firstname' => $order_info['payment_firstname'].'<br>'.$order_info['payment_telephone'],
 					'lastname'  => $order_info['payment_lastname'],
 					'company'   => $order_info['payment_company'],
 					'address_1' => $order_info['payment_address_1'],
@@ -1744,7 +1744,7 @@ class ControllerSaleOrder extends Controller {
 				);
 
 				$replace = array(
-					'firstname' => $order_info['shipping_firstname'],
+					'firstname' => $order_info['shipping_firstname'].'<br>'.$order_info['shipping_telephone'],
 					'lastname'  => $order_info['shipping_lastname'],
 					'company'   => $order_info['shipping_company'],
 					'address_1' => $order_info['shipping_address_1'],
@@ -1843,7 +1843,6 @@ class ControllerSaleOrder extends Controller {
 				);
 			}
 		}
-
 		$this->response->setOutput($this->load->view('sale/order_invoice', $data));
 	}
 
@@ -1951,7 +1950,7 @@ class ControllerSaleOrder extends Controller {
 				);
 
 				$replace = array(
-					'firstname' => $order_info['shipping_firstname'],
+					'firstname' => $order_info['shipping_firstname'].'<br>'.$order_info['shipping_telephone'],
 					'lastname'  => $order_info['shipping_lastname'],
 					'company'   => $order_info['shipping_company'],
 					'address_1' => $order_info['shipping_address_1'],
