@@ -207,19 +207,24 @@ class ModelCatalogProduct extends Model {
 
 		$query = $this->db->query($sql);
 
-		if (!empty($data['type'])) {
+        /**
+                 *  171207 - 先不參考type參數做搜尋, 若有需要再開啟
+                 */
+		/*
+        if (!empty($data['type'])) {
 		    $type = [
 		        'primary'   => '國小',
                 'junior'    => '國中',
                 'senior'    => '高中',
             ];
-
+            $product_id = [];
 			foreach($query->rows as $k0 => $v0) {
 				$product_id[] = $v0['product_id'];
 			}
 
 		    $query = $this->getProductsByCategory($type[$data['type']], implode(',', $product_id));
         }
+        */
 
 		foreach ($query->rows as $result) {
 			$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
@@ -537,6 +542,14 @@ class ModelCatalogProduct extends Model {
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
+
+        if (!empty($data['keyword'])) {
+            $sql .= " AND pd.name LIKE '%" . $data['keyword'] . "%'";
+        }
+
+        if (!empty($data['grade'])) {
+            $sql .= " AND pd.name LIKE '%" . $data['grade'] . "%'";
+        }
 
 		$query = $this->db->query($sql);
 
