@@ -214,8 +214,12 @@ class ModelCatalogProduct extends Model {
                 'junior'    => '國中',
                 'senior'    => '高中',
             ];
-		    $product_id = array_column($query->rows, 'product_id') ;
-            $query = $this->getProductsByCategory($type[$data['type']], implode(',', $product_id));
+
+			foreach($query->rows as $k0 => $v0) {
+				$product_id[] = $v0['product_id'];
+			}
+
+		    $query = $this->getProductsByCategory($type[$data['type']], implode(',', $product_id));
         }
 
 		foreach ($query->rows as $result) {
