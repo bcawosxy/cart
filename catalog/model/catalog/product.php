@@ -207,7 +207,6 @@ class ModelCatalogProduct extends Model {
 
 		$query = $this->db->query($sql);
 
-		//加入查詢國小、國中、高中的條件
 		if (!empty($data['type'])) {
 		    $type = [
 		        'primary'   => '國小',

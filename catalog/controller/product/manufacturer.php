@@ -208,9 +208,10 @@ class ControllerProductManufacturer extends Controller {
 				'grade'					 => $grade,
 			);
 
-			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+//			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
+			$product_total = count($results);
 
 			foreach ($results as $result) {
 				if ($result['image']) {
@@ -331,6 +332,18 @@ class ControllerProductManufacturer extends Controller {
 				$url .= '&order=' . $this->request->get['order'];
 			}
 
+			if (isset($this->request->get['type'])) {
+				$url .= '&type=' . $this->request->get['type'];
+			}
+
+			if (isset($this->request->get['keyword'])) {
+				$url .= '&keyword=' . $this->request->get['keyword'];
+			}
+
+			if (isset($this->request->get['grade'])) {
+				$url .= '&grade=' . $this->request->get['grade'];
+			}
+
 			$data['limits'] = array();
 
 			$limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
@@ -359,6 +372,17 @@ class ControllerProductManufacturer extends Controller {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
 
+			if (isset($this->request->get['type'])) {
+				$url .= '&type=' . $this->request->get['type'];
+			}
+
+			if (isset($this->request->get['keyword'])) {
+				$url .= '&keyword=' . $this->request->get['keyword'];
+			}
+
+			if (isset($this->request->get['grade'])) {
+				$url .= '&grade=' . $this->request->get['grade'];
+			}
 			$pagination = new Pagination();
 			$pagination->total = $product_total;
 			$pagination->page = $page;
