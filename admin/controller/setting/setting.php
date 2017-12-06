@@ -68,9 +68,10 @@ class ControllerSettingSetting extends Controller {
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			
+
 			$this->model_setting_setting->editSetting('config', $this->request->post);
 			$this->model_setting_setting->editeSettingFee1($this->request->post);
+			$this->model_setting_setting->editeSettingBankTransfer($this->request->post);
 
 			if ($this->config->get('config_currency_auto')) {
 				$this->load->model('localisation/currency');
@@ -322,8 +323,7 @@ class ControllerSettingSetting extends Controller {
 		$data['tab_mail'] = $this->language->get('tab_mail');
 		$data['tab_server'] = $this->language->get('tab_server');
 		$data['tab_version'] = '參考書版本';
-		$data['tab_fee'] = '免運費設定';
-		$data['tab_bank_transfer'] = '銀行匯款或轉帳說明';
+		$data['tab_checkout'] = '結帳設定';
 
 		$data['error_yearsGrade'] = $this->language->get('error_yearsGrade');
 		$data['error_schoolType'] = $this->language->get('error_schoolType');
@@ -1472,7 +1472,6 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->response->setOutput($server . 'image/no_image.png');
 		}
-	}	
-
+	}
 
 }

@@ -52,7 +52,6 @@ class ModelSettingSetting extends Model {
 		}
 	}
 
-
 	/**
 	 * 170219 - 由settings::settings 調整郵寄/宅配的相關設定, 將原生的運送方式搭配x-fee的免運模組
 	 * 資料庫 : settings 
@@ -74,7 +73,30 @@ class ModelSettingSetting extends Model {
 		foreach ($editData as $k0 => $v0) {
 			foreach ($v0 as $k1 => $v1) {
 				$this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape($v1) . "', serialized = '0'  WHERE `code` = '" . $this->db->escape($k0) . "' AND `key` = '" . $this->db->escape($k1) . "' AND store_id = '" . (int)$store_id . "'");
+			}
+		}
+	}
 
+	/**
+	 * 171206 - 由settings::settings 調整結帳頁面匯款或轉帳時的說明文字
+	 * 資料庫 : settings
+	 * column Name[code] : bank_transfer
+	 * column Name[key] : bank_transfer_bank1 (說明文字)
+	 *
+	 * 頁面 : extension/payment/bank_transfer
+	 */
+	public function editeSettingBankTransfer($data, $store_id = 0) {
+
+		//這邊用的code與key須與db使用的一樣
+		$editData = [
+			'bank_transfer' => [
+				'bank_transfer_bank1' => $data['bank_transfer_bank1'],
+			],
+		];
+
+		foreach ($editData as $k0 => $v0) {
+			foreach ($v0 as $k1 => $v1) {
+				$this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape($v1) . "', serialized = '0'  WHERE `code` = '" . $this->db->escape($k0) . "' AND `key` = '" . $this->db->escape($k1) . "' AND store_id = '" . (int)$store_id . "'");
 			}
 		}
 	}
