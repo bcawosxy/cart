@@ -129,6 +129,18 @@ class ModelAccountOrder extends Model {
 		return $query->rows;
 	}
 
+	/**
+	 * 171207 - 取得該產品在訂單中的訂購數量
+	 * @param $order_id
+	 * @param $product_id
+	 * @return $quantity
+	 */
+	public function getOrderProductQuantity($order_id, $product_id) {
+		$query = $this->db->query("SELECT `quantity` FROM " . DB_PREFIX . "order_product WHERE product_id = '". (int)$product_id ."' AND order_id = '" . (int)$order_id . "'");
+
+		return $query->rows[0];
+	}
+
 	public function getOrderOptions($order_id, $order_product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");
 

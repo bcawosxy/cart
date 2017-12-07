@@ -62,3 +62,5 @@ $_['error_product']      = '商品名稱必須在 3 到 255 個字之間。';
 $_['error_model']        = '商品型號必須在 3 到 64 個字之間。';
 $_['error_reason']       = '請選擇一個退換原因。';
 $_['error_agree']        = '警告：您必須同意%s條款！';
+$_['error_quantity'] 	 = '退貨數量填寫錯誤';
+$_['error_maxQuantity']  = '退貨數量不可超過訂購數';

@@ -344,6 +344,8 @@ class ControllerAccountReturn extends Controller {
 		$data['button_submit'] = $this->language->get('button_submit');
 		$data['button_back'] = $this->language->get('button_back');
 
+		$data['error_maxQuantity'] = $this->language->get('error_maxQuantity');
+
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -392,18 +394,28 @@ class ControllerAccountReturn extends Controller {
 			$data['error_model'] = '';
 		}
 
+		if (isset($this->error['quantity'])) {
+			$data['error_quantity'] = $this->error['quantity'];
+		} else {
+			$data['error_quantity'] = '';
+		}
+
 		if (isset($this->error['reason'])) {
 			$data['error_reason'] = $this->error['reason'];
 		} else {
 			$data['error_reason'] = '';
 		}	
 
-		$data['action'] = $this->url->link('account/return/add', 'product_id=' . $this->request->get['product_id'], true);
+		$data['action'] = $this->url->link('account/return/add', 'order_id=' . $this->request->get['order_id'].'&product_id=' . $this->request->get['product_id'], true);
 
 		$this->load->model('account/order');
 
 		if (isset($this->request->get['order_id'])) {
 			$order_info = $this->model_account_order->getOrder($this->request->get['order_id']);
+		}
+
+		if(empty($order_info)) {
+			$this->response->redirect($this->url->link('account/order', '', true));
 		}
 
 		$this->load->model('catalog/product');
@@ -476,10 +488,15 @@ class ControllerAccountReturn extends Controller {
 			$data['model'] = '';
 		}
 
+		/**
+		 *  171207 - 退貨的最大數量調整最訂單內的數量, 避免填寫超過
+		 */
+		$orderProductQuantity = $this->model_account_order->getOrderProductQuantity($this->request->get['order_id'],$this->request->get['product_id']);
+		$data['maxQuantity']  = $orderProductQuantity['quantity'];
 		if (isset($this->request->post['quantity'])) {
 			$data['quantity'] = $this->request->post['quantity'];
 		} else {
-			$data['quantity'] = 1;
+			$data['quantity']  = 1;
 		}
 
 		if (isset($this->request->post['opened'])) {
@@ -566,6 +583,10 @@ class ControllerAccountReturn extends Controller {
 
 		if ((utf8_strlen($this->request->post['model']) < 1) || (utf8_strlen($this->request->post['model']) > 64)) {
 			$this->error['model'] = $this->language->get('error_model');
+		}
+
+		if ( !is_numeric($this->request->post['quantity'])) {
+			$this->error['quantity'] = $this->language->get('error_quantity');
 		}
 
 		if (empty($this->request->post['return_reason_id'])) {

@@ -57,7 +57,7 @@
               <div class="text-danger"><?php echo $error_order_id; ?></div>
               <?php } ?>
             </div>
-          </div> 
+          </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-date-ordered"><?php echo $entry_date_ordered; ?></label>
             <div class="col-sm-3">
@@ -94,10 +94,13 @@
               <?php } ?>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group required textQuantity">
             <label class="col-sm-2 control-label" for="input-quantity"><?php echo $entry_quantity; ?></label>
             <div class="col-sm-10">
               <input type="text" name="quantity" value="<?php echo $quantity; ?>" placeholder="<?php echo $entry_quantity; ?>" id="input-quantity" class="form-control" />
+              <?php if ($error_quantity) { ?>
+              <div class="text-danger"><?php echo $error_quantity; ?></div>
+              <?php } ?>
             </div>
           </div>
           <div class="form-group required">
@@ -178,5 +181,16 @@
 $('.date').datetimepicker({
 	pickTime: false
 });
+
+$('#input-quantity').on('change', function(){
+    if($(this).val() > <?php echo $maxQuantity ?>) {
+        $(this).parent().find('.text-danger').remove();
+        $(this).val(<?php echo $maxQuantity; ?>);
+        $(this).after('<p class="text-danger"><?php echo $error_maxQuantity; ?></p>');
+    } else {
+        $('.textQuantity').removeClass('has-error');
+        $(this).parent().find('.text-danger').remove();
+    }
+})
 //--></script>
 <?php echo $footer; ?>

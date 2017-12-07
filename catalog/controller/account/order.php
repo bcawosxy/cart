@@ -374,7 +374,7 @@ class ControllerAccountOrder extends Controller {
 				$data['histories'][] = array(
 					'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 					'status'     => $result['status'],
-					'comment'    => $result['notify'] ? nl2br($result['comment']) : ''
+					'comment'    => $result['notify'] ? html_entity_decode(($result['comment']),ENT_QUOTES,'UTF-8') : ''
 				);
 			}
 
