@@ -157,6 +157,7 @@
                   <textarea name="comment" rows="5" placeholder="<?php echo $entry_comment; ?>" id="input-comment" class="form-control"><?php echo $comment; ?></textarea>
                 </div>
               </div>
+              <?php if (!$return_id) { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-return-action"><?php echo $entry_return_action; ?></label>
                 <div class="col-sm-10">
@@ -172,7 +173,6 @@
                   </select>
                 </div>
               </div>
-              <?php if (!$return_id) { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-return-status"><?php echo $entry_return_status; ?></label>
                 <div class="col-sm-10">
@@ -205,6 +205,21 @@
                     <option value="<?php echo $return_status['return_status_id']; ?>" selected="selected"><?php echo $return_status['name']; ?></option>
                     <?php } else { ?>
                     <option value="<?php echo $return_status['return_status_id']; ?>"><?php echo $return_status['name']; ?></option>
+                    <?php } ?>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-return-action"><?php echo $entry_return_action; ?></label>
+                <div class="col-sm-10">
+                  <select name="return_action_id" id="input-return-action" class="form-control">
+                    <option value="0"></option>
+                    <?php foreach ($return_actions as $return_action) { ?>
+                    <?php if ($return_action['return_action_id'] == $return_action_id) { ?>
+                    <option value="<?php echo $return_action['return_action_id']; ?>" selected="selected"> <?php echo $return_action['name']; ?></option>
+                    <?php } else { ?>
+                    <option value="<?php echo $return_action['return_action_id']; ?>"><?php echo $return_action['name']; ?></option>
                     <?php } ?>
                     <?php } ?>
                   </select>
@@ -302,7 +317,7 @@ $('#button-history').on('click', function(e) {
 		url: 'index.php?route=sale/return/history&token=<?php echo $token; ?>&return_id=<?php echo $return_id; ?>',
 		type: 'post',
 		dataType: 'html',
-		data: 'return_status_id=' + encodeURIComponent($('select[name=\'return_status_id\']').val()) + '&notify=' + ($('input[name=\'notify\']').prop('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'history_comment\']').val()),
+		data: 'return_action_id=' + encodeURIComponent($('select[name=\'return_action_id\']').val()) +'&return_status_id=' + encodeURIComponent($('select[name=\'return_status_id\']').val()) + '&notify=' + ($('input[name=\'notify\']').prop('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'history_comment\']').val()),
 		beforeSend: function() {
 			$('#button-history').button('loading');	
 		},

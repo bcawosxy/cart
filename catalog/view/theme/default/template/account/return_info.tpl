@@ -56,14 +56,14 @@
             <tr>
               <td class="text-left" style="width: 33.3%;"><?php echo $column_reason; ?></td>
               <td class="text-left" style="width: 33.3%;"><?php echo $column_opened; ?></td>
-              <td class="text-left" style="width: 33.3%;"><?php echo $column_action; ?></td>
+              <td class="text-left" style="width: 33.3%;display: none;"><?php echo $column_action; ?></td>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="text-left"><?php echo $reason; ?></td>
               <td class="text-left"><?php echo $opened; ?></td>
-              <td class="text-left"><?php echo $action; ?></td>
+              <td class="text-left" style="display: none;"><?php echo $action; ?></td>
             </tr>
           </tbody>
         </table>
@@ -89,9 +89,10 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr>
-              <td class="text-left" style="width: 33.3%;"><?php echo $column_date_added; ?></td>
-              <td class="text-left" style="width: 33.3%;"><?php echo $column_status; ?></td>
-              <td class="text-left" style="width: 33.3%;"><?php echo $column_comment; ?></td>
+              <td class="text-left" style="width: 25%;"><?php echo $column_date_added; ?></td>
+              <td class="text-left" style="width: 25%;"><?php echo $column_status; ?></td>
+              <td class="text-left" style="width: 25%;"><?php echo $column_action; ?></td>
+              <td class="text-left" style="width: 25%;"><?php echo $column_comment; ?></td>
             </tr>
           </thead>
           <tbody>
@@ -100,6 +101,7 @@
             <tr>
               <td class="text-left"><?php echo $history['date_added']; ?></td>
               <td class="text-left"><?php echo $history['status']; ?></td>
+              <td class="text-left"><?php echo $history['action']; ?></td>
               <td class="text-left"><?php echo $history['comment']; ?></td>
             </tr>
             <?php } ?>

@@ -88,6 +88,7 @@ class ControllerSaleReturn extends Controller {
 		$this->load->model('sale/return');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+
 			$this->model_sale_return->editReturn($this->request->get['return_id'], $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -966,6 +967,7 @@ class ControllerSaleReturn extends Controller {
 		$this->load->model('sale/return');
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
 			if (!$this->user->hasPermission('modify', 'sale/return')) {
 				$data['error'] = $this->language->get('error_permission');
 			}
@@ -983,6 +985,7 @@ class ControllerSaleReturn extends Controller {
 		$data['column_status'] = $this->language->get('column_status');
 		$data['column_notify'] = $this->language->get('column_notify');
 		$data['column_comment'] = $this->language->get('column_comment');
+		$data['column_action'] = $this->language->get('column_action');
 
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -998,6 +1001,7 @@ class ControllerSaleReturn extends Controller {
 			$data['histories'][] = array(
 				'notify'     => $result['notify'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
 				'status'     => $result['status'],
+				'action'     => $result['action'],
 				'comment'    => nl2br($result['comment']),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
 			);

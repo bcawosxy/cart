@@ -35,7 +35,7 @@ $_['column_price']       = '價格';
 $_['column_opened']      = '已拆封';
 $_['column_comment']     = '備註';
 $_['column_reason']      = '原因';
-$_['column_action']      = '管理';
+$_['column_action']      = '退換貨管理';
 
 // Entry
 $_['entry_order_id']     = '訂單編號';
