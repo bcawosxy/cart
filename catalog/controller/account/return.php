@@ -344,6 +344,7 @@ class ControllerAccountReturn extends Controller {
 		$data['button_submit'] = $this->language->get('button_submit');
 		$data['button_back'] = $this->language->get('button_back');
 
+		$data['error_quantity'] = $this->language->get('error_quantity');
 		$data['error_maxQuantity'] = $this->language->get('error_maxQuantity');
 
 		if (isset($this->error['warning'])) {

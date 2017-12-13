@@ -183,10 +183,14 @@ $('.date').datetimepicker({
 });
 
 $('#input-quantity').on('change', function(){
-    if($(this).val() > <?php echo $maxQuantity ?>) {
+    if( $(this).val() > <?php echo $maxQuantity ?> ) {
         $(this).parent().find('.text-danger').remove();
         $(this).val(<?php echo $maxQuantity; ?>);
         $(this).after('<p class="text-danger"><?php echo $error_maxQuantity; ?></p>');
+    } else if($(this).val() <= 0 ) {
+        $(this).parent().find('.text-danger').remove();
+        $(this).val(<?php echo $maxQuantity; ?>);
+        $(this).after('<p class="text-danger">退貨數量填寫錯誤</p>');
     } else {
         $('.textQuantity').removeClass('has-error');
         $(this).parent().find('.text-danger').remove();

@@ -13,8 +13,8 @@ $_['text_tax']                         = '稅率';
 $_['text_account']                     = '帳戶';
 $_['text_checkout']                    = '結帳';
 $_['text_stock']                       = '商品庫存';
-$_['text_shipping']                    = '運送地址';
-$_['text_payment']                     = '帳單地址';
+$_['text_shipping']                    = '收件人';
+$_['text_payment']                     = '付款人';
 
 // Column
 $_['column_name']                      = '商店名稱';
