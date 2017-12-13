@@ -104,6 +104,7 @@ class ControllerSettingSetting extends Controller {
 		$data['text_tax'] = $this->language->get('text_tax');
 		$data['text_account'] = $this->language->get('text_account');
 		$data['text_checkout'] = $this->language->get('text_checkout');
+		$data['text_checkout_tips'] = $this->language->get('text_checkout_tips');
 		$data['text_stock'] = $this->language->get('text_stock');
 		$data['text_affiliate'] = $this->language->get('text_affiliate');
 		$data['text_return'] = $this->language->get('text_return');

@@ -34,6 +34,7 @@ $_['text_upload']					  	= '上傳';
 $_['text_error']					   	= '錯誤';
 $_['text_version_upload']				= '匯入版本表';
 $_['text_bank_transfer']				= '銀行匯款或轉帳說明文字';
+$_['text_checkout_tips']				= '結帳附加說明文字';
 $_['text_primary']						= '國小';
 $_['text_junior']						= '國中';
 $_['text_senior']						= '高中';

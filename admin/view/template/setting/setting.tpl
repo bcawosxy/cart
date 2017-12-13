@@ -133,7 +133,6 @@
                   <input type="text" name="config_geocode" value="<?php echo $config_geocode; ?>" placeholder="<?php echo $entry_geocode; ?>" id="input-geocode" class="form-control" />
                 </div>
               </div>
-              
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
                 <div class="col-sm-10">
@@ -174,13 +173,6 @@
                 <label class="col-sm-2 control-label" for="input-comment"><span data-toggle="tooltip" data-container="#tab-general" title="<?php echo $help_comment; ?>"><?php echo $entry_comment; ?></span></label>
                 <div class="col-sm-10">
                   <textarea name="config_comment" rows="5" placeholder="<?php echo $entry_comment; ?>" id="input-comment" class="form-control"><?php echo $config_comment; ?></textarea>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-checkout_tips"><span data-toggle="tooltip" data-container="#tab-general" title="<?php echo $help_checkout_tips; ?>"><?php echo $entry_checkout_tips; ?></span></label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_checkout_tips"  placeholder="<?php echo $entry_checkout_tips; ?>" id="input-checkout_tips" class="form-control" value="<?php echo $config_checkout_tips; ?>">
                 </div>
               </div>
 
@@ -1552,6 +1544,16 @@
                   <label class="col-sm-2 control-label" for="input-version_year"><?php echo $entry_bank_transfer; ?></label>
                   <div class="col-sm-10">
                     <textarea name="bank_transfer_bank<?php echo $language['language_id'] ?>" placeholder="<?php echo $entry_bank_transfer; ?>" id="bank_transfer_bank<?php echo $language['language_id'] ?>" class="form-control summernote"><?php echo ${'bank_transfer_bank'.$language['language_id']} ?></textarea>
+                  </div>
+                </div>
+              </fieldset>
+              <hr>
+              <fieldset>
+                <legend><?php echo $text_checkout_tips; ?></legend>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-checkout_tips"><span data-toggle="tooltip" data-container="#tab-general" title="<?php echo $help_checkout_tips; ?>"><?php echo $entry_checkout_tips; ?></span></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_checkout_tips"  placeholder="<?php echo $entry_checkout_tips; ?>" id="input-checkout_tips" class="form-control" value="<?php echo $config_checkout_tips; ?>">
                   </div>
                 </div>
               </fieldset>
