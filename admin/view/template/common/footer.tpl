@@ -2,7 +2,7 @@
 function setLog(act, target, target_id) {
   <?php 
      parse_str($_SERVER['QUERY_STRING'], $query);
-     $_token = $query['token'];
+     $_token = empty($query['token']) ? '' : $query['token'];
   ?>
   var _token = "<?php echo $_token; ?>",
       url = 'index.php?route=common/log&token=' + _token + '&order_id=' + $('input[name=\'order_id\']').val();
